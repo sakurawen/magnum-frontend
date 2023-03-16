@@ -1,3 +1,4 @@
+"use client"
 import { materialList } from '@/components/material';
 import Dragable from '@/components/Dragable';
 

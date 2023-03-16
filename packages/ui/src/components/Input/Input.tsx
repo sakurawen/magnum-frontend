@@ -1,14 +1,29 @@
 import { forwardRef, InputHTMLAttributes } from 'react';
 import cx from 'classnames';
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
+interface InputProps
+  extends Pick<
+    InputHTMLAttributes<HTMLInputElement>,
+    'className' | 'placeholder' | 'disabled' | 'onChange' | 'value' | 'type'
+  > {
+  size?: 'large' | 'middle' | 'small';
+}
+
+const InputSizeStyle = {
+  large: 'p-3 text-sm',
+  middle: 'p-2 text-sm',
+  small: 'p-1.5 text-xs',
+};
 
 const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+  const { size, className, ...restProps } = props;
   return (
     <input
-      {...props}
+      {...restProps}
       className={cx(
-        'outline-none  ring-1 text-sky-800 transition focus:ring-sky-500 focus:ring-2 ring-sky-200 w-full  rounded px-2 py-1.5  text-sm',
-        'placeholder:text-gray-300',
+        'outline-none  bg-gray-100  transition w-full rounded',
+        'placeholder:text-gray-400',
+        'disabled:cursor-not-allowed disabled:!bg-gray-200',
+        InputSizeStyle[size],
         props.className,
       )}
       ref={ref}
@@ -19,6 +34,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
 Input.displayName = 'Input';
 Input.defaultProps = {
   placeholder: 'Input',
+  size: 'middle',
 };
 
 export default Input;

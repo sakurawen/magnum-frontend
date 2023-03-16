@@ -5,5 +5,5 @@ import { redirect } from 'next/navigation';
  * @returns
  */
 export default function Home() {
-  return redirect('/editor');
+  return redirect('/login');
 }

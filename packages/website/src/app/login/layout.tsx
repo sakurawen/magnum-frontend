@@ -1,5 +1,5 @@
 export const metadata = {
-  title: 'Magnum engine editor',
+  title: 'Magnum Engine Editor',
 };
 
 const LoginLayout = ({ children }: { children: React.ReactNode }) => {

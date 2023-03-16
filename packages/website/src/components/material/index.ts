@@ -11,7 +11,7 @@ type Material<Props = any> = {
 };
 
 type MaterialProps = {
-  className: string;
+  className?: string;
 };
 export const materialList: Material<MaterialProps>[] = [
   {

@@ -12,7 +12,7 @@ export default defineConfig({
     {
       file: 'dist/index.js',
       format: 'es',
-      sourcemap: true,
+      sourcemap: false,
     },
   ],
   plugins: [
@@ -34,15 +34,11 @@ export default defineConfig({
       namedExports: true,
       extract: true,
       minimize: true,
-      sourceMap: true,
+      sourceMap: false,
       extensions: ['.css'],
       plugins: [autoprefixer()],
     }),
-    typescript({
-      declaration: true,
-      declarationDir: 'types',
-      
-    }),
+    typescript(),
   ],
   external: ['react'],
 });

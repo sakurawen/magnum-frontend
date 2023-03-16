@@ -4,7 +4,9 @@ import { devtools } from 'zustand/middleware';
 import userSlice from './slice/user';
 import appSlice from './slice/app';
 import { RootState } from './store';
-const useStore = create<RootState>()(
+import { createTrackedSelector } from 'react-tracked';
+
+export const useOriginAppStore = create<RootState>()(
   devtools(
     immer((...a) => {
       return {
@@ -15,4 +17,4 @@ const useStore = create<RootState>()(
   ),
 );
 
-export default useStore;
+export const useTrackedAppStore = createTrackedSelector(useOriginAppStore);

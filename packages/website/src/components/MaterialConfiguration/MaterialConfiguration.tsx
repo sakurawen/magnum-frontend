@@ -1,3 +1,4 @@
+'use client';
 const MaterialConfiguration = () => {
   return (
     <div className="p-2 ">
