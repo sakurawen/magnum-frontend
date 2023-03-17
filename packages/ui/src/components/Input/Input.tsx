@@ -1,11 +1,13 @@
-import { forwardRef, InputHTMLAttributes } from 'react';
-import cx from 'classnames';
+import { forwardRef, InputHTMLAttributes, isValidElement } from 'react';
+import cx from 'clsx';
 interface InputProps
   extends Pick<
     InputHTMLAttributes<HTMLInputElement>,
     'className' | 'placeholder' | 'disabled' | 'onChange' | 'value' | 'type'
   > {
   size?: 'large' | 'middle' | 'small';
+  fill?: boolean;
+  icon?: React.ReactElement;
 }
 
 const InputSizeStyle = {
@@ -15,19 +17,27 @@ const InputSizeStyle = {
 };
 
 const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
-  const { size, className, ...restProps } = props;
+  const { size, icon, className, fill, ...restProps } = props;
+  const enableIcon = isValidElement(icon);
   return (
-    <input
-      {...restProps}
-      className={cx(
-        'outline-none  bg-gray-100  transition w-full rounded',
-        'placeholder:text-gray-400',
-        'disabled:cursor-not-allowed disabled:!bg-gray-200',
-        InputSizeStyle[size],
-        props.className,
-      )}
-      ref={ref}
-    />
+    <div
+      className={cx('inline-flex bg-theme-gray-2/90 rounded', {
+        'w-full': fill,
+      })}
+    >
+      {enableIcon && <div className="flex pl-2 items-center justify-center">{icon}</div>}
+      <input
+        {...restProps}
+        className={cx(
+          'outline-none bg-transparent  transition w-full rounded',
+          'placeholder:text-theme-content-1/50',
+          'disabled:cursor-not-allowed disabled:!',
+          InputSizeStyle[size],
+          props.className,
+        )}
+        ref={ref}
+      />
+    </div>
   );
 });
 

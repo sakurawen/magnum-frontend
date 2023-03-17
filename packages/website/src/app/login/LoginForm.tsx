@@ -4,7 +4,7 @@ import { startTransition, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { userService } from '@/services';
 import { useImmer } from 'use-immer';
-import c from 'classnames';
+import c from 'clsx';
 import { useTrackedAppStore } from '@/store';
 
 /**
@@ -35,7 +35,7 @@ const Login = () => {
     });
   };
 
-  const [yes, setYes] = useState(true);
+  const [checked, setChecked] = useState(false);
 
   const router = useRouter();
 
@@ -59,7 +59,7 @@ const Login = () => {
           name: user.name,
         });
         startTransition(() => {
-          router.replace('/editor');
+          router.replace('/workspaces/editor');
         });
       })
       .catch((err) => {
@@ -104,13 +104,14 @@ const Login = () => {
 
   useEffect(() => {
     if (userID === undefined) {
-      router.replace('/editor');
+      router.replace('/workspaces/editor');
     }
   }, [userID]);
 
   const Login = (
     <div className="space-y-5">
       <Input
+        fill
         size="large"
         disabled={loading}
         placeholder="用户名"
@@ -118,6 +119,8 @@ const Login = () => {
         onChange={(e) => handleSetLoginForm('username', e.target.value)}
       />
       <Input
+        fill
+        className="w-full"
         size="large"
         disabled={loading}
         placeholder="密码"
@@ -134,6 +137,7 @@ const Login = () => {
   const Register = (
     <div className="space-y-5">
       <Input
+        fill
         size="large"
         disabled={loading}
         placeholder="用户名"
@@ -141,6 +145,7 @@ const Login = () => {
         onChange={(e) => handleSetRegisterForm('username', e.target.value)}
       />
       <Input
+        fill
         size="large"
         disabled={loading}
         placeholder="密码"
@@ -149,6 +154,8 @@ const Login = () => {
         onChange={(e) => handleSetRegisterForm('password', e.target.value)}
       />
       <Input
+        fill
+        size="large"
         disabled={loading}
         placeholder="确认密码"
         type="password"
@@ -163,7 +170,7 @@ const Login = () => {
 
   return (
     <div className="w-[500px]  px-12 py-24 bg-white rounded-lg shadow ">
-      <h2 className="text-4xl font-bold mb-8 text-gray-800 ">欢迎使用Magnum</h2>
+      <h2 className="text-4xl font-bold mb-8 text-theme-content-1">欢迎使用Magnum</h2>
       <div className="mb-8 space-x-4 text-sm">
         <button
           className={c('inline-block cursor-pointer relative px-2', {
@@ -187,7 +194,7 @@ const Login = () => {
       <div>{isLoginMode ? Login : Register}</div>
       <p className="text-xs mt-6">
         <label htmlFor="YesLogin" className="leading-3 inline-flex items-center justify-center">
-          <Checkbox checked={yes} onChange={(checked) => setYes(checked)} />
+          <Checkbox className="mr-1" checked={checked} onChange={(val) => setChecked(val)} />
           <span>登录注册即同意Magnum《隐私政策》及《服务协议》</span>
         </label>
       </p>

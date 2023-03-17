@@ -1,9 +1,16 @@
+import { Background } from './Background';
+
 export const metadata = {
-  title: 'Magnum Engine Editor',
+  title: 'Magnum',
 };
 
 const LoginLayout = ({ children }: { children: React.ReactNode }) => {
-  return <>{children}</>;
+  return (
+    <>
+      <Background />
+      {children}
+    </>
+  );
 };
 
 export default LoginLayout;

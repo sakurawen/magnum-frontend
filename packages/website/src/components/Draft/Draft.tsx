@@ -1,14 +1,12 @@
 'use client';
 import { useDrop } from 'react-dnd';
 import { useEffect, useRef, useState } from 'react';
-import cx from 'classnames';
-import { Components } from '@/components/material';
+import cx from 'clsx';
+import { acceptTypes } from '@/components/material';
 import { log } from '@/utils';
 import { Button } from '@magnum/ui';
 
-const acceptTypes = Object.keys(Components);
-
-const Canvas = () => {
+const Draft = () => {
   const ref = useRef<HTMLDivElement>(null);
   const [i, setItem] = useState({
     left: 0,
@@ -57,16 +55,16 @@ const Canvas = () => {
 
   return (
     <div className="h-full w-full flex flex-col">
-      <h1 className="relative z-10 p-2  border-b border-gray-100 font-bold select-none">Canvas</h1>
-      <div className="flex-1 flex justify-center items-center bg-gray-100">
+      <h1 className="relative z-10 p-2  border-b border-theme-border text-sm select-none text-center">Draft</h1>
+      <div className="flex-1 flex justify-center items-center bg-theme-gray-2">
         <div className={cx(' border-2 border-dashed', [isOver ? ' border-green-200' : 'border-transparent '])}>
           <div
-            className={cx('w-[50.625vh] h-[90vh]  relative  mx-auto shadow-sm', [isOver ? 'bg-green-50' : 'bg-white'])}
+            className={cx('w-[50.625vh] h-[86vh]  relative  mx-auto shadow-sm', [isOver ? 'bg-green-50' : 'bg-white'])}
             ref={ref}
           >
             <Button
               size="small"
-              className="absolute bg-red-200 shadow-sm rounded"
+              className="absolute shadow-sm rounded"
               style={{
                 left: i.left,
                 top: i.top,
@@ -81,4 +79,4 @@ const Canvas = () => {
   );
 };
 
-export default Canvas;
+export default Draft;

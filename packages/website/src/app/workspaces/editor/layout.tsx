@@ -1,10 +1,9 @@
 export const metadata = {
-  title: 'Magnum engine editor',
+  title: 'Magnum Editor',
 };
 
-
 const EditorLayout = ({ children }: { children: React.ReactNode }) => {
-  return <div className="overflow-hidden">{children}</div>;
+  return <div className="h-full overflow-hidden">{children}</div>;
 };
 
 export default EditorLayout;

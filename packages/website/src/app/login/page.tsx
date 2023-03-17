@@ -6,9 +6,12 @@ import LoginForm from './LoginForm';
  */
 const LoginPage = () => {
   return (
-    <div className="login-page-container login-bg bg-cover bg-no-repeat bg-center">
-      <div className="h-screen bg-white/20 flex justify-center items-center">
-        <LoginForm />
+    <div className="login-page-container bg-login  bg-cover bg-no-repeat bg-center">
+      <div className="h-screen flex justify-center items-center">
+        <section className="flex-1"></section>
+        <section className="flex-1 flex justify-center items-center mr-40 relative z-10">
+          <LoginForm />
+        </section>
       </div>
     </div>
   );

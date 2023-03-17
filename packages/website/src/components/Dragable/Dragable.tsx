@@ -1,5 +1,6 @@
-import React, { useRef } from 'react';
+import React, { useRef, isValidElement } from 'react';
 import { useDrag } from 'react-dnd';
+import cx from 'clsx';
 
 interface DragableProps {
   className?: string;
@@ -10,16 +11,24 @@ interface DragableProps {
 
 const Dragable = ({ children, type, className, item }: DragableProps) => {
   const ref = useRef<HTMLDivElement>(null);
-  const [, drag] = useDrag(
+  const [{ isDragging }, drag] = useDrag(
     () => ({
       type,
       item,
+      collect(monitor) {
+        return {
+          isDragging: monitor.isDragging(),
+        };
+      },
+      options: {
+        dropEffect: 'copy',
+      },
     }),
     [item, type],
   );
   drag(ref);
   return (
-    <div className={className} ref={ref}>
+    <div className={cx([isDragging && 'opacity-0'], className)} ref={ref}>
       {children}
     </div>
   );

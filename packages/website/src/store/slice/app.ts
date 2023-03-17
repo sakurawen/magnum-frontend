@@ -1,9 +1,13 @@
 import { SliceCreator } from '../store';
+import { DraftItem } from '@/typings';
 
 export type AppSliceState = {
   app: {
     navbar: {
       search: string;
+    };
+    workspaces: {
+      draft: DraftItem[];
     };
     setNavbarSearch(val: string): void;
   };
@@ -14,6 +18,9 @@ const appSlice: SliceCreator<AppSliceState> = (set, get) => {
     app: {
       navbar: {
         search: '',
+      },
+      workspaces: {
+        draft: [],
       },
       setNavbarSearch(val) {
         set(

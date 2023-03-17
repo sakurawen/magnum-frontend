@@ -4,9 +4,9 @@
 
 html,
 body {
-  @apply min-h-screen text-gray-600 selection:text-indigo-500 selection:bg-theme
+  @apply min-h-screen text-theme-content-1 selection:text-theme-deep selection:bg-theme-main/20;
 }
 
-.login-bg {
-  background-image: url(/image/login_bg.jpg);
+.bg-login {
+  @apply bg-gradient-to-tr from-theme-1  via-theme-2/80 to-theme-3/50;
 }
