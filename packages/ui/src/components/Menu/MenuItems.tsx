@@ -2,7 +2,7 @@ import { MenuContext } from './context';
 import { useContext } from 'react';
 import cx from 'clsx';
 
-type MenuItemsProps = {
+export type MenuItemsProps = {
   children?: React.ReactNode | React.ReactNode[];
   className?: string;
 };

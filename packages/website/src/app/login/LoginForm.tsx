@@ -170,7 +170,10 @@ const Login = () => {
 
   return (
     <div className="w-[500px]  px-12 py-24 bg-white rounded-lg shadow ">
-      <h2 className="text-4xl font-bold mb-8 text-theme-content-1">欢迎使用Magnum</h2>
+      <h2 className="text-4xl font-bold mb-8 text-theme-content-1">
+        欢迎使用
+        <br /> Magnum Form
+      </h2>
       <div className="mb-8 space-x-4 text-sm">
         <button
           className={c('inline-block cursor-pointer relative px-2', {

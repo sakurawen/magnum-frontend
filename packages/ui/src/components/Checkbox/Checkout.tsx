@@ -2,19 +2,19 @@ import { forwardRef } from 'react';
 import cx from 'clsx';
 import { Icon } from '@iconify/react';
 
-interface CheckboxProps {
+export type CheckboxProps = {
   checked: boolean;
   className?: string;
   onChange?: (checked: boolean) => void;
-}
+};
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>((props, ref) => {
   const { checked, className, onChange } = props;
   return (
-    <label className={cx('inline-flex items-center rounded overflow-hidden justify-center', className)}>
+    <label className={cx('inline-flex items-center rounded overflow-hidden', className)}>
       <span
         className={cx(
-          'relative overflow-hidden cursor-pointer rounded  flex transition items-center justify-center w-4 h-4 border',
+          'relative overflow-hidden cursor-pointer rounded bg-white/90 flex transition items-center justify-center  border',
           [checked ? 'border-theme-main' : 'border-light'],
         )}
       >

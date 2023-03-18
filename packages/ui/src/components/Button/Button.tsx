@@ -14,12 +14,14 @@ const ButtonSizeStyle = {
   small: 'px-2 py-1 text-xs',
 };
 
-interface ButtonProps
-  extends Pick<ButtonHTMLAttributes<HTMLButtonElement>, 'children' | 'className' | 'disabled' | 'onClick' | 'style'> {
+export type ButtonProps = Pick<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  'children' | 'className' | 'disabled' | 'onClick' | 'style'
+> & {
   variant?: keyof typeof ButtonVariantStyle;
   size?: 'large' | 'middle' | 'small';
   loading?: boolean;
-}
+};
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
   const { className, variant, disabled, loading, children, onClick, size, ...restProps } = props;
@@ -31,7 +33,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>((props, ref) => {
       onClick={onClick}
       disabled={disableButton}
       className={cx(
-        'relative   rounded transform active:scale-[98%]',
+        'relative rounded transform active:translate-y-[1px]',
         [
           disableButton
             ? 'disabled:bg-theme-gray-2 disabled:cursor-not-allowed'

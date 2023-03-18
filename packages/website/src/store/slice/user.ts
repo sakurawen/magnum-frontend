@@ -6,6 +6,7 @@ type InitParams = {
   name: string;
   account: string;
 };
+
 export type UserSliceState = {
   user: {
     token?: string;
@@ -48,6 +49,9 @@ const userSlice: SliceCreator<UserSliceState> = (set, get) => {
           false,
           'user/logout',
         );
+        setTimeout(() => {
+          get().app.resetAppState();
+        }, 500);
       },
     },
   };

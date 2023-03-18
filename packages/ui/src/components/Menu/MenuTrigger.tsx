@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import cx from 'clsx';
 import { MenuContext } from './context';
-type MenuTriggerProps = {
+export type MenuTriggerProps = {
   children?: React.ReactNode;
   className?: string;
 };

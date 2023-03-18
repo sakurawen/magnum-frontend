@@ -6,7 +6,7 @@ export type RootState = AppSliceState & UserSliceState;
 
 export type SliceCreator<Slice> = StateCreator<
   RootState,
-  [['zustand/devtools', never], ['zustand/immer', never]],
+  [['zustand/immer', never], ['zustand/devtools', never]],
   [],
   Slice
 >;

@@ -1,12 +1,10 @@
 'use client';
-
-import cx from 'clsx';
 import Draft from '@/components/Draft';
-import MaterialStore from '@/components/MaterialStore';
 import MaterialConfiguration from '@/components/MaterialConfiguration';
+import MaterialStore from '@/components/MaterialStore';
+import cx from 'clsx';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import Navbar from '@/components/Navbar';
 
 const Editor = () => {
   return (

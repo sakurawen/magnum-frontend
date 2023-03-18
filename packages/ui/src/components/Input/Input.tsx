@@ -1,14 +1,13 @@
 import { forwardRef, InputHTMLAttributes, isValidElement } from 'react';
 import cx from 'clsx';
-interface InputProps
-  extends Pick<
-    InputHTMLAttributes<HTMLInputElement>,
-    'className' | 'placeholder' | 'disabled' | 'onChange' | 'value' | 'type'
-  > {
+export type InputProps = Pick<
+  InputHTMLAttributes<HTMLInputElement>,
+  'className' | 'placeholder' | 'disabled' | 'onChange' | 'value' | 'type'
+> & {
   size?: 'large' | 'middle' | 'small';
   fill?: boolean;
   icon?: React.ReactElement;
-}
+};
 
 const InputSizeStyle = {
   large: 'p-3 text-sm',

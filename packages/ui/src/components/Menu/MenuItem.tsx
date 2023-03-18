@@ -1,7 +1,7 @@
 import cx from 'clsx';
 import { useContext } from 'react';
 import { MenuContext } from './context';
-type MenuItemProps = {
+export type MenuItemProps = {
   children?: React.ReactNode | React.ReactNode[];
   className?: string;
   onClick?: React.MouseEventHandler;

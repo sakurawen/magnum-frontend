@@ -28,7 +28,7 @@ const Dragable = ({ children, type, className, item }: DragableProps) => {
   );
   drag(ref);
   return (
-    <div className={cx([isDragging && 'opacity-0'], className)} ref={ref}>
+    <div className={cx([isDragging && 'opacity-50'], className)} ref={ref}>
       {children}
     </div>
   );
