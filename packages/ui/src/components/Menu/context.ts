@@ -8,6 +8,8 @@ export type MenuContextValue = typeof MenuContextDefaultValue;
 
 export type MenuContextDispatcher = Dispatch<'open' | 'close' | 'toggle'>;
 
-export const MenuContext = createContext<[MenuContextValue, MenuContextDispatcher] | null>(null);
+export const MenuContext = createContext<
+  [MenuContextValue, MenuContextDispatcher] | null
+>(null);
 
 export const useMenuContext = () => useContext(MenuContext);

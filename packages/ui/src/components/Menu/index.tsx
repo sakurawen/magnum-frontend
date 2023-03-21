@@ -1,2 +1,4 @@
-export { default } from './Menu';
-export { default as MenuItem } from './MenuItem';
+export * from './Menu';
+export * from './MenuItem';
+export * from './MenuItems';
+export * from './MenuTrigger';

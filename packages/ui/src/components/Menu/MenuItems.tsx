@@ -7,13 +7,17 @@ export type MenuItemsProps = {
   className?: string;
 };
 
-const MenuItems = ({ children, className }: MenuItemsProps) => {
+export const MenuItems = (props: MenuItemsProps) => {
+  const { children, className } = props;
   const [context] = useContext(MenuContext);
   return context.open ? (
-    <div className={cx('menu-items border border-light bg-white w-full absolute  z-20 left-0', className)}>
+    <div
+      className={cx(
+        'menu-items border border-light bg-white w-full absolute  z-20 left-0',
+        className,
+      )}
+    >
       {children}
     </div>
   ) : null;
 };
-
-export default MenuItems;

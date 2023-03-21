@@ -15,16 +15,18 @@ const InputSizeStyle = {
   small: 'p-1.5 text-xs',
 };
 
-const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
+export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const { size, icon, className, fill, ...restProps } = props;
   const enableIcon = isValidElement(icon);
   return (
     <div
-      className={cx('inline-flex bg-theme-gray-2/90 rounded', {
+      className={cx('inline-flex  bg-theme-gray-2/90 rounded', {
         'w-full': fill,
       })}
     >
-      {enableIcon && <div className="flex pl-2 items-center justify-center">{icon}</div>}
+      {enableIcon && (
+        <div className="flex pl-2 items-center justify-center">{icon}</div>
+      )}
       <input
         {...restProps}
         className={cx(
@@ -45,5 +47,3 @@ Input.defaultProps = {
   placeholder: 'Input',
   size: 'middle',
 };
-
-export default Input;

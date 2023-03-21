@@ -5,40 +5,42 @@ import typescript from '@rollup/plugin-typescript';
 import postcss from 'rollup-plugin-postcss';
 import commonjs from '@rollup/plugin-commonjs';
 import autoprefixer from 'autoprefixer';
-
-export default defineConfig({
-  input: './src/index.ts',
-  output: [
-    {
-      file: 'dist/index.js',
-      format: 'es',
-      sourcemap: false,
-    },
-  ],
-  plugins: [
-    commonjs(),
-    babel({
-      babelHelpers: 'bundled',
-      presets: [
-        '@babel/preset-env',
-        [
-          '@babel/preset-react',
-          {
-            runtime: 'automatic',
-          },
+import pkg from './package.json' assert { type: 'json' };
+export default defineConfig([
+  {
+    input: './src/index.ts',
+    output: [
+      {
+        file: pkg.module,
+        format: 'es',
+        sourcemap: false,
+      },
+    ],
+    plugins: [
+      nodeResolve(),
+      commonjs(),
+      typescript(),
+      babel({
+        babelHelpers: 'bundled',
+        presets: [
+          '@babel/preset-env',
+          [
+            '@babel/preset-react',
+            {
+              runtime: 'automatic',
+            },
+          ],
         ],
-      ],
-    }),
-    nodeResolve(),
-    postcss({
-      namedExports: true,
-      extract: true,
-      minimize: true,
-      sourceMap: false,
-      extensions: ['.css'],
-      plugins: [autoprefixer()],
-    }),
-    typescript(),
-  ],
-  external: ['react'],
-});
+      }),
+      postcss({
+        namedExports: true,
+        extract: true,
+        minimize: true,
+        sourceMap: false,
+        extensions: ['.css'],
+        plugins: [autoprefixer()],
+      }),
+    ],
+    external: ['react'],
+  },
+]);

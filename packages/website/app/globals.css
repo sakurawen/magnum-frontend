@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html,
+body {
+  @apply min-h-screen text-theme-content-1 selection:text-theme-3 selection:bg-theme-3/10;
+}
+
+.bg-login {
+  background-image: url(/images/bg-login.png);
+  @apply bg-cover bg-theme-1;
+}
+
+*::-webkit-scrollbar {
+  @apply w-2 rounded bg-theme-gray-2/50;
+}
+
+*::-webkit-scrollbar-thumb {
+  @apply bg-theme-gray-3 rounded;
+}

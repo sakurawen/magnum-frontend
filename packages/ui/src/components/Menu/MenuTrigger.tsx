@@ -1,11 +1,13 @@
-import { useContext } from 'react';
+import { PropsWithChildren, useContext } from 'react';
 import cx from 'clsx';
 import { MenuContext } from './context';
-export type MenuTriggerProps = {
-  children?: React.ReactNode;
+
+export type MenuTriggerProps = PropsWithChildren<{
   className?: string;
-};
-const MenuTrigger = ({ children, className }: MenuTriggerProps) => {
+}>;
+
+export const MenuTrigger = (props: MenuTriggerProps) => {
+  const { children, className } = props;
   const [, dispatch] = useContext(MenuContext);
   const handleToggle = () => {
     dispatch('toggle');
@@ -16,5 +18,3 @@ const MenuTrigger = ({ children, className }: MenuTriggerProps) => {
     </div>
   );
 };
-
-export default MenuTrigger;

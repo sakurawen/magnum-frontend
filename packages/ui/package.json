@@ -2,20 +2,16 @@
   "name": "@magnum/ui",
   "version": "1.0.0",
   "description": "",
-  "main": "./dist/index.js",
-  "types": "./dist/types/index.d.ts",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
-    "dist",
-    "tailwind.config.cjs"
+    "dist"
   ],
   "scripts": {
     "build": "rimraf ./dist && rollup -c rollup.config.mjs",
     "dev": "rollup -c rollup.config.mjs --watch"
   },
   "exports": {
-    "./tailwind": {
-      "require": "./tailwind.config.cjs"
-    },
     ".": {
       "import": "./dist/index.js"
     },
@@ -48,6 +44,7 @@
   },
   "dependencies": {
     "@types/react": "18.0.28",
-    "clsx": "^1.2.1"
+    "clsx": "^1.2.1",
+    "rollup-plugin-dts": "^5.3.0"
   }
 }
