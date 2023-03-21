@@ -105,18 +105,13 @@ const Draft = () => {
             )}
             ref={ref}
           >
-            {draftElements.map((item, index) => {
+            {draftElements.map((item) => {
               return (
-                <DraftDragable
-                  item={item}
-                  index={index}
-                  type={item.name}
-                  key={item.id}
-                >
+                <DraftDragable id={item.id} type={item.name} key={item.id}>
                   <div
                     data-is-draft-item={true}
                     onClick={() => handleSelectDraftComponent(item)}
-                    className={cx('p-2 hover:ring-2  ring-theme-2 ring-inset', {
+                    className={cx('p-2 ring-theme-2 ring-inset', {
                       'bg-theme-1/50 ring-2':
                         currentDraftElement?.id === item.id,
                     })}

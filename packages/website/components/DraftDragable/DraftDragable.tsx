@@ -2,36 +2,72 @@ import { PropsWithChildren, useRef } from 'react';
 import { useDrag, useDrop } from 'react-dnd';
 import { draftAcceptTypes } from '@/components/material';
 import { useTrackedAppStore } from '@/store';
+import { memo } from 'react';
 
 type DraftDragableProps = PropsWithChildren<{
   type: string;
-  index: number;
-  item: Record<string, any>;
+  id: string;
 }>;
-
+type DraftDragableItem = {
+  id: string;
+  originIndex: number;
+};
 const DraftDragable = (props: DraftDragableProps) => {
-  const { children, item, type, index } = props;
+  const { children, id, type } = props;
   const {
-    app: { swapDraftElement },
+    app: {
+      moveDraftElement,
+      editor: { draftElements },
+    },
   } = useTrackedAppStore();
+
+  const findIndex = (id: string) => {
+    const item = draftElements.filter((item) => item.id === id)[0];
+    const ret = draftElements.indexOf(item);
+    if (ret === -1) {
+      console.log('item:', item, id, draftElements.length);
+    }
+    return ret;
+  };
+
+  const originIndex = findIndex(id);
   const ref = useRef<HTMLDivElement>(null);
-  const [, drag] = useDrag({
-    type: 'draft-' + type,
-    item: {
-      ...item,
-      index,
-    },
-  });
-  const [, drop] = useDrop(() => ({
-    accept: draftAcceptTypes,
-    hover(item: any, monitor) {
-      if (item.index !== index) {
-        swapDraftElement(item.index, index);
-      }
-    },
-  }));
-  drop(drag(ref));
+
+  const [, drag] = useDrag(
+    () => ({
+      type: 'draft-' + type,
+      item: {
+        id,
+        originIndex,
+      },
+      collect: (monitor) => ({
+        isDragging: monitor.isDragging(),
+      }),
+      end(item: DraftDragableItem, monitor) {
+        const { id: droppedId, originIndex } = item;
+        const didDrop = monitor.didDrop();
+        if (!didDrop) {
+          moveDraftElement(droppedId, originIndex);
+        }
+      },
+    }),
+    [originIndex, id, draftElements],
+  );
+  const [, drop] = useDrop(
+    () => ({
+      accept: draftAcceptTypes,
+      hover(item: DraftDragableItem) {
+        const { id: draggedId } = item;
+        if (draggedId !== id) {
+          const overIndex = findIndex(id);
+          moveDraftElement(draggedId, overIndex);
+        }
+      },
+    }),
+    [draftElements],
+  );
+  drag(drop(ref));
   return <div ref={ref}>{children}</div>;
 };
 
-export default DraftDragable;
+export default memo(DraftDragable);

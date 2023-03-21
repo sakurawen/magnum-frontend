@@ -15,7 +15,7 @@ export type AppSliceState = {
     setCurrentDraftComponent(item: DraftElement | null): void;
     setDraftElementProperties(): void;
     addDraftElement(item: DraftElement): void;
-    swapDraftElement(idx1: number, idx2: number): void;
+    moveDraftElement(id: string, index: number): void;
     setNavbarSearch(val: string): void;
     resetAppState(): void;
   };
@@ -35,13 +35,15 @@ const appSlice: SliceCreator<AppSliceState> = (set, get) => {
   return {
     app: {
       ...rawAppState,
-      swapDraftElement(idx1, idx2) {
+      moveDraftElement(id, atIndex) {
+        const idx = get().app.editor.draftElements.findIndex(
+          (item) => item.id === id,
+        );
+        const card = get().app.editor.draftElements[idx];
         set(
           (state) => {
-            const temp = state.app.editor.draftElements[idx1];
-            state.app.editor.draftElements[idx1] =
-              state.app.editor.draftElements[idx2];
-            state.app.editor.draftElements[idx2] = temp;
+            state.app.editor.draftElements.splice(idx, 1);
+            state.app.editor.draftElements.splice(atIndex, 0, card);
           },
           false,
           'app/swapDraftElement',
