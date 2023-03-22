@@ -17,6 +17,7 @@ const DraftDragable = (props: DraftDragableProps) => {
   const {
     app: {
       moveDraftElement,
+      setCurrentDraftComponentId,
       editor: { draftElements },
     },
   } = useTrackedAppStore();
@@ -30,20 +31,24 @@ const DraftDragable = (props: DraftDragableProps) => {
     return ret;
   };
 
-  const originIndex = findIndex(id);
+  const originIndex: number = findIndex(id);
   const ref = useRef<HTMLDivElement>(null);
 
   const [, drag] = useDrag(
     () => ({
       type: 'draft-' + type,
-      item: {
-        id,
-        originIndex,
+      item: () => {
+        setCurrentDraftComponentId(id);
+        return {
+          id,
+          originIndex,
+        };
       },
       collect: (monitor) => ({
         isDragging: monitor.isDragging(),
       }),
       end(item: DraftDragableItem, monitor) {
+        console.log('end')
         const { id: droppedId, originIndex } = item;
         const didDrop = monitor.didDrop();
         if (!didDrop) {
@@ -56,7 +61,8 @@ const DraftDragable = (props: DraftDragableProps) => {
   const [, drop] = useDrop(
     () => ({
       accept: draftAcceptTypes,
-      hover(item: DraftDragableItem) {
+      hover(item: DraftDragableItem, monitor) {
+        console.log('hover')
         const { id: draggedId } = item;
         if (draggedId !== id) {
           const overIndex = findIndex(id);
@@ -64,7 +70,7 @@ const DraftDragable = (props: DraftDragableProps) => {
         }
       },
     }),
-    [draftElements],
+    [originIndex, id],
   );
   drag(drop(ref));
   return <div ref={ref}>{children}</div>;

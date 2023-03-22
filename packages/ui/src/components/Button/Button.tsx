@@ -1,6 +1,7 @@
 import { forwardRef, ButtonHTMLAttributes } from 'react';
 import { Icon } from '@iconify/react';
 import cx from 'clsx';
+import { SIZE_CLASSNAMES } from '../size';
 
 const ButtonVariantStyle = {
   primary:
@@ -10,18 +11,12 @@ const ButtonVariantStyle = {
   custom: '',
 };
 
-const ButtonSizeStyle = {
-  large: 'px-3 py-3 text-sm',
-  middle: 'px-3 py-2 text-sm',
-  small: 'px-2 py-1 text-xs',
-};
-
 export type ButtonProps = Pick<
   ButtonHTMLAttributes<HTMLButtonElement>,
   'children' | 'className' | 'disabled' | 'onClick' | 'style'
 > & {
   variant?: keyof typeof ButtonVariantStyle;
-  size?: 'large' | 'middle' | 'small';
+  size?: ComponentSize;
   loading?: boolean;
 };
 
@@ -51,7 +46,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
               ? 'disabled:bg-theme-gray-2 disabled:cursor-not-allowed'
               : ButtonVariantStyle[variant || 'primary'],
           ],
-          ButtonSizeStyle[size],
+          SIZE_CLASSNAMES[size],
           className,
         )}
         ref={ref}
@@ -62,7 +57,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             icon="mdi:loading"
           />
         ) : (
-          <span>{children}</span>
+          <span className="inline-block min-h-[1em]">{children}</span>
         )}
       </button>
     );

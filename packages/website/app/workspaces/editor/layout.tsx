@@ -2,6 +2,7 @@ import { PropsWithChildren } from 'react';
 
 export const metadata = {
   title: 'Magnum Form - Editor',
+  description: "Magnum Form Editor"
 };
 
 const EditorLayout = ({ children }: PropsWithChildren) => {

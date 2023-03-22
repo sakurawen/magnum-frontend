@@ -1,8 +1,8 @@
 'use client';
-import { useEffect } from 'react';
+import { useTrackedAppStore } from '@/store';
 import { validateToken } from '@/utils';
 import { useRouter } from 'next/navigation';
-import { useTrackedAppStore } from '@/store';
+import { startTransition, useEffect } from 'react';
 
 const LoginChecker = () => {
   const {
@@ -22,7 +22,9 @@ const LoginChecker = () => {
       })
       .catch(() => {
         logout();
-        router.replace('/login');
+        startTransition(() => {
+          router.replace('/login');
+        });
       });
   }, [init, logout, router]);
   return null;

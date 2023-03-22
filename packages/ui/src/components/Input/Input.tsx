@@ -1,19 +1,16 @@
 import { forwardRef, InputHTMLAttributes, isValidElement } from 'react';
 import cx from 'clsx';
+import { SIZE_CLASSNAMES } from '../size';
+
 export type InputProps = Pick<
   InputHTMLAttributes<HTMLInputElement>,
   'className' | 'placeholder' | 'disabled' | 'onChange' | 'value' | 'type'
 > & {
-  size?: 'large' | 'middle' | 'small';
+  size?: ComponentSize;
   fill?: boolean;
   icon?: React.ReactElement;
 };
 
-const InputSizeStyle = {
-  large: 'p-3 text-sm',
-  middle: 'p-2 text-sm',
-  small: 'p-1.5 text-xs',
-};
 
 export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const { size, icon, className, fill, ...restProps } = props;
@@ -33,7 +30,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
           'outline-none bg-transparent  transition w-full rounded',
           'placeholder:text-theme-content-1/50',
           'disabled:cursor-not-allowed disabled:!',
-          InputSizeStyle[size],
+          SIZE_CLASSNAMES[size],
           props.className,
         )}
         ref={ref}

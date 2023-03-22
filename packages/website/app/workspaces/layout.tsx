@@ -5,6 +5,7 @@ type WorkspacesLayoutProps = {
 };
 export const metadata = {
   title: 'Magnum Form - Workspaces',
+  description: 'Magnum Form Workspaces',
 };
 
 const WorkspacesLayout = ({ children }: WorkspacesLayoutProps) => {

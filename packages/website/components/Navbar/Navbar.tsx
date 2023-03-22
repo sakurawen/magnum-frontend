@@ -4,6 +4,7 @@ import { Icon } from '@iconify/react';
 import { Input, Menu } from '@magnum/ui';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { startTransition } from 'react';
 
 const Navbar = () => {
   const {
@@ -16,14 +17,16 @@ const Navbar = () => {
   const router = useRouter();
   const handleLogout = () => {
     logout();
-    router.replace('/login');
+    startTransition(() => {
+      router.replace('/login');
+    });
   };
   return (
     <nav className="navbar  flex relative z-50 items-center justify-between text-xs border-b  border-light">
       <div className="flex h-full items-center  space-x-4">
         <Menu className="h-full">
           <Menu.Trigger className="h-full">
-            <div className="group select-none hover:bg-theme-gray-3  border-light w-80 h-full px-4 flex justify-between items-center  border-r">
+            <div className="group select-none hover:bg-theme-gray-2  border-light w-80 h-full px-4 flex justify-between items-center  border-r">
               <div className="flex items-center justify-center ">
                 <Icon
                   className="w-6 h-6 mr-2 text-theme-3"
@@ -80,7 +83,7 @@ const Navbar = () => {
             size="middle"
           />
         </div>
-        <Menu className="h-full border-l border-light hover:bg-gray-50">
+        <Menu className="h-full border-l border-light hover:bg-theme-gray-2">
           <Menu.Trigger className="h-full">
             <div className="group h-full px-6  flex justify-center items-center">
               <div className="w-6 h-6 mr-2 flex items-center justify-center rounded-full">

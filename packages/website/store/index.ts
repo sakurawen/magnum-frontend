@@ -6,7 +6,7 @@ import appSlice from './slice/app';
 import { RootState } from './store';
 import { createTrackedSelector } from 'react-tracked';
 
-export const useOriginAppStore = create<RootState>()(
+export const useAppStore = create<RootState>()(
   immer(
     devtools((...a) => {
       return {
@@ -17,4 +17,5 @@ export const useOriginAppStore = create<RootState>()(
   ),
 );
 
-export const useTrackedAppStore = createTrackedSelector(useOriginAppStore);
+
+export const useTrackedAppStore = createTrackedSelector(useAppStore);

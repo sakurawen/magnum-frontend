@@ -19,12 +19,15 @@ export type UserSliceState = {
 };
 
 const userSlice: SliceCreator<UserSliceState> = (set, get) => {
+  const rawState = {
+    token: undefined,
+    name: undefined,
+    account: undefined,
+    id: undefined,
+  };
   return {
     user: {
-      token: undefined,
-      name: undefined,
-      account: undefined,
-      id: undefined,
+      ...rawState,
       init({ id, name, account, token }) {
         set(
           (state) => {

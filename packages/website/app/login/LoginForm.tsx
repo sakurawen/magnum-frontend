@@ -1,12 +1,12 @@
 'use client';
-import { Button, Input, Checkbox } from '@magnum/ui';
-import { startTransition, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { userService } from '@/services';
-import { useImmer } from 'use-immer';
-import c from 'clsx';
 import { useTrackedAppStore } from '@/store';
+import { Button, Checkbox, Input } from '@magnum/ui';
+import c from 'clsx';
+import { useRouter } from 'next/navigation';
+import { startTransition, useEffect, useState } from 'react';
 import { toast } from 'sonner';
+import { useImmer } from 'use-immer';
 
 /**
  * 登录页
@@ -119,7 +119,9 @@ const Login = () => {
 
   useEffect(() => {
     if (userID === undefined) {
-      router.replace('/workspaces/editor');
+      startTransition(() => {
+        router.replace('/workspaces/editor');
+      });
     }
   }, [userID]);
 

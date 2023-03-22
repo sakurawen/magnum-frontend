@@ -1,29 +1,32 @@
 'use client';
 import { useDrop } from 'react-dnd';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import cx from 'clsx';
 import { materialAcceptTypes } from '@/components/material';
 import { log } from '@/utils';
 import { useTrackedAppStore } from '@/store';
-import { createDraftElement, DraftElement } from '@/schemas/draft';
+import { createDraftElement } from '@/schemas/draft';
 import { Material } from '@/schemas/material';
 import DraftDragable from '@/components/DraftDragable';
+
+const getProperties = (raw: Record<string, any>) => {
+  const properties: Record<string, any> = {};
+  for (let key in raw) {
+    properties[key] = raw[key].value;
+  }
+  return properties;
+};
 
 const Draft = () => {
   const {
     app: {
       addDraftElement,
-      setCurrentDraftComponent,
-      editor: { draftElements, currentDraftElement },
+      setCurrentDraftComponentId,
+      editor: { draftElements, currentDraftElementId },
     },
   } = useTrackedAppStore();
 
   const ref = useRef<HTMLDivElement>(null);
-
-  const [offset, setOffset] = useState({
-    top: 0,
-    left: 0,
-  });
 
   const [{ isOver }, drop] = useDrop(
     () => ({
@@ -38,34 +41,19 @@ const Draft = () => {
         };
       },
     }),
-    [offset],
+    [],
   );
-
-  useEffect(() => {
-    const watchSizeChange = () => {
-      const rect = ref.current?.getBoundingClientRect();
-      setOffset({
-        left: rect?.left || 0,
-        top: rect?.top || 0,
-      });
-    };
-    watchSizeChange();
-    window.addEventListener('resize', watchSizeChange);
-    return () => {
-      window.removeEventListener('resize', watchSizeChange);
-    };
-  }, []);
 
   drop(ref);
 
-  const handleSelectDraftComponent = (item: DraftElement) => {
-    setCurrentDraftComponent(item);
+  const handleSelectDraftComponentId = (id: string) => {
+    setCurrentDraftComponentId(id);
   };
 
   const draftContainerRef = useRef<HTMLDivElement>(null);
 
   /**
-   * 取消选中
+   * 监听取消选中
    */
   useEffect(() => {
     const listenDraftItemCancelSelect = (e: MouseEvent) => {
@@ -74,8 +62,7 @@ const Draft = () => {
         !isDraftItem &&
         draftContainerRef.current?.contains(e.target as HTMLElement)
       ) {
-        console.log('cancel select');
-        setCurrentDraftComponent(null);
+        setCurrentDraftComponentId(null);
       }
     };
     document.addEventListener('click', listenDraftItemCancelSelect);
@@ -110,21 +97,17 @@ const Draft = () => {
                 <DraftDragable id={item.id} type={item.name} key={item.id}>
                   <div
                     data-is-draft-item={true}
-                    onClick={() => handleSelectDraftComponent(item)}
+                    onClick={() => handleSelectDraftComponentId(item.id)}
                     className={cx('p-2 ring-theme-2 ring-inset', {
-                      'bg-theme-1/50 ring-2':
-                        currentDraftElement?.id === item.id,
+                      'bg-theme-1/50 ring-2': currentDraftElementId === item.id,
                     })}
                     key={item.id}
                   >
                     <div className="pointer-events-none select-none">
                       <item.componentType
                         {...item.internal}
-                        {...item.configuration.raw}
-                        className={cx(
-                          [currentDraftElement?.id === item.id && 'shadow'],
-                          item.internal.className,
-                        )}
+                        {...getProperties(item.configuration.properties)}
+                        className={cx(item.internal.className)}
                       />
                     </div>
                   </div>
