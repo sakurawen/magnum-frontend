@@ -7,7 +7,7 @@ import { log } from '@/utils';
 import { useTrackedAppStore } from '@/store';
 import { createDraftElement } from '@/schemas/draft';
 import { Material } from '@/schemas/material';
-import DraftDragable from '@/components/DraftDragable';
+import DraftMoveable from '@/components/DraftMoveable';
 
 const getProperties = (raw: Record<string, any>) => {
   const properties: Record<string, any> = {};
@@ -94,7 +94,7 @@ const Draft = () => {
           >
             {draftElements.map((item) => {
               return (
-                <DraftDragable id={item.id} type={item.name} key={item.id}>
+                <DraftMoveable id={item.id} type={item.name} key={item.id}>
                   <div
                     data-is-draft-item={true}
                     onClick={() => handleSelectDraftComponentId(item.id)}
@@ -111,7 +111,7 @@ const Draft = () => {
                       />
                     </div>
                   </div>
-                </DraftDragable>
+                </DraftMoveable>
               );
             })}
           </div>
