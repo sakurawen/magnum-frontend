@@ -8,6 +8,7 @@ import { useTrackedAppStore } from '@/store';
 import { createDraftElement, DraftElement, DraftItem } from '@/schemas/draft';
 import { Material } from '@/schemas/material';
 import DraftElementComponent from './Element';
+import { useDroppable } from '@dnd-kit/core';
 
 const Draft = () => {
   const {
@@ -18,25 +19,10 @@ const Draft = () => {
     },
   } = useTrackedAppStore();
 
+  const { setNodeRef, isOver } = useDroppable({
+    id: 'Draft',
+  });
   const ref = useRef<HTMLDivElement>(null);
-
-  const [{ isOver }, drop] = useDrop(
-    () => ({
-      accept: materialAcceptTypes,
-      drop(item: Material['item'], monitor) {
-        log.info('drop over', item);
-        addDraftElement(createDraftElement(item));
-      },
-      collect(monitor) {
-        return {
-          isOver: monitor.isOver(),
-        };
-      },
-    }),
-    [draftElements],
-  );
-
-  drop(ref);
 
   const draftContainerRef = useRef<HTMLDivElement>(null);
 
@@ -68,7 +54,7 @@ const Draft = () => {
 
   return (
     <div className="h-full w-full flex flex-col">
-      <h1 className="relative z-10 p-2  border-b border-theme-border text-sm select-none text-center">
+      <h1 className=" z-10 p-2  border-b border-theme-border text-sm select-none text-center">
         Draft
       </h1>
       <div
@@ -76,13 +62,14 @@ const Draft = () => {
         className="draft-container flex-1 flex justify-center items-center bg-theme-gray-2"
       >
         <div
+          ref={setNodeRef}
           className={cx(' border-2 border-dashed', [
             isOver ? ' border-green-200' : 'border-transparent ',
           ])}
         >
           <div
             className={cx(
-              'w-[50.625vh] h-[86vh] overflow-y-auto  relative  mx-auto shadow-sm',
+              'w-[50.625vh] h-[86vh] overflow-y-auto    mx-auto shadow-sm',
               [isOver ? 'bg-green-50' : 'bg-white'],
             )}
             ref={ref}

@@ -13,7 +13,7 @@ const materialElementCls = 'pointer-events-none ';
 
 export const materialList: Material[] = [
   {
-    type: 'Button',
+    type: 'Material',
     item: {
       name: 'Button',
       componentType: ButtonImpl,
@@ -29,7 +29,7 @@ export const materialList: Material[] = [
     preview: <Button className={cx(materialElementCls, 'w-full')} />,
   },
   {
-    type: 'Input',
+    type: 'Material',
     item: {
       name: 'Input',
       componentType: InputImpl,
@@ -47,7 +47,7 @@ export const materialList: Material[] = [
     ),
   },
   {
-    type: 'Checkbox',
+    type: 'Material',
     item: {
       name: 'Checkbox',
       componentType: CheckboxImpl,
@@ -61,7 +61,7 @@ export const materialList: Material[] = [
     preview: <Checkbox className={materialElementCls} checked={true} />,
   },
   {
-    type: 'Textarea',
+    type: 'Material',
     item: {
       name: 'Textarea',
       componentType: TextareaImpl,
@@ -70,7 +70,7 @@ export const materialList: Material[] = [
         size: 'large',
         placeholder: '随便写点什么吧...',
         label: 'Textarea label',
-        rows:4,
+        rows: 4,
       },
     },
     preview: (
@@ -81,7 +81,7 @@ export const materialList: Material[] = [
     ),
   },
   {
-    type: 'Image',
+    type: 'Material',
     item: {
       name: 'Image',
       componentType: ImageImpl,
@@ -96,7 +96,7 @@ export const materialList: Material[] = [
     ),
   },
   {
-    type: 'Divider',
+    type: 'Material',
     item: {
       name: 'Divider',
       componentType: DividerImpl,
@@ -113,6 +113,9 @@ export const materialList: Material[] = [
 ];
 
 export const materialAcceptTypes = materialList.map((item) => item.type);
+export const materialIds = materialList.map(
+  (item) => 'Material-' + item.item.name,
+);
 export const draftAcceptTypes = materialList.map(
   (item) => 'draft-' + item.type,
 );

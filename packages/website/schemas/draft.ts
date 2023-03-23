@@ -16,12 +16,6 @@ export const DraftItem = z.object({
 
 export type DraftItem = z.infer<typeof DraftItem>;
 
-const configValueType = {
-  string: 'string',
-  number: 'number',
-  boolean: 'boolean',
-};
-
 function createMaterialConfiguration(config: Record<string, any>) {
   let properties: Record<string, any> = {};
   for (let p in config) {

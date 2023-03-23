@@ -1,38 +1,39 @@
-import React, { useRef, PropsWithChildren, useEffect } from 'react';
-import { useDrag } from 'react-dnd';
+import React, { useRef, PropsWithChildren } from 'react';
 import cx from 'clsx';
+import { useDraggable } from '@dnd-kit/core';
 
 type MaterialDragableProps = PropsWithChildren<{
   className?: string;
-  type: string;
+  id: string;
   item: Record<string, any>;
 }>;
 
 const MaterialDragable = ({
   children,
-  type,
+  id,
   className,
   item,
 }: MaterialDragableProps) => {
-  const ref = useRef<HTMLDivElement>(null);
-  const [{ isDragging }, drag] = useDrag(
-    () => ({
-      type,
-      item,
-      collect(monitor) {
-        return {
-          isDragging: monitor.isDragging(),
-        };
-      },
-      options: {
-        dropEffect: 'copy',
-      },
-    }),
-    [item, type],
-  );
-  drag(ref);
+  const { attributes, listeners, setNodeRef, transform } = useDraggable({
+    id: `Material-${id}`,
+    data: {
+      ...item,
+    },
+  });
+  const style = transform
+    ? {
+        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+      }
+    : undefined;
+
   return (
-    <div className={cx([isDragging && 'opacity-50'], className)} ref={ref}>
+    <div
+      ref={setNodeRef}
+      style={style}
+      {...listeners}
+      {...attributes}
+      className={cx(['cursor-default'], className)}
+    >
       {children}
     </div>
   );

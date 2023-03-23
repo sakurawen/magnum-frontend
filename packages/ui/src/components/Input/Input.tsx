@@ -17,7 +17,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const enableIcon = isValidElement(icon);
   return (
     <div
-      className={cx('inline-flex  bg-theme-gray-2/90 rounded', {
+      className={cx('inline-flex  bg-theme-gray-2/70 rounded', {
         'w-full': fill,
       })}
     >

@@ -1,14 +1,8 @@
-import { PropsWithChildren, useRef } from 'react';
-import { useDrag, useDrop, XYCoord } from 'react-dnd';
-import { draftAcceptTypes } from '@/components/material';
 import { useTrackedAppStore } from '@/store';
 import { DraftElement } from '@/schemas/draft';
 import cx from 'clsx';
-
-type ElementItem = {
-  id: string;
-  index: number;
-};
+import { useDraggable } from '@dnd-kit/core';
+import { Icon } from '@iconify/react';
 
 type ElementProps = {
   index: number;
@@ -24,92 +18,43 @@ const getProperties = (raw: Record<string, any>) => {
 };
 
 const Element = (props: ElementProps) => {
-  const { item, index } = props;
+  const { item } = props;
   const {
     app: {
       setCurrentDraftComponentId,
-      moveDraftElementByIndex,
       editor: { currentDraftElementId },
     },
   } = useTrackedAppStore();
 
-  const ref = useRef<HTMLDivElement>(null);
-
-  const [{ handlerId, isDragging }, drag] = useDrag(() => ({
-    type: 'draft-' + item.name,
-    item: () => {
-      return {
-        id: item.id,
-        index,
-      };
-    },
-    collect: (monitor) => ({
-      isDragging: monitor.isDragging(),
-      handlerId: monitor.getHandlerId(),
-    }),
-  }));
-  const [, drop] = useDrop({
-    accept: draftAcceptTypes,
-    hover(dragItem: ElementItem, monitor) {
-      if (!ref.current) {
-        return;
-      }
-      const dragIndex = dragItem.index;
-      const hoverIndex = index;
-
-      // Don't replace items with themselves
-      if (dragIndex === hoverIndex) {
-        return;
-      }
-
-      // Determine rectangle on screen
-      const hoverBoundingRect = ref.current?.getBoundingClientRect();
-
-      // Get vertical middle
-      const hoverMiddleY =
-        (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
-
-      // Determine mouse position
-      const clientOffset = monitor.getClientOffset();
-
-      // Get pixels to the top
-      const hoverClientY = (clientOffset as XYCoord).y - hoverBoundingRect.top;
-
-      // Only perform the move when the mouse has crossed half of the items height
-      // When dragging downwards, only move when the cursor is below 50%
-      // When dragging upwards, only move when the cursor is above 50%
-
-      // Dragging downwards
-      if (dragIndex < hoverIndex && hoverClientY < hoverMiddleY) {
-        return;
-      }
-
-      // Dragging upwards
-      if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
-        return;
-      }
-      moveDraftElementByIndex(dragIndex, hoverIndex);
-      dragItem.index = hoverIndex;
-    },
-  });
-  const handleSelectDraftComponentId = (id: string) => {
+  const handleSelectElementById = (id: string) => {
     setCurrentDraftComponentId(id);
   };
-  drag(drop(ref));
+
+  const { setNodeRef, transform, attributes, isDragging, listeners } =
+    useDraggable({
+      id: `Element-${item.id}`,
+      data: item,
+    });
+  const style = transform
+    ? {
+        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+      }
+    : undefined;
   return (
     <div
-      ref={ref}
-      className="my-2"
-      style={{
-        opacity: isDragging ? 0 : 1,
-      }}
-      data-handle-id={handlerId}
+      style={style}
+      ref={setNodeRef}
+      {...attributes}
+      className={cx('draft-element cursor-default', [
+        isDragging ? 'z-100' : 'z-0',
+      ])}
+      onClick={() => handleSelectElementById(item.id)}
     >
       <div
         data-is-draft-item={true}
-        onClick={() => handleSelectDraftComponentId(item.id)}
-        className={cx('p-2 ring-theme-2 ring-inset', {
+        className={cx('p-2 rounded relative ring-theme-2 ring-inset', {
           'bg-theme-1/50 ring-2': currentDraftElementId === item.id,
+          'bg-white': isDragging,
         })}
         key={item.id}
       >
@@ -120,6 +65,12 @@ const Element = (props: ElementProps) => {
             className={cx(item.internal.className)}
           />
         </div>
+        <button
+          className="right-3 hover:shadow py-1 top-1/2 -translate-y-1/2 absolute rounded hover:bg-white/50 text-theme-content-1 overflow-hidden cursor-grab"
+          {...listeners}
+        >
+          <Icon className="w-6 h-6" icon="clarity:drag-handle-line" />
+        </button>
       </div>
     </div>
   );
