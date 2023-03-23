@@ -106,7 +106,7 @@ export const materialList: Material[] = [
     preview: (
       <Icon
         className={cx(materialElementCls, 'w-5 h-5')}
-        icon="heroicons:photo"
+        icon="heroicons:minus"
       />
     ),
   },
