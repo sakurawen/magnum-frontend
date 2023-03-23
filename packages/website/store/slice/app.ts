@@ -7,6 +7,8 @@ export type AppSliceState = {
       search: string;
     };
     editor: {
+      dragIndex?: number;
+      hoverIndex?: number;
       // 当前选中的草稿组件id
       currentDraftElementId: string | null;
       draftElements: DraftElement[];
@@ -17,6 +19,7 @@ export type AppSliceState = {
     setDraftElementProperties(elementId: string, key: string, value: any): void;
     addDraftElement(item: DraftElement): void;
     moveDraftElement(id: string, index: number): void;
+    moveDraftElementByIndex(dragIndex: number, hoverIndex: number): void;
     setNavbarSearch(val: string): void;
     resetAppState(): void;
   };
@@ -27,6 +30,8 @@ const appSlice: SliceCreator<AppSliceState> = (set, get) => {
       search: '',
     },
     editor: {
+      dragIndex: undefined,
+      hoverIndex: undefined,
       currentDraftElementId: null,
       draftElements: [],
     },
@@ -50,6 +55,17 @@ const appSlice: SliceCreator<AppSliceState> = (set, get) => {
           },
           false,
           'app/delDraftElementWithId',
+        );
+      },
+      moveDraftElementByIndex(dragIndex, hoverIndex) {
+        const moveItem = get().app.editor.draftElements[dragIndex];
+        set(
+          (state) => {
+            state.app.editor.draftElements.splice(dragIndex, 1);
+            state.app.editor.draftElements.splice(hoverIndex, 0, moveItem);
+          },
+          false,
+          'app/moveDraftElementByIndex',
         );
       },
       moveDraftElement(id, atIndex) {
