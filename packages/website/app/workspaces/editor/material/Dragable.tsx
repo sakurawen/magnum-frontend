@@ -1,4 +1,5 @@
-import React, { useRef, PropsWithChildren } from 'react';
+'use client';
+import React, { PropsWithChildren } from 'react';
 import cx from 'clsx';
 import { useDraggable } from '@dnd-kit/core';
 
@@ -14,12 +15,13 @@ const MaterialDragable = ({
   className,
   item,
 }: MaterialDragableProps) => {
-  const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: `Material-${id}`,
-    data: {
-      ...item,
-    },
-  });
+  const { attributes, isDragging, transform, listeners, setNodeRef } =
+    useDraggable({
+      id: `Material-${id}`,
+      data: {
+        ...item,
+      },
+    });
   const style = transform
     ? {
         transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
@@ -28,11 +30,17 @@ const MaterialDragable = ({
 
   return (
     <div
-      ref={setNodeRef}
       style={style}
+      ref={setNodeRef}
       {...listeners}
       {...attributes}
-      className={cx(['cursor-default'], className)}
+      className={cx(
+        ['cursor-default'],
+        {
+          // 'opacity-0': isDragging,
+        },
+        className,
+      )}
     >
       {children}
     </div>

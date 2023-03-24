@@ -1,9 +1,9 @@
 import { z } from 'zod';
-import { Material } from '@/schemas/material';
+import { MaterialSchema } from '@/schemas/material';
 import { immerable } from 'immer';
 import { nanoid } from 'nanoid';
 
-export const DraftItem = z.object({
+export const DraftElementSchema = z.object({
   id: z.string(),
   name: z.string(),
   internal: z.record(z.string(), z.any()),
@@ -14,7 +14,7 @@ export const DraftItem = z.object({
   componentType: z.custom<React.FC<any>>(),
 });
 
-export type DraftItem = z.infer<typeof DraftItem>;
+export type DraftElementSchema = z.infer<typeof DraftElementSchema>;
 
 function createMaterialConfiguration(config: Record<string, any>) {
   let properties: Record<string, any> = {};
@@ -38,7 +38,7 @@ export class DraftElement {
   configuration: ReturnType<typeof createMaterialConfiguration>;
   componentType: React.FC<any>;
   internal;
-  constructor({ id, componentType, name, config, internal }: DraftItem) {
+  constructor({ id, componentType, name, config, internal }: DraftElementSchema) {
     this.id = id;
     this.name = name;
     this.componentType = componentType;
@@ -58,7 +58,7 @@ export function createDraftElement({
   componentType,
   config,
   internal,
-}: Material['item']) {
+}: MaterialSchema['item']) {
   const properties = {
     name,
     id: nanoid(),

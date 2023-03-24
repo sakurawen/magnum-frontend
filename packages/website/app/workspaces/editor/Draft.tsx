@@ -1,21 +1,19 @@
 'use client';
-import { useDrop } from 'react-dnd';
-import { useCallback, useEffect, useRef } from 'react';
-import cx from 'clsx';
-import { materialAcceptTypes } from '@/components/material';
-import { log } from '@/utils';
 import { useTrackedAppStore } from '@/store';
-import { createDraftElement, DraftElement, DraftItem } from '@/schemas/draft';
-import { Material } from '@/schemas/material';
-import DraftElementComponent from './Element';
 import { useDroppable } from '@dnd-kit/core';
-
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
+import cx from 'clsx';
+import { useEffect, useMemo, useRef } from 'react';
+import ElementSortable from './element/Sortable';
+import DraftElementComponent from './element/Element';
 const Draft = () => {
   const {
     app: {
-      addDraftElement,
       setCurrentDraftComponentId,
-      editor: { draftElements, currentDraftElementId },
+      editor: { draftElements },
     },
   } = useTrackedAppStore();
 
@@ -45,11 +43,9 @@ const Draft = () => {
     };
   }, []);
 
-  const renderDraftElement = useCallback(
-    (item: DraftElement, index: number) => {
-      return <DraftElementComponent key={item.id} item={item} index={index} />;
-    },
-    [],
+  const sortItems = useMemo(
+    () => draftElements.map((i) => 'Element-' + i.id),
+    [draftElements],
   );
 
   return (
@@ -68,15 +64,23 @@ const Draft = () => {
           ])}
         >
           <div
-            className={cx(
-              'w-[50.625vh] h-[86vh] overflow-y-auto    mx-auto shadow-sm',
-              [isOver ? 'bg-green-50' : 'bg-white'],
-            )}
+            className={cx('w-[50.625vh] h-[86vh]    mx-auto shadow-sm', [
+              isOver ? 'bg-green-50' : 'bg-white',
+            ])}
             ref={ref}
           >
-            {draftElements.map((item, index) => {
-              return renderDraftElement(item, index);
-            })}
+            <SortableContext
+              strategy={verticalListSortingStrategy}
+              items={sortItems}
+            >
+              {draftElements.map((item) => {
+                return (
+                  <ElementSortable item={item} key={item.id}>
+                    <DraftElementComponent item={item} />
+                  </ElementSortable>
+                );
+              })}
+            </SortableContext>
           </div>
         </div>
       </div>

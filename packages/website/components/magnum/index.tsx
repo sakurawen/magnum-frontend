@@ -1,17 +1,17 @@
-import type { Material } from '@/schemas/material';
+import type { MaterialSchema } from '@/schemas/material';
 import { Icon } from '@iconify/react';
 import { Button, Checkbox, Input } from '@magnum/ui';
 import cx from 'clsx';
-import ButtonImpl from './impl/magnum/Button';
-import CheckboxImpl from './impl/magnum/Checkbox';
-import DividerImpl from './impl/magnum/Divider';
-import ImageImpl from './impl/magnum/Image';
-import InputImpl from './impl/magnum/Input';
-import TextareaImpl from './impl/magnum/Textarea';
+import ButtonImpl from './Button';
+import CheckboxImpl from './Checkbox';
+import DividerImpl from './Divider';
+import ImageImpl from './Image';
+import InputImpl from './Input';
+import TextareaImpl from './Textarea';
 
 const materialElementCls = 'pointer-events-none ';
 
-export const materialList: Material[] = [
+export const materialList: MaterialSchema[] = [
   {
     type: 'Material',
     item: {

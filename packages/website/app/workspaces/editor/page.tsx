@@ -1,14 +1,12 @@
 import Draft from '@/app/workspaces/editor/Draft';
 import Configuration from '@/app/workspaces/editor/Configuration';
-import Materials from '@/app/workspaces/editor/Materials';
+import Materials from '@/app/workspaces/editor/MaterialList';
 import cx from 'clsx';
-import ClientDndProvider from './ClientDndProvider';
-import PreviewLayer from './PreviewLayer';
+import ClientDndContext from './ClientDndContext';
 
 const Editor = () => {
   return (
-    <ClientDndProvider>
-      {/* <PreviewLayer /> */}
+    <ClientDndContext>
       <div className="h-full relative">
         <div className="absolute left-0 top-0 bg-white  z-20 h-full components-container w-80  border-r border-light">
           <Materials />
@@ -20,7 +18,7 @@ const Editor = () => {
           <Configuration />
         </div>
       </div>
-    </ClientDndProvider>
+    </ClientDndContext>
   );
 };
 

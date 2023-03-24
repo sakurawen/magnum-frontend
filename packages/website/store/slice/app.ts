@@ -18,8 +18,8 @@ export type AppSliceState = {
     delDraftElementWithId(id: string): void;
     setDraftElementProperties(elementId: string, key: string, value: any): void;
     addDraftElement(item: DraftElement): void;
-    moveDraftElement(id: string, index: number): void;
-    moveDraftElementByIndex(dragIndex: number, hoverIndex: number): void;
+    findDraftIndexById(id: string): number;
+    setDraftElements(elements: DraftElement[]): void;
     setNavbarSearch(val: string): void;
     resetAppState(): void;
   };
@@ -40,6 +40,11 @@ const appSlice: SliceCreator<AppSliceState> = (set, get) => {
   return {
     app: {
       ...rawAppState,
+      findDraftIndexById(id) {
+        return get().app.editor.draftElements.findIndex(
+          (draft) => draft.id === id,
+        );
+      },
       delDraftElementWithId(id) {
         const idx = get().app.editor.draftElements.findIndex(
           (item) => item.id === id,
@@ -57,37 +62,6 @@ const appSlice: SliceCreator<AppSliceState> = (set, get) => {
           'app/delDraftElementWithId',
         );
       },
-      moveDraftElementByIndex(dragIndex, hoverIndex) {
-        const moveItem = get().app.editor.draftElements[dragIndex];
-        set(
-          (state) => {
-            state.app.editor.draftElements.splice(dragIndex, 1);
-            state.app.editor.draftElements.splice(hoverIndex, 0, moveItem);
-          },
-          false,
-          'app/moveDraftElementByIndex',
-        );
-      },
-      moveDraftElement(id, atIndex) {
-        const idx = get().app.editor.draftElements.findIndex(
-          (item) => item.id === id,
-        );
-        console.log({
-          id,
-          idx,
-          atIndex,
-        });
-        if (idx === atIndex) return;
-        const card = get().app.editor.draftElements[idx];
-        set(
-          (state) => {
-            state.app.editor.draftElements.splice(idx, 1);
-            state.app.editor.draftElements.splice(atIndex, 0, card);
-          },
-          false,
-          'app/swapDraftElement',
-        );
-      },
       resetAppState() {
         set(
           (state) => {
@@ -97,6 +71,15 @@ const appSlice: SliceCreator<AppSliceState> = (set, get) => {
           },
           false,
           'app/resetAppState',
+        );
+      },
+      setDraftElements(elements) {
+        set(
+          (state) => {
+            state.app.editor.draftElements = elements;
+          },
+          false,
+          'app/setDraftElements',
         );
       },
       setDraftElementProperties(elementId, key, value) {

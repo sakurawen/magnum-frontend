@@ -1,10 +1,10 @@
 import { z } from 'zod';
-import { DraftItem } from './draft';
+import { DraftElementSchema } from './draft';
 
-export const Material = z.object({
+export const MaterialSchema = z.object({
   type: z.string(),
   preview: z.custom<React.ReactElement>(),
-  item: DraftItem.omit({
+  item: DraftElementSchema.omit({
     id: true,
     config: true,
   }).extend({
@@ -12,4 +12,4 @@ export const Material = z.object({
   }),
 });
 
-export type Material = z.infer<typeof Material>;
+export type MaterialSchema = z.infer<typeof MaterialSchema>;
