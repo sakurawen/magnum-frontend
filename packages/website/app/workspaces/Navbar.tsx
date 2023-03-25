@@ -43,7 +43,7 @@ const Navbar = () => {
               </div>
               <Icon
                 className="w-3 h-3 mt-0.5 group-hover:translate-y-0.5 transition"
-                icon="heroicons:chevron-down"
+                icon="radix-icons:chevron-down"
               />
             </div>
           </Menu.Trigger>
@@ -73,7 +73,7 @@ const Navbar = () => {
             icon={
               <Icon
                 className="w-5 h-5 mt-0.5 text-gray-400"
-                icon="heroicons:magnifying-glass"
+                icon="radix-icons:magnifying-glass"
               />
             }
             value={search}
@@ -91,7 +91,7 @@ const Navbar = () => {
               </div>
               <Icon
                 className="w-3 h-3 mt-0.5 group-hover:translate-y-0.5 transition"
-                icon="heroicons:chevron-down"
+                icon="radix-icons:chevron-down"
               />
             </div>
           </Menu.Trigger>

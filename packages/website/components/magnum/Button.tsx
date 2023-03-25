@@ -1,7 +1,7 @@
 import { Button, ButtonProps } from '@magnum/ui';
 
 const ButtonImpl = (props: ButtonProps) => {
-  return <Button {...props} />;
+  return <Button className='p-2' {...props} />;
 };
 
 export default ButtonImpl;

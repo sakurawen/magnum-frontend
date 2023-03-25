@@ -9,13 +9,16 @@ import cx from 'clsx';
 import { useEffect, useMemo, useRef } from 'react';
 import ElementSortable from './element/Sortable';
 import DraftElementComponent from './element/Element';
+
 const Draft = () => {
   const {
     app: {
       setCurrentDraftComponentId,
-      editor: { draftElements },
+      editor: { draftElements, currentDragItemType },
     },
   } = useTrackedAppStore();
+
+  const dragItemIsMaterial = currentDragItemType === 'Material';
 
   const { setNodeRef, isOver } = useDroppable({
     id: 'Draft',
@@ -44,10 +47,12 @@ const Draft = () => {
   }, []);
 
   const sortItems = useMemo(
-    () => draftElements.map((i) => 'Element-' + i.id),
+    () => draftElements.map((i) => 'Element|' + i.id),
     [draftElements],
   );
-
+  console.log({
+    isOver,
+  });
   return (
     <div className="h-full w-full flex flex-col">
       <h1 className=" z-10 p-2  border-b border-theme-border text-sm select-none text-center">
@@ -57,31 +62,43 @@ const Draft = () => {
         ref={draftContainerRef}
         className="draft-container flex-1 flex justify-center items-center bg-theme-gray-2"
       >
-        <div
-          ref={setNodeRef}
-          className={cx(' border-2 border-dashed', [
-            isOver ? ' border-green-200' : 'border-transparent ',
-          ])}
-        >
-          <div
-            className={cx('w-[50.625vh] h-[86vh]    mx-auto shadow-sm', [
-              isOver ? 'bg-green-50' : 'bg-white',
-            ])}
-            ref={ref}
-          >
-            <SortableContext
-              strategy={verticalListSortingStrategy}
-              items={sortItems}
+        <div className="w-[50.625vh] h-[86vh]">
+          {dragItemIsMaterial ? (
+            <div
+              ref={setNodeRef}
+              className={cx(
+                'draft-element-insert-layer flex justify-center items-center h-full w-full ',
+                {},
+                [isOver ? 'bg-green-50' : 'bg-white'],
+              )}
             >
-              {draftElements.map((item) => {
-                return (
-                  <ElementSortable item={item} key={item.id}>
-                    <DraftElementComponent item={item} />
-                  </ElementSortable>
-                );
-              })}
-            </SortableContext>
-          </div>
+              <div className="flex  justify-center items-center">
+                <div>拖动到这里</div>
+              </div>
+            </div>
+          ) : (
+            <div className="w-full h-full relative">
+              <div
+                className={cx(
+                  'w-full h-full pb-20 overflow-y-auto bg-white mx-auto shadow-sm',
+                )}
+                ref={ref}
+              >
+                <SortableContext
+                  strategy={verticalListSortingStrategy}
+                  items={sortItems}
+                >
+                  {draftElements.map((item) => {
+                    return (
+                      <ElementSortable item={item} key={item.id}>
+                        <DraftElementComponent item={item} />
+                      </ElementSortable>
+                    );
+                  })}
+                </SortableContext>
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </div>

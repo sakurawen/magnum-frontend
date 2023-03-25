@@ -8,22 +8,19 @@ import {
 import { MaterialSchema } from '@/schemas/material';
 import { useTrackedAppStore } from '@/store';
 import {
+  closestCenter,
   DndContext,
   DragEndEvent,
-  DragOverlay,
   DragStartEvent,
-  closestCenter,
-  useSensors,
-  useSensor,
   KeyboardSensor,
-  TouchSensor,
   MouseSensor,
+  TouchSensor,
+  useSensor,
+  useSensors,
 } from '@dnd-kit/core';
 import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 import { PropsWithChildren, useState } from 'react';
-import { createPortal } from 'react-dom';
-import Element from './element/Element';
-import Material from './material/Material';
+import DragPReview from './DragPreview';
 
 const ClientDndContext = ({ children }: PropsWithChildren) => {
   const {
@@ -31,6 +28,7 @@ const ClientDndContext = ({ children }: PropsWithChildren) => {
       addDraftElement,
       setDraftElements,
       findDraftIndexById,
+      setCurrentDragItemType,
       editor: { draftElements },
     },
   } = useTrackedAppStore();
@@ -66,6 +64,7 @@ const ClientDndContext = ({ children }: PropsWithChildren) => {
     const id = e.active.id as string;
     const isElement = id.startsWith('Element');
     const isMaterial = id.startsWith('Material');
+    setCurrentDragItemType(isElement ? 'Element' : 'Material');
     if (isMaterial) {
       previewMaterial(e);
     }
@@ -74,30 +73,41 @@ const ClientDndContext = ({ children }: PropsWithChildren) => {
     }
   };
 
+  const handleDragEnd = (e: DragEndEvent) => {
+    console.log(e)
+    const { active, over } = e;
+    setPreview(undefined);
+    setCurrentDragItemType(undefined);
+    if (materialIds.includes(active.id as string) && over?.id === 'Draft') {
+      draftDragEnd(e);
+    }
+    sortDraft(e);
+  };
+
   const draftDragEnd = (e: DragStartEvent) => {
     const item = e.active.data.current as DraftElementSchema;
     addDraftElement(createDraftElement(item));
   };
 
-  const handleDragEnd = (e: DragEndEvent) => {
+  const sortDraft = (e: DragEndEvent) => {
     const { active, over } = e;
-    setPreview(undefined);
-    if (materialIds.includes(active.id as string) && over?.id === 'Draft') {
-      draftDragEnd(e);
-    }
     const activeId = active.id as string;
     const overId = over?.id as string;
-    const [aTag, aid] = activeId.split('-');
-    const [oTag, oid] = overId.split('-');
-    if (activeId && overId && aTag === 'Element' && oTag === 'Element') {
-      const activeIndex = findDraftIndexById(aid);
-      const overIndex = findDraftIndexById(oid);
-      // setDraftElements(arrayMove(draftElements, newIndex, oldIndex));
+    const [activeTag, activeUUID] = activeId.split('|');
+    const [overTag, overUUID] = overId.split('|');
+    if (
+      activeId &&
+      overId &&
+      activeTag === 'Element' &&
+      overTag === 'Element'
+    ) {
+      const activeIndex = findDraftIndexById(activeUUID);
+      const overIndex = findDraftIndexById(overUUID);
       const next = arrayMove(draftElements, activeIndex, overIndex);
-      console.log({ next, activeIndex, overIndex });
       setDraftElements(next);
     }
   };
+
   const sensors = useSensors(
     useSensor(TouchSensor),
     useSensor(MouseSensor),
@@ -109,26 +119,13 @@ const ClientDndContext = ({ children }: PropsWithChildren) => {
   return (
     <DndContext
       accessibility={undefined}
-      autoScroll={false}
       sensors={sensors}
       collisionDetection={closestCenter}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
     >
       {children}
-      {createPortal(
-        <DragOverlay>
-          {preview?.type === 'material' ? (
-            <Material item={preview.data as MaterialSchema} />
-          ) : null}
-          {preview?.type === 'element' ? (
-            <div className="bg-white">
-              <Element item={preview.data as DraftElement} />
-            </div>
-          ) : null}
-        </DragOverlay>,
-        document.body,
-      )}
+      <DragPReview preview={preview} />
     </DndContext>
   );
 };

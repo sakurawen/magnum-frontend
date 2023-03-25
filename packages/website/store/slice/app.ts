@@ -7,14 +7,14 @@ export type AppSliceState = {
       search: string;
     };
     editor: {
-      dragIndex?: number;
-      hoverIndex?: number;
+      currentDragItemType: 'Material' | 'Element' | undefined;
       // 当前选中的草稿组件id
       currentDraftElementId: string | null;
       draftElements: DraftElement[];
     };
     workspaces: {};
     setCurrentDraftComponentId(id: string | null): void;
+    setCurrentDragItemType(type: 'Material' | 'Element' | undefined): void;
     delDraftElementWithId(id: string): void;
     setDraftElementProperties(elementId: string, key: string, value: any): void;
     addDraftElement(item: DraftElement): void;
@@ -30,8 +30,7 @@ const appSlice: SliceCreator<AppSliceState> = (set, get) => {
       search: '',
     },
     editor: {
-      dragIndex: undefined,
-      hoverIndex: undefined,
+      currentDragItemType: undefined,
       currentDraftElementId: null,
       draftElements: [],
     },
@@ -40,6 +39,15 @@ const appSlice: SliceCreator<AppSliceState> = (set, get) => {
   return {
     app: {
       ...rawAppState,
+      setCurrentDragItemType(type) {
+        set(
+          (state) => {
+            state.app.editor.currentDragItemType = type;
+          },
+          false,
+          'app/setCurrentDragItemType',
+        );
+      },
       findDraftIndexById(id) {
         return get().app.editor.draftElements.findIndex(
           (draft) => draft.id === id,

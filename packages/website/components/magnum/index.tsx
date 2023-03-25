@@ -7,7 +7,9 @@ import CheckboxImpl from './Checkbox';
 import DividerImpl from './Divider';
 import ImageImpl from './Image';
 import InputImpl from './Input';
+import Paragraph from './Paragraph';
 import TextareaImpl from './Textarea';
+import Title from './Title';
 
 const materialElementCls = 'pointer-events-none ';
 
@@ -26,7 +28,7 @@ export const materialList: MaterialSchema[] = [
         variant: 'primary',
       },
     },
-    preview: <Button className={cx(materialElementCls, 'w-full')} />,
+    preview: <Icon icon="radix-icons:button" className="w-5 h-5" />,
   },
   {
     type: 'Material',
@@ -42,9 +44,7 @@ export const materialList: MaterialSchema[] = [
         label: 'Input label',
       },
     },
-    preview: (
-      <Input className={cx(materialElementCls, '!bg-theme-gray-2 shadow-sm')} />
-    ),
+    preview: <Icon icon="radix-icons:input" className="w-5 h-5" />,
   },
   {
     type: 'Material',
@@ -58,7 +58,7 @@ export const materialList: MaterialSchema[] = [
         description: 'description',
       },
     },
-    preview: <Checkbox className={materialElementCls} checked={true} />,
+    preview: <Icon icon="radix-icons:checkbox" className="w-5 h-5" />,
   },
   {
     type: 'Material',
@@ -73,12 +73,7 @@ export const materialList: MaterialSchema[] = [
         rows: 4,
       },
     },
-    preview: (
-      <Icon
-        className={cx(materialElementCls, 'w-5 h-5')}
-        icon="heroicons:pencil-square"
-      />
-    ),
+    preview: <Icon className="w-5 h-5" icon="radix-icons:rows" />,
   },
   {
     type: 'Material',
@@ -86,14 +81,11 @@ export const materialList: MaterialSchema[] = [
       name: 'Image',
       componentType: ImageImpl,
       internal: {},
-      config: {},
+      config: {
+        full: false,
+      },
     },
-    preview: (
-      <Icon
-        className={cx(materialElementCls, 'w-5 h-5')}
-        icon="heroicons:photo"
-      />
-    ),
+    preview: <Icon className="w-5 h-5" icon="radix-icons:image" />,
   },
   {
     type: 'Material',
@@ -106,16 +98,37 @@ export const materialList: MaterialSchema[] = [
     preview: (
       <Icon
         className={cx(materialElementCls, 'w-5 h-5')}
-        icon="heroicons:minus"
+        icon="radix-icons:divider-horizontal"
       />
     ),
+  },
+  {
+    type: 'Material',
+    item: {
+      name: 'Title',
+      componentType: Title,
+      internal: {},
+      config: {
+        text: 'Lorem ipsum',
+      },
+    },
+    preview: <Icon className="w-5 h-5" icon="pajamas:title" />,
+  },
+  {
+    type: 'Material',
+    item: {
+      name: 'Paragraph',
+      componentType: Paragraph,
+      internal: {},
+      config: {
+        text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt soluta error, tempore mollitia consequatur quos voluptatum sit perferendis distinctio nisi animi officia. Repudiandae itaque eligendi, veritatis porro pariatur quia exercitationem.',
+      },
+    },
+    preview: <Icon className="w-5 h-5" icon="bi:text-paragraph" />,
   },
 ];
 
 export const materialAcceptTypes = materialList.map((item) => item.type);
 export const materialIds = materialList.map(
-  (item) => 'Material-' + item.item.name,
-);
-export const draftAcceptTypes = materialList.map(
-  (item) => 'draft-' + item.type,
+  (item) => 'Material|' + item.item.name,
 );

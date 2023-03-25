@@ -8,8 +8,8 @@ body {
 }
 
 .bg-login {
-  background-image: url(/images/bg-login.png);
-  @apply bg-cover bg-theme-1;
+  background-image: url(/images/bg-login.jpg);
+  @apply bg-cover bg-top bg-theme-1;
 }
 
 *::-webkit-scrollbar {

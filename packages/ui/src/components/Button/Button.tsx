@@ -54,7 +54,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {enableLoading ? (
           <Icon
             className="inline-block animate-spin w-4 h-4"
-            icon="mdi:loading"
+            icon="radix-icons:reload"
           />
         ) : (
           <span className="inline-block min-h-[1em]">{children}</span>

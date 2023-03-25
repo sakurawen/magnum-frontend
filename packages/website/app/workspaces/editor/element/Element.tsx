@@ -27,11 +27,10 @@ const Element = (props: ElementProps) => {
   const handleSelectElementById = (id: string) => {
     setCurrentDraftComponentId(id);
   };
-
   return (
     <div
       data-is-draft-item={true}
-      className={cx('element p-2 ring-inset rounded', {
+      className={cx('element px-2.5 py-2 ring-inset rounded', {
         'bg-theme-1/50 ring-2': currentDraftElementId === item.id,
       })}
       onClick={() => handleSelectElementById(item.id)}

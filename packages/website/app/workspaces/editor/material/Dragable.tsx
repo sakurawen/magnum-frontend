@@ -17,7 +17,7 @@ const MaterialDragable = ({
 }: MaterialDragableProps) => {
   const { attributes, isDragging, transform, listeners, setNodeRef } =
     useDraggable({
-      id: `Material-${id}`,
+      id: `Material|${id}`,
       data: {
         ...item,
       },

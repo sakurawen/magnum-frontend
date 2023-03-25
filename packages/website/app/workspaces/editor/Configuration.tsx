@@ -35,7 +35,7 @@ const Configuration = () => {
                 key={property}
                 className="mb-2 px-4 py-1 flex items-center justify-between"
               >
-                <span className=" inline-block text-xs w-[8em]">
+                <span className="inline-block text-xs w-[8em]">
                   {property}:
                 </span>
                 <div className="flex-1">
@@ -47,7 +47,6 @@ const Configuration = () => {
                         .value
                     }
                     onChange={(e) => {
-                      console.log('input:', e.target.value);
                       setDraftElementProperties(
                         currentDraftElement?.id || '',
                         property,

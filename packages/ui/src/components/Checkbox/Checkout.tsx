@@ -29,7 +29,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
                 ? 'visible opacity-100 translate-y-0'
                 : 'opacity-0 invisible translate-y-1',
             ])}
-            icon="material-symbols:done"
+            icon="radix-icons:check"
           />
           <input
             className="hidden"

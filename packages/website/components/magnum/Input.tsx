@@ -1,6 +1,8 @@
 import { Input, InputProps } from '@magnum/ui';
 
-const InputImpl = (props: InputProps & { label: string }) => {
+const InputImpl = (
+  props: InputProps & { label: string; sortHandler?: React.ReactElement },
+) => {
   const { label, ...restProps } = props;
   return (
     <div>
