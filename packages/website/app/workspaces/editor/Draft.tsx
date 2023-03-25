@@ -9,6 +9,7 @@ import cx from 'clsx';
 import { useEffect, useMemo, useRef } from 'react';
 import ElementSortable from './element/Sortable';
 import DraftElementComponent from './element/Element';
+import { useHotKey, Control } from '@/hooks/use-hot-key';
 
 const Draft = () => {
   const {
@@ -26,6 +27,14 @@ const Draft = () => {
   const ref = useRef<HTMLDivElement>(null);
 
   const draftContainerRef = useRef<HTMLDivElement>(null);
+
+  useHotKey(
+    ['d', [Control,Control,Control,Control]],
+    () => {
+      console.log('测试快捷键');
+    },
+    [],
+  );
 
   /**
    * 监听取消选中

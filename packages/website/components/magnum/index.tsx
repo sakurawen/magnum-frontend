@@ -17,6 +17,30 @@ export const materialList: MaterialSchema[] = [
   {
     type: 'Material',
     item: {
+      name: 'Title',
+      componentType: Title,
+      internal: {},
+      config: {
+        text: 'Lorem ipsum',
+      },
+    },
+    preview: <Icon className="w-5 h-5" icon="pajamas:title" />,
+  },
+  {
+    type: 'Material',
+    item: {
+      name: 'Paragraph',
+      componentType: Paragraph,
+      internal: {},
+      config: {
+        text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt soluta error, tempore mollitia consequatur quos voluptatum sit perferendis distinctio nisi animi officia. Repudiandae itaque eligendi, veritatis porro pariatur quia exercitationem.',
+      },
+    },
+    preview: <Icon className="w-5 h-5" icon="bi:text-paragraph" />,
+  },
+  {
+    type: 'Material',
+    item: {
       name: 'Button',
       componentType: ButtonImpl,
       internal: {
@@ -78,18 +102,6 @@ export const materialList: MaterialSchema[] = [
   {
     type: 'Material',
     item: {
-      name: 'Image',
-      componentType: ImageImpl,
-      internal: {},
-      config: {
-        full: false,
-      },
-    },
-    preview: <Icon className="w-5 h-5" icon="radix-icons:image" />,
-  },
-  {
-    type: 'Material',
-    item: {
       name: 'Divider',
       componentType: DividerImpl,
       internal: {},
@@ -105,26 +117,14 @@ export const materialList: MaterialSchema[] = [
   {
     type: 'Material',
     item: {
-      name: 'Title',
-      componentType: Title,
+      name: 'Image',
+      componentType: ImageImpl,
       internal: {},
       config: {
-        text: 'Lorem ipsum',
+        full: false,
       },
     },
-    preview: <Icon className="w-5 h-5" icon="pajamas:title" />,
-  },
-  {
-    type: 'Material',
-    item: {
-      name: 'Paragraph',
-      componentType: Paragraph,
-      internal: {},
-      config: {
-        text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Incidunt soluta error, tempore mollitia consequatur quos voluptatum sit perferendis distinctio nisi animi officia. Repudiandae itaque eligendi, veritatis porro pariatur quia exercitationem.',
-      },
-    },
-    preview: <Icon className="w-5 h-5" icon="bi:text-paragraph" />,
+    preview: <Icon className="w-5 h-5" icon="radix-icons:image" />,
   },
 ];
 
