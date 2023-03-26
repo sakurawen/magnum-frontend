@@ -74,7 +74,7 @@ const ClientDndContext = ({ children }: PropsWithChildren) => {
   };
 
   const handleDragEnd = (e: DragEndEvent) => {
-    console.log(e)
+    console.log(e);
     const { active, over } = e;
     setPreview(undefined);
     setCurrentDragItemType(undefined);
@@ -118,9 +118,9 @@ const ClientDndContext = ({ children }: PropsWithChildren) => {
 
   return (
     <DndContext
+      // collisionDetection={closestCenter}
       accessibility={undefined}
       sensors={sensors}
-      collisionDetection={closestCenter}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
     >
