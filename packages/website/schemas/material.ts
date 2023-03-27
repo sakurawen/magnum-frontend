@@ -8,8 +8,13 @@ export const MaterialSchema = z.object({
     id: true,
     config: true,
   }).extend({
-    config: z.record(z.string(), z.any()),
+    text:z.string(),
+    config: z.array(z.object({
+      key:z.string(),
+      type:z.string(),
+      text:z.string(),
+      value:z.any()
+    })) 
   }),
 });
-
 export type MaterialSchema = z.infer<typeof MaterialSchema>;

@@ -4,7 +4,7 @@ import { SIZE_CLASSNAMES } from '../size';
 
 export type InputProps = Pick<
   InputHTMLAttributes<HTMLInputElement>,
-  'className' | 'placeholder' | 'disabled' | 'onChange' | 'value' | 'type'
+  'className' | 'placeholder' | 'disabled' | 'onChange' | 'value' | 'type'|"tabIndex"
 > & {
   size?: ComponentSize;
   fill?: boolean;

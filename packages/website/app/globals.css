@@ -4,7 +4,7 @@
 
 html,
 body {
-  @apply min-h-screen text-theme-content-1 selection:text-theme-3 selection:bg-theme-3/10;
+  @apply min-h-screen text-theme-content-2 selection:text-theme-3 selection:bg-theme-3/10;
 }
 
 .bg-login {
@@ -12,10 +12,17 @@ body {
   @apply bg-cover bg-top bg-theme-1;
 }
 
+.bg-login-grid {
+  background-image: url(/images/grid.svg);
+}
 *::-webkit-scrollbar {
-  @apply w-2 rounded bg-theme-gray-2/50;
+  @apply w-1.5 rounded bg-theme-gray-2/50;
 }
 
 *::-webkit-scrollbar-thumb {
   @apply bg-theme-gray-3 rounded;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  @apply bg-gray-500;
 }

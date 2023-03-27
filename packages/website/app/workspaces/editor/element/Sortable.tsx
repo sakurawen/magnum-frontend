@@ -2,17 +2,30 @@
 import { DraftElement } from '@/schemas/draft';
 import { useSortable } from '@dnd-kit/sortable';
 import { Icon } from '@iconify/react';
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useMemo } from 'react';
 import { useTrackedAppStore } from '@/store';
+import { createPortal } from 'react-dom';
 
 type ElementSortableProps = PropsWithChildren<{
   item: DraftElement;
 }>;
 
+const defaultRect = {
+  height: 0,
+  width: 0,
+  left: 0,
+  top: 0,
+  x: 0,
+  y: 0,
+};
 const ElementSortable = ({ item, children }: ElementSortableProps) => {
   const {
     app: {
-      editor: { currentDragItemType },
+      editor: {
+        canvas: { height, width },
+        currentDragItemType,
+        draftElements,
+      },
     },
   } = useTrackedAppStore();
 
@@ -25,6 +38,7 @@ const ElementSortable = ({ item, children }: ElementSortableProps) => {
     transition,
     isDragging,
     listeners,
+    node,
   } = useSortable({
     id: `Element|${item.id}`,
     data: item,
@@ -46,17 +60,20 @@ const ElementSortable = ({ item, children }: ElementSortableProps) => {
         pointerEvents: dragItemIsMaterial ? 'none' : undefined,
       }}
     >
-      <div className="relative group">
+      <div className="sortable relative overflow-hidden group">
         {children}
-        <div
-          {...attributes}
-          {...listeners}
-          className="right-2 hover:shadow group-hover:opacity-100 opacity-0 py-1 top-1/2 -translate-y-1/2 absolute rounded hover:bg-white/50 text-theme-content-1 overflow-hidden cursor-grab"
-        >
-          <Icon
-            className="w-4 h-4 text-theme-3"
-            icon="radix-icons:drag-handle-dots-2"
-          />
+        <div className="group-hover:right-0 -right-20 h-full transition-all top-0 flex flex-col justify-center items-center  absolute  z-50  overflow-hidden ">
+          <div
+            className="shadow bg-white  rounded cursor-grab"
+            {...attributes}
+            {...listeners}
+            tabIndex={-1}
+          >
+            <Icon
+              className="w-6 h-6  text-theme-3"
+              icon="radix-icons:drag-handle-dots-2"
+            />
+          </div>
         </div>
       </div>
     </div>

@@ -9,13 +9,19 @@ import cx from 'clsx';
 import { useEffect, useMemo, useRef } from 'react';
 import ElementSortable from './element/Sortable';
 import DraftElementComponent from './element/Element';
-import { useHotKey, Control } from '@/hooks/use-hot-key';
+import { useResize } from '@/hooks/use-resize';
+import { materialList } from '@/components/magnum';
 
 const Draft = () => {
   const {
     app: {
-      setCurrentDraftComponentId,
-      editor: { draftElements, currentDragItemType },
+      setCurrentDraftElementId,
+      setCanvasSize,
+      editor: {
+        canvas: { height, width },
+        draftElements,
+        currentDragItemType,
+      },
     },
   } = useTrackedAppStore();
 
@@ -28,14 +34,19 @@ const Draft = () => {
 
   const draftContainerRef = useRef<HTMLDivElement>(null);
 
-  useHotKey(
-    ['d', [Control,Control,Control,Control]],
+  useResize(
+    window,
     () => {
-      console.log('测试快捷键');
+      const clientHeight = document.body.clientHeight;
+      const height = clientHeight * 0.86;
+      const width = clientHeight * 0.50625;
+      setCanvasSize({
+        width,
+        height,
+      });
     },
     [],
   );
-
   /**
    * 监听取消选中
    */
@@ -46,7 +57,7 @@ const Draft = () => {
         !isDraftItem &&
         draftContainerRef.current?.contains(e.target as HTMLElement)
       ) {
-        setCurrentDraftComponentId(null);
+        setCurrentDraftElementId(null);
       }
     };
     document.addEventListener('click', listenDraftItemCancelSelect);
@@ -59,13 +70,32 @@ const Draft = () => {
     () => draftElements.map((i) => 'Element|' + i.id),
     [draftElements],
   );
-  console.log({
-    isOver,
-  });
+
+  const MaterialDroppable = (
+    <div
+      ref={setNodeRef}
+      className={cx(
+        'draft-element-insert-layer flex justify-center items-center h-full w-full ',
+        {},
+        [
+          isOver
+            ? 'bg-green-50 border-2 border-dashed border-green-300'
+            : 'bg-white border-2 border-dashed border-theme-gray-4',
+        ],
+      )}
+    >
+      <div className="flex text-center justify-center items-center">
+        <div>
+          <p>将物料拖动至此</p>
+        </div>
+      </div>
+    </div>
+  );
+
   return (
     <div className="h-full w-full flex flex-col">
       <h1 className=" z-10 p-2  border-b border-theme-border text-sm select-none text-center">
-        Draft
+        草稿
       </h1>
       <div
         ref={draftContainerRef}
@@ -73,23 +103,12 @@ const Draft = () => {
       >
         <div className="w-[50.625vh] h-[86vh]">
           {dragItemIsMaterial ? (
-            <div
-              ref={setNodeRef}
-              className={cx(
-                'draft-element-insert-layer flex justify-center items-center h-full w-full ',
-                {},
-                [isOver ? 'bg-green-50' : 'bg-white'],
-              )}
-            >
-              <div className="flex  justify-center items-center">
-                <div>拖动到这里</div>
-              </div>
-            </div>
+            MaterialDroppable
           ) : (
             <div className="w-full h-full relative">
               <div
                 className={cx(
-                  'w-full h-full pb-20 overflow-y-auto bg-white mx-auto shadow-sm',
+                  'w-full  h-full pb-20 overflow-x-hidden overflow-y-auto bg-white mx-auto shadow-sm',
                 )}
                 ref={ref}
               >

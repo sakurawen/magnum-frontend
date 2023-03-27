@@ -1,5 +1,5 @@
 'use client';
-import { materialIds, materialList } from '@/components/magnum';
+import { materialList } from '@/components/magnum';
 import {
   createDraftElement,
   DraftElement,
@@ -8,7 +8,6 @@ import {
 import { MaterialSchema } from '@/schemas/material';
 import { useTrackedAppStore } from '@/store';
 import {
-  closestCenter,
   DndContext,
   DragEndEvent,
   DragStartEvent,
@@ -74,14 +73,15 @@ const ClientDndContext = ({ children }: PropsWithChildren) => {
   };
 
   const handleDragEnd = (e: DragEndEvent) => {
-    console.log(e);
     const { active, over } = e;
     setPreview(undefined);
     setCurrentDragItemType(undefined);
-    if (materialIds.includes(active.id as string) && over?.id === 'Draft') {
+    if ((active.id as string).startsWith('Material|') && over?.id === 'Draft') {
       draftDragEnd(e);
     }
-    sortDraft(e);
+    if ((active.id as string).startsWith('Element')) {
+      sortDraft(e);
+    }
   };
 
   const draftDragEnd = (e: DragStartEvent) => {
@@ -118,7 +118,6 @@ const ClientDndContext = ({ children }: PropsWithChildren) => {
 
   return (
     <DndContext
-      // collisionDetection={closestCenter}
       accessibility={undefined}
       sensors={sensors}
       onDragStart={handleDragStart}

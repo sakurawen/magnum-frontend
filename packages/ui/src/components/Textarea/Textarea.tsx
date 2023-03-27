@@ -4,7 +4,7 @@ import cx from 'clsx';
 
 export type TextareaProps = Pick<
   TextareaHTMLAttributes<HTMLTextAreaElement>,
-  'value' | 'rows' | 'className' | 'value' | 'onChange' | 'placeholder'
+  'value' | 'rows' | 'className' | 'value' | 'onChange' | 'placeholder'|"tabIndex"
 > & {
   size?: ComponentSize;
 };

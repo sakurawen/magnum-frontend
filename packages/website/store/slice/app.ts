@@ -7,21 +7,34 @@ export type AppSliceState = {
       search: string;
     };
     editor: {
+      canvas: {
+        height: number;
+        width: number;
+      };
       currentDragItemType: 'Material' | 'Element' | undefined;
       // 当前选中的草稿组件id
       currentDraftElementId: string | null;
       draftElements: DraftElement[];
     };
     workspaces: {};
-    setCurrentDraftComponentId(id: string | null): void;
+    // 设置当前选中element id
+    setCurrentDraftElementId(id: string | null): void;
+    // 根据idx选中对应索引的element id
+    setCurrentDraftElementIdWithIndex(index: number): void;
     setCurrentDragItemType(type: 'Material' | 'Element' | undefined): void;
-    delDraftElementWithId(id: string): void;
-    setDraftElementProperties(elementId: string, key: string, value: any): void;
+    // 根据id删除element，返回删除element的idx
+    delDraftElementWithId(id: string): number;
+    setDraftElementProperties(
+      elementId: string,
+      propertyIdx: number,
+      value: any,
+    ): void;
     addDraftElement(item: DraftElement): void;
     findDraftIndexById(id: string): number;
     setDraftElements(elements: DraftElement[]): void;
     setNavbarSearch(val: string): void;
     resetAppState(): void;
+    setCanvasSize(size: { height: number; width: number }): void;
   };
 };
 const appSlice: SliceCreator<AppSliceState> = (set, get) => {
@@ -30,6 +43,10 @@ const appSlice: SliceCreator<AppSliceState> = (set, get) => {
       search: '',
     },
     editor: {
+      canvas: {
+        height: 0,
+        width: 0,
+      },
       currentDragItemType: undefined,
       currentDraftElementId: null,
       draftElements: [],
@@ -39,6 +56,12 @@ const appSlice: SliceCreator<AppSliceState> = (set, get) => {
   return {
     app: {
       ...rawAppState,
+      setCanvasSize(size) {
+        set((state) => {
+          state.app.editor.canvas.width = size.width;
+          state.app.editor.canvas.height = size.height;
+        });
+      },
       setCurrentDragItemType(type) {
         set(
           (state) => {
@@ -57,10 +80,10 @@ const appSlice: SliceCreator<AppSliceState> = (set, get) => {
         const idx = get().app.editor.draftElements.findIndex(
           (item) => item.id === id,
         );
-        if (idx === -1) return;
+        if (idx === -1) return -1;
         const curIdx = get().app.editor.currentDraftElementId;
         if (curIdx === id) {
-          get().app.setCurrentDraftComponentId(null);
+          get().app.setCurrentDraftElementId(null);
         }
         set(
           (state) => {
@@ -69,6 +92,7 @@ const appSlice: SliceCreator<AppSliceState> = (set, get) => {
           false,
           'app/delDraftElementWithId',
         );
+        return idx;
       },
       resetAppState() {
         set(
@@ -90,27 +114,43 @@ const appSlice: SliceCreator<AppSliceState> = (set, get) => {
           'app/setDraftElements',
         );
       },
-      setDraftElementProperties(elementId, key, value) {
+      setDraftElementProperties(elementId, propertyIdx, value) {
         const elementIdx = get().app.editor.draftElements.findIndex(
           (item) => item.id === elementId,
         );
         set(
           (state) => {
-            state.app.editor.draftElements[elementIdx].configuration.properties[
-              key
+            state.app.editor.draftElements[elementIdx].configuration[
+              propertyIdx
             ].value = value;
           },
           false,
           'app/setDraftElementProperties',
         );
       },
-      setCurrentDraftComponentId(id) {
+      setCurrentDraftElementIdWithIndex(index) {
+        const elements = get().app.editor.draftElements;
+        if (index < 0) return;
+        if (elements.length === 0) return;
+        if (index > elements.length - 1) {
+          index = elements.length - 1;
+        }
+        const id = elements[index].id;
         set(
           (state) => {
             state.app.editor.currentDraftElementId = id;
           },
           false,
-          'app/setCurrentDraftComponentId',
+          'app/setCurrentDraftElementIdWithIndex',
+        );
+      },
+      setCurrentDraftElementId(id) {
+        set(
+          (state) => {
+            state.app.editor.currentDraftElementId = id;
+          },
+          false,
+          'app/setCurrentDraftElementId',
         );
       },
       addDraftElement(item) {

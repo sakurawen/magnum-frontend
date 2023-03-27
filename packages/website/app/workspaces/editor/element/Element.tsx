@@ -7,10 +7,11 @@ type ElementProps = {
   className?: string;
 };
 
-const getProperties = (raw: Record<string, any>) => {
+const getProperties = (conf: DraftElement['configuration']) => {
   const properties: Record<string, any> = {};
-  for (let key in raw) {
-    properties[key] = raw[key].value;
+  for (let idx in conf) {
+    const property = conf[idx];
+    properties[property.key] = property.value;
   }
   return properties;
 };
@@ -19,13 +20,13 @@ const Element = (props: ElementProps) => {
   const { item, className } = props;
   const {
     app: {
-      setCurrentDraftComponentId,
+      setCurrentDraftElementId,
       editor: { currentDraftElementId },
     },
   } = useTrackedAppStore();
 
   const handleSelectElementById = (id: string) => {
-    setCurrentDraftComponentId(id);
+    setCurrentDraftElementId(id);
   };
   return (
     <div
@@ -38,7 +39,7 @@ const Element = (props: ElementProps) => {
       <div className="pointer-events-none select-none ring-theme-2 ring-inset">
         <item.componentType
           {...item.internal}
-          {...getProperties(item.configuration.properties)}
+          {...getProperties(item.configuration)}
           className={cx(
             item.internal.className,
 

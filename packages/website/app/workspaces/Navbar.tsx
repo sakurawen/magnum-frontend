@@ -22,15 +22,15 @@ const Navbar = () => {
     });
   };
   return (
-    <nav className="navbar  flex relative z-50 items-center justify-between text-xs border-b  border-light">
+    <nav className="navbar flex relative z-50 items-center justify-between text-xs border-b  ">
       <div className="flex h-full items-center  space-x-4">
         <Menu className="h-full">
           <Menu.Trigger className="h-full">
-            <div className="group select-none hover:bg-theme-gray-2  border-light w-80 h-full px-4 flex justify-between items-center  border-r">
+            <div className="group select-none hover:bg-theme-gray-2   w-80 h-full px-4 flex justify-between items-center  border-r">
               <div className="flex items-center justify-center ">
                 <Icon
                   className="w-6 h-6 mr-2 text-theme-3"
-                  icon="heroicons:cube-transparent"
+                  icon="iconoir:codepen"
                 />
                 <div>
                   <h2 className="text-base leading-none mb-0.5 font-bold text-black">
@@ -53,7 +53,7 @@ const Navbar = () => {
                 className="block h-full p-2 cursor-default"
                 href="/workspaces"
               >
-                Workspaces
+                工作空间
               </Link>
             </Menu.Item>
             <Menu.Item>
@@ -61,7 +61,7 @@ const Navbar = () => {
                 className="block h-full p-2 cursor-default "
                 href="/workspaces/editor"
               >
-                Editor
+                编辑器
               </Link>
             </Menu.Item>
           </Menu.Items>
@@ -83,8 +83,8 @@ const Navbar = () => {
             size="middle"
           />
         </div>
-        <Menu className="h-full border-l border-light hover:bg-theme-gray-2">
-          <Menu.Trigger className="h-full">
+        <Menu className="h-full border-l border-light ">
+          <Menu.Trigger className="h-full hover:bg-theme-gray-2">
             <div className="group h-full px-6  flex justify-center items-center">
               <div className="w-6 h-6 mr-2 flex items-center justify-center rounded-full">
                 <Icon className="w-5 h-5" icon="heroicons:cog-8-tooth" />

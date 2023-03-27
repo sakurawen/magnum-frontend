@@ -48,20 +48,20 @@ const keyDownSet = new Set();
  * @param deps
  */
 export const useHotKey = (
-  [key, combineKey]: [Key, CombineKey[]],
+  [key, combineKey]: [Key[], CombineKey[]],
   callback: GlobalKeyListener,
   deps?: DependencyList,
 ) => {
   useEffect(() => {
     const keyDownHandler: GlobalKeyListener = (e) => {
-      const downKey = e.key.toLowerCase();
-      if (downKey !== key) return;
+      const downKey = e.key.toLowerCase() as Key;
+      if (!key.includes(downKey)) return;
       e.preventDefault();
       const select = combineKey.reduce((acc, cur) => acc | cur, 0);
       if (keyDownSet.has(key)) {
         return;
       }
-      keyDownSet.add(key);
+      keyDownSet.add(downKey);
       const ctrlDown = e.ctrlKey;
       const altDown = e.altKey;
       const shiftDown = e.shiftKey;
@@ -71,8 +71,8 @@ export const useHotKey = (
       callback(e);
     };
     const handleKeyUp: GlobalKeyListener = (e) => {
-      const key = e.key.toLowerCase();
-      keyDownSet.delete(key);
+      const downKey = e.key.toLowerCase();
+      keyDownSet.delete(downKey);
     };
     document.addEventListener('keydown', keyDownHandler);
     document.addEventListener('keyup', handleKeyUp);
