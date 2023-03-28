@@ -1,5 +1,5 @@
 import { SliceCreator } from '../store';
-import { DraftElement } from '@/schemas/draft';
+import { DraftWidget } from '@/schemas/draft';
 
 export type AppSliceState = {
   app: {
@@ -13,25 +13,25 @@ export type AppSliceState = {
       };
       currentDragItemType: 'Material' | 'Element' | undefined;
       // 当前选中的草稿组件id
-      currentDraftElementId: string | null;
-      draftElements: DraftElement[];
+      currentDraftWidgetId: string | null;
+      draftWidgets: DraftWidget[];
     };
     workspaces: {};
     // 设置当前选中element id
-    setCurrentDraftElementId(id: string | null): void;
+    setCurrentDraftWidgetId(id: string | null): void;
     // 根据idx选中对应索引的element id
-    setCurrentDraftElementIdWithIndex(index: number): void;
+    setCurrentDraftWidgetIdWithIndex(index: number): void;
     setCurrentDragItemType(type: 'Material' | 'Element' | undefined): void;
     // 根据id删除element，返回删除element的idx
-    delDraftElementWithId(id: string): number;
-    setDraftElementProperties(
+    delDraftWidgetWithId(id: string): number;
+    setDraftWidgetProperties(
       elementId: string,
       propertyIdx: number,
       value: any,
     ): void;
-    addDraftElement(item: DraftElement): void;
+    addDraftWidget(item: DraftWidget): void;
     findDraftIndexById(id: string): number;
-    setDraftElements(elements: DraftElement[]): void;
+    setDraftWidgets(elements: DraftWidget[]): void;
     setNavbarSearch(val: string): void;
     resetAppState(): void;
     setCanvasSize(size: { height: number; width: number }): void;
@@ -48,8 +48,8 @@ const appSlice: SliceCreator<AppSliceState> = (set, get) => {
         width: 0,
       },
       currentDragItemType: undefined,
-      currentDraftElementId: null,
-      draftElements: [],
+      currentDraftWidgetId: null,
+      draftWidgets: [],
     },
     workspaces: {},
   };
@@ -72,25 +72,25 @@ const appSlice: SliceCreator<AppSliceState> = (set, get) => {
         );
       },
       findDraftIndexById(id) {
-        return get().app.editor.draftElements.findIndex(
+        return get().app.editor.draftWidgets.findIndex(
           (draft) => draft.id === id,
         );
       },
-      delDraftElementWithId(id) {
-        const idx = get().app.editor.draftElements.findIndex(
+      delDraftWidgetWithId(id) {
+        const idx = get().app.editor.draftWidgets.findIndex(
           (item) => item.id === id,
         );
         if (idx === -1) return -1;
-        const curIdx = get().app.editor.currentDraftElementId;
+        const curIdx = get().app.editor.currentDraftWidgetId;
         if (curIdx === id) {
-          get().app.setCurrentDraftElementId(null);
+          get().app.setCurrentDraftWidgetId(null);
         }
         set(
           (state) => {
-            state.app.editor.draftElements.splice(idx, 1);
+            state.app.editor.draftWidgets.splice(idx, 1);
           },
           false,
-          'app/delDraftElementWithId',
+          'app/delDraftWidgetWithId',
         );
         return idx;
       },
@@ -105,31 +105,31 @@ const appSlice: SliceCreator<AppSliceState> = (set, get) => {
           'app/resetAppState',
         );
       },
-      setDraftElements(elements) {
+      setDraftWidgets(elements) {
         set(
           (state) => {
-            state.app.editor.draftElements = elements;
+            state.app.editor.draftWidgets = elements;
           },
           false,
-          'app/setDraftElements',
+          'app/setDraftWidgets',
         );
       },
-      setDraftElementProperties(elementId, propertyIdx, value) {
-        const elementIdx = get().app.editor.draftElements.findIndex(
+      setDraftWidgetProperties(elementId, propertyIdx, value) {
+        const elementIdx = get().app.editor.draftWidgets.findIndex(
           (item) => item.id === elementId,
         );
         set(
           (state) => {
-            state.app.editor.draftElements[elementIdx].configuration[
+            state.app.editor.draftWidgets[elementIdx].configuration[
               propertyIdx
             ].value = value;
           },
           false,
-          'app/setDraftElementProperties',
+          'app/setDraftWidgetProperties',
         );
       },
-      setCurrentDraftElementIdWithIndex(index) {
-        const elements = get().app.editor.draftElements;
+      setCurrentDraftWidgetIdWithIndex(index) {
+        const elements = get().app.editor.draftWidgets;
         if (index < 0) return;
         if (elements.length === 0) return;
         if (index > elements.length - 1) {
@@ -138,28 +138,28 @@ const appSlice: SliceCreator<AppSliceState> = (set, get) => {
         const id = elements[index].id;
         set(
           (state) => {
-            state.app.editor.currentDraftElementId = id;
+            state.app.editor.currentDraftWidgetId = id;
           },
           false,
-          'app/setCurrentDraftElementIdWithIndex',
+          'app/setCurrentDraftWidgetIdWithIndex',
         );
       },
-      setCurrentDraftElementId(id) {
+      setCurrentDraftWidgetId(id) {
         set(
           (state) => {
-            state.app.editor.currentDraftElementId = id;
+            state.app.editor.currentDraftWidgetId = id;
           },
           false,
-          'app/setCurrentDraftElementId',
+          'app/setCurrentDraftWidgetId',
         );
       },
-      addDraftElement(item) {
+      addDraftWidget(item) {
         set(
           (state) => {
-            state.app.editor.draftElements.push(item);
+            state.app.editor.draftWidgets.push(item);
           },
           false,
-          'app/addDraftElement',
+          'app/addDraftWidget',
         );
       },
       setNavbarSearch(val) {

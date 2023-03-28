@@ -1,13 +1,13 @@
 import { useTrackedAppStore } from '@/store';
-import { DraftElement } from '@/schemas/draft';
+import { DraftWidget } from '@/schemas/draft';
 import cx from 'clsx';
 
 type ElementProps = {
-  item: DraftElement;
+  item: DraftWidget;
   className?: string;
 };
 
-const getProperties = (conf: DraftElement['configuration']) => {
+const getProperties = (conf: DraftWidget['configuration']) => {
   const properties: Record<string, any> = {};
   for (let idx in conf) {
     const property = conf[idx];
@@ -20,19 +20,19 @@ const Element = (props: ElementProps) => {
   const { item, className } = props;
   const {
     app: {
-      setCurrentDraftElementId,
-      editor: { currentDraftElementId },
+      setCurrentDraftWidgetId,
+      editor: { currentDraftWidgetId },
     },
   } = useTrackedAppStore();
 
   const handleSelectElementById = (id: string) => {
-    setCurrentDraftElementId(id);
+    setCurrentDraftWidgetId(id);
   };
   return (
     <div
       data-is-draft-item={true}
-      className={cx('element px-2.5 py-2 ring-inset rounded', {
-        'bg-theme-1/50 ring-2': currentDraftElementId === item.id,
+      className={cx('widget px-2.5 py-2 ring-inset ', {
+        'bg-theme-1/50 ring-2': currentDraftWidgetId === item.id,
       })}
       onClick={() => handleSelectElementById(item.id)}
     >
@@ -42,7 +42,6 @@ const Element = (props: ElementProps) => {
           {...getProperties(item.configuration)}
           className={cx(
             item.internal.className,
-
             className,
           )}
         />

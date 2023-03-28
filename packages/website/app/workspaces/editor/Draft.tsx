@@ -7,19 +7,18 @@ import {
 } from '@dnd-kit/sortable';
 import cx from 'clsx';
 import { useEffect, useMemo, useRef } from 'react';
-import ElementSortable from './element/Sortable';
-import DraftElementComponent from './element/Element';
+import WidgetSortable from './widget/Sortable';
+import DraftWidget from './widget/Widget';
 import { useResize } from '@/hooks/use-resize';
-import { materialList } from '@/components/magnum';
 
 const Draft = () => {
   const {
     app: {
-      setCurrentDraftElementId,
+      setCurrentDraftWidgetId,
       setCanvasSize,
       editor: {
         canvas: { height, width },
-        draftElements,
+        draftWidgets,
         currentDragItemType,
       },
     },
@@ -57,7 +56,7 @@ const Draft = () => {
         !isDraftItem &&
         draftContainerRef.current?.contains(e.target as HTMLElement)
       ) {
-        setCurrentDraftElementId(null);
+        setCurrentDraftWidgetId(null);
       }
     };
     document.addEventListener('click', listenDraftItemCancelSelect);
@@ -67,8 +66,8 @@ const Draft = () => {
   }, []);
 
   const sortItems = useMemo(
-    () => draftElements.map((i) => 'Element|' + i.id),
-    [draftElements],
+    () => draftWidgets.map((i) => 'Element|' + i.id),
+    [draftWidgets],
   );
 
   const MaterialDroppable = (
@@ -116,11 +115,11 @@ const Draft = () => {
                   strategy={verticalListSortingStrategy}
                   items={sortItems}
                 >
-                  {draftElements.map((item) => {
+                  {draftWidgets.map((item) => {
                     return (
-                      <ElementSortable item={item} key={item.id}>
-                        <DraftElementComponent item={item} />
-                      </ElementSortable>
+                      <WidgetSortable item={item} key={item.id}>
+                        <DraftWidget item={item} />
+                      </WidgetSortable>
                     );
                   })}
                 </SortableContext>

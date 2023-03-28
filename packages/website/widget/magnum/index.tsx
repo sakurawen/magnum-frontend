@@ -73,7 +73,7 @@ export const materialList: MaterialSchema[] = [
         {
           key: 'children',
           text: '文本',
-          value: 'wuhu',
+          value: '提 交',
           type: 'string',
         },
         {
@@ -94,7 +94,7 @@ export const materialList: MaterialSchema[] = [
       componentType: InputImpl,
       internal: {
         fill: true,
-        tabIndex:-1
+        tabIndex: -1,
       },
       config: [
         {
@@ -132,7 +132,7 @@ export const materialList: MaterialSchema[] = [
       config: [
         {
           key: 'description',
-          value: 'description',
+          value: '同意协议',
           type: 'string',
           text: '说明文本',
         },

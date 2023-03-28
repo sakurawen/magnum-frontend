@@ -2,10 +2,10 @@ import { z } from 'zod';
 import { MaterialSchema } from '@/schemas/material';
 import { immerable } from 'immer';
 import { nanoid } from 'nanoid';
-export const DraftElementSchema = z.object({
+export const DraftWidgetSchema = z.object({
   id: z.string(),
   name: z.string(),
-  text:z.string(),
+  text: z.string(),
   internal: z.record(z.string(), z.any()),
   config: z.array(
     z.object({
@@ -18,9 +18,9 @@ export const DraftElementSchema = z.object({
   componentType: z.custom<React.FC<any>>(),
 });
 
-export type DraftElementSchema = z.infer<typeof DraftElementSchema>;
+export type DraftWidgetSchema = z.infer<typeof DraftWidgetSchema>;
 
-export class DraftElement {
+export class DraftWidget {
   [immerable] = true;
   id;
   name;
@@ -34,7 +34,7 @@ export class DraftElement {
     name,
     config,
     internal,
-  }: DraftElementSchema) {
+  }: DraftWidgetSchema) {
     this.id = id;
     this.name = name;
     this.componentType = componentType;
@@ -43,24 +43,26 @@ export class DraftElement {
   }
 }
 
-const testDraftElement = z.instanceof(DraftElement);
+const testDraftWidget = z.instanceof(DraftWidget);
 
-export function isDraftElement(item: any) {
-  return testDraftElement.parse(item);
+export function isDraftWidget(item: any) {
+  return testDraftWidget.parse(item);
 }
 
-export function createDraftElement({
+export function createDraftWidget({
   name,
   componentType,
   config,
+  text,
   internal,
 }: MaterialSchema['item']) {
   const properties = {
     name,
     id: nanoid(),
+    text,
     componentType,
     config: config,
     internal,
   };
-  return new DraftElement(properties);
+  return new DraftWidget(properties);
 }

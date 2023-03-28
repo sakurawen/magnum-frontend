@@ -1,15 +1,15 @@
 import { createPortal } from 'react-dom';
 import { DragOverlay } from '@dnd-kit/core';
 import Material from './material/Material';
-import Element from './element/Element';
+import Widget from './widget/Widget';
 import { MaterialSchema } from '@/schemas/material';
-import { DraftElement } from '@/schemas/draft';
+import { DraftWidget } from '@/schemas/draft';
 
 type DragPreviewProps = {
   preview:
     | {
         type: 'material' | 'element';
-        data: MaterialSchema | DraftElement;
+        data: MaterialSchema | DraftWidget;
       }
     | undefined;
 };
@@ -22,7 +22,7 @@ const DragPreview = ({ preview }: DragPreviewProps) => {
       ) : null}
       {preview?.type === 'element' ? (
         <div className="bg-white rounded shadow">
-          <Element item={preview.data as DraftElement} />
+          <Widget item={preview.data as DraftWidget} />
         </div>
       ) : null}
     </DragOverlay>,

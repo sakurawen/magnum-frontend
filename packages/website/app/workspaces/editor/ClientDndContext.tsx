@@ -1,9 +1,9 @@
 'use client';
-import { materialList } from '@/components/magnum';
+import { materialList } from '@/widget/magnum';
 import {
-  createDraftElement,
-  DraftElement,
-  DraftElementSchema,
+  createDraftWidget,
+  DraftWidget,
+  DraftWidgetSchema,
 } from '@/schemas/draft';
 import { MaterialSchema } from '@/schemas/material';
 import { useTrackedAppStore } from '@/store';
@@ -24,24 +24,24 @@ import DragPReview from './DragPreview';
 const ClientDndContext = ({ children }: PropsWithChildren) => {
   const {
     app: {
-      addDraftElement,
-      setDraftElements,
+      addDraftWidget,
+      setDraftWidgets,
       findDraftIndexById,
       setCurrentDragItemType,
-      editor: { draftElements },
+      editor: { draftWidgets },
     },
   } = useTrackedAppStore();
 
   const [preview, setPreview] = useState<
     | {
         type: 'material' | 'element';
-        data: MaterialSchema | DraftElement;
+        data: MaterialSchema | DraftWidget;
       }
     | undefined
   >();
 
   const previewMaterial = (e: DragStartEvent) => {
-    const item = e.active.data.current as DraftElementSchema;
+    const item = e.active.data.current as DraftWidgetSchema;
     const material = materialList.find(
       (m) => m.item.name === item.name,
     ) as MaterialSchema;
@@ -51,7 +51,7 @@ const ClientDndContext = ({ children }: PropsWithChildren) => {
     });
   };
   const previewElement = (e: DragStartEvent) => {
-    const element = e.active.data.current as DraftElement;
+    const element = e.active.data.current as DraftWidget;
     setPreview({
       type: 'element',
       data: element,
@@ -85,8 +85,8 @@ const ClientDndContext = ({ children }: PropsWithChildren) => {
   };
 
   const draftDragEnd = (e: DragStartEvent) => {
-    const item = e.active.data.current as DraftElementSchema;
-    addDraftElement(createDraftElement(item));
+    const item = e.active.data.current as DraftWidgetSchema;
+    addDraftWidget(createDraftWidget(item));
   };
 
   const sortDraft = (e: DragEndEvent) => {
@@ -103,8 +103,8 @@ const ClientDndContext = ({ children }: PropsWithChildren) => {
     ) {
       const activeIndex = findDraftIndexById(activeUUID);
       const overIndex = findDraftIndexById(overUUID);
-      const next = arrayMove(draftElements, activeIndex, overIndex);
-      setDraftElements(next);
+      const next = arrayMove(draftWidgets, activeIndex, overIndex);
+      setDraftWidgets(next);
     }
   };
 

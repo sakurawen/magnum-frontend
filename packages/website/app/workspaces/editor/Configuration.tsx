@@ -4,24 +4,34 @@ import { Input, Button } from '@magnum/ui';
 import { memo, useMemo } from 'react';
 import { useHotKey, Control } from '@/hooks/use-hot-key';
 import { motion, AnimatePresence } from 'framer-motion';
+import ReactJson from 'react-json-view';
+const reactJsonConfig = {
+  name: false as const,
+  iconStyle: 'triangle' as const,
+  enableClipboard: false,
+  displayObjectSize: false,
+  displayDataTypes: false,
+  displayArrayKey: false,
+  indentWidth: 2,
+};
 
 const Configuration = () => {
   const {
     app: {
-      setDraftElementProperties,
-      setCurrentDraftElementIdWithIndex,
-      delDraftElementWithId,
-      editor: { currentDraftElementId, draftElements },
+      setDraftWidgetProperties,
+      setCurrentDraftWidgetIdWithIndex,
+      delDraftWidgetWithId,
+      editor: { currentDraftWidgetId, draftWidgets },
     },
   } = useTrackedAppStore();
 
-  const currentDraftElement = useMemo(
-    () => draftElements.find((item) => item.id === currentDraftElementId),
-    [draftElements, currentDraftElementId],
+  const currentDraftWidget = useMemo(
+    () => draftWidgets.find((item) => item.id === currentDraftWidgetId),
+    [draftWidgets, currentDraftWidgetId],
   );
 
-  const handleDeleteDraftElement = (id: string) => {
-    delDraftElementWithId(id);
+  const handleDeleteDraftWidget = (id: string) => {
+    delDraftWidgetWithId(id);
   };
 
   /**
@@ -30,16 +40,16 @@ const Configuration = () => {
   useHotKey(
     [['d'], [Control]],
     () => {
-      if (currentDraftElementId === null) return;
-      const idx = delDraftElementWithId(currentDraftElementId);
-      setCurrentDraftElementIdWithIndex(idx);
+      if (currentDraftWidgetId === null) return;
+      const idx = delDraftWidgetWithId(currentDraftWidgetId);
+      setCurrentDraftWidgetIdWithIndex(idx);
     },
-    [currentDraftElementId],
+    [currentDraftWidgetId],
   );
 
   return (
     <AnimatePresence>
-      {currentDraftElementId === null ? null : (
+      {currentDraftWidgetId !== null && (
         <motion.div
           initial={{
             opacity: 0,
@@ -53,7 +63,7 @@ const Configuration = () => {
         >
           <h1 className="text-sm select-none px-4 py-4">配置</h1>
           <div>
-            {currentDraftElement?.configuration?.map(
+            {currentDraftWidget?.configuration?.map(
               (property, propertyIdx) => {
                 return (
                   <div
@@ -66,11 +76,11 @@ const Configuration = () => {
                     <div className="flex-1">
                       <Input
                         fill
-                        size="small"
+                        size="middle"
                         value={property.value}
                         onChange={(e) => {
-                          setDraftElementProperties(
-                            currentDraftElement?.id || '',
+                          setDraftWidgetProperties(
+                            currentDraftWidget?.id || '',
                             propertyIdx,
                             e.target.value,
                           );
@@ -85,7 +95,7 @@ const Configuration = () => {
               <Button
                 className="w-full"
                 variant="danger"
-                onClick={() => handleDeleteDraftElement(currentDraftElementId)}
+                onClick={() => handleDeleteDraftWidget(currentDraftWidgetId)}
               >
                 删除元素
               </Button>

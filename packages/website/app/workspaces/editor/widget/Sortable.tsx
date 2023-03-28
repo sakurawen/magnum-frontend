@@ -1,5 +1,5 @@
 'use client';
-import { DraftElement } from '@/schemas/draft';
+import { DraftWidget } from '@/schemas/draft';
 import { useSortable } from '@dnd-kit/sortable';
 import { Icon } from '@iconify/react';
 import { PropsWithChildren, useMemo } from 'react';
@@ -7,7 +7,7 @@ import { useTrackedAppStore } from '@/store';
 import { createPortal } from 'react-dom';
 
 type ElementSortableProps = PropsWithChildren<{
-  item: DraftElement;
+  item: DraftWidget;
 }>;
 
 const defaultRect = {
@@ -24,7 +24,7 @@ const ElementSortable = ({ item, children }: ElementSortableProps) => {
       editor: {
         canvas: { height, width },
         currentDragItemType,
-        draftElements,
+        draftWidgets,
       },
     },
   } = useTrackedAppStore();
@@ -70,7 +70,7 @@ const ElementSortable = ({ item, children }: ElementSortableProps) => {
             tabIndex={-1}
           >
             <Icon
-              className="w-6 h-6  text-theme-3"
+              className="w-6 h-6  text-gray-800"
               icon="radix-icons:drag-handle-dots-2"
             />
           </div>
