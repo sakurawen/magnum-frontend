@@ -1,15 +1,15 @@
 'use client';
+import { useResize } from '@/hooks/use-resize';
 import { useTrackedAppStore } from '@/store';
 import { useDroppable } from '@dnd-kit/core';
 import {
   SortableContext,
-  verticalListSortingStrategy,
+  verticalListSortingStrategy
 } from '@dnd-kit/sortable';
 import cx from 'clsx';
 import { useEffect, useMemo, useRef } from 'react';
 import WidgetSortable from './widget/Sortable';
 import DraftWidget from './widget/Widget';
-import { useResize } from '@/hooks/use-resize';
 
 const Draft = () => {
   const {
@@ -107,7 +107,7 @@ const Draft = () => {
             <div className="w-full h-full relative">
               <div
                 className={cx(
-                  'w-full  h-full pb-20 overflow-x-hidden overflow-y-auto bg-white mx-auto shadow-sm',
+                  'w-full h-full pb-20 overflow-x-hidden overflow-y-auto bg-white mx-auto shadow-sm',
                 )}
                 ref={ref}
               >

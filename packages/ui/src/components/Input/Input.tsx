@@ -1,6 +1,6 @@
 import { forwardRef, InputHTMLAttributes, isValidElement } from 'react';
 import cx from 'clsx';
-import { SIZE_CLASSNAMES } from '../size';
+import { SIZE_CLASSNAMES } from '../consts';
 
 export type InputProps = Pick<
   InputHTMLAttributes<HTMLInputElement>,
@@ -17,7 +17,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   const enableIcon = isValidElement(icon);
   return (
     <div
-      className={cx('inline-flex  bg-theme-gray-2/70 rounded', {
+      className={cx('inline-flex  bg-theme-gray-2 rounded-md', {
         'w-full': fill,
       })}
     >

@@ -54,20 +54,20 @@ export const useHotKey = (
 ) => {
   useEffect(() => {
     const keyDownHandler: GlobalKeyListener = (e) => {
+      const ctrlDown = e.ctrlKey;
+      const altDown = e.altKey;
+      const shiftDown = e.shiftKey;
+      const select = combineKey.reduce((acc, cur) => acc | cur, 0);
+      if (hasCombineKey(select, Control) && !ctrlDown) return;
+      if (hasCombineKey(select, Alt) && !altDown) return;
+      if (hasCombineKey(select, Shift) && !shiftDown) return;
       const downKey = e.key.toLowerCase() as Key;
       if (!key.includes(downKey)) return;
       e.preventDefault();
-      const select = combineKey.reduce((acc, cur) => acc | cur, 0);
       if (keyDownSet.has(key)) {
         return;
       }
       keyDownSet.add(downKey);
-      const ctrlDown = e.ctrlKey;
-      const altDown = e.altKey;
-      const shiftDown = e.shiftKey;
-      if (hasCombineKey(select, Control) && !ctrlDown) return;
-      if (hasCombineKey(select, Alt) && !altDown) return;
-      if (hasCombineKey(select, Shift) && !shiftDown) return;
       callback(e);
     };
     const handleKeyUp: GlobalKeyListener = (e) => {

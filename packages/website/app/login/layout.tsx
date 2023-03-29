@@ -8,7 +8,6 @@ export const metadata = {
 const LoginLayout = ({ children }: PropsWithChildren) => {
   return (
     <>
-      {/* <Background /> */}
       {children}
     </>
   );

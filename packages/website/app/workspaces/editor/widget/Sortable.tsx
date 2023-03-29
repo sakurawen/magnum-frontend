@@ -1,10 +1,9 @@
 'use client';
 import { DraftWidget } from '@/schemas/draft';
+import { useTrackedAppStore } from '@/store';
 import { useSortable } from '@dnd-kit/sortable';
 import { Icon } from '@iconify/react';
-import { PropsWithChildren, useMemo } from 'react';
-import { useTrackedAppStore } from '@/store';
-import { createPortal } from 'react-dom';
+import { PropsWithChildren } from 'react';
 
 type ElementSortableProps = PropsWithChildren<{
   item: DraftWidget;
@@ -22,9 +21,7 @@ const ElementSortable = ({ item, children }: ElementSortableProps) => {
   const {
     app: {
       editor: {
-        canvas: { height, width },
         currentDragItemType,
-        draftWidgets,
       },
     },
   } = useTrackedAppStore();

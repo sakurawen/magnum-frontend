@@ -1,13 +1,13 @@
 import { forwardRef, ButtonHTMLAttributes } from 'react';
 import { Icon } from '@iconify/react';
 import cx from 'clsx';
-import { SIZE_CLASSNAMES } from '../size';
+import { SIZE_CLASSNAMES, FOCUS_RING_CLASSNAMES } from '../consts';
 
 const ButtonVariantStyle = {
   primary:
-    'bg-theme-1 hover:bg-theme-2 text-theme-3 text-gray-700 ring-inset ring-[1px] ring-theme-2/80',
+    'bg-theme-1 hover:bg-theme-2  active:bg-theme-3 text-white  focus:ring-theme-1/80',
   danger:
-    'bg-red-100 hover:bg-red-200  text-red-500 ring-inset ring-[1px] ring-red-300/50',
+    'bg-red-500 hover:bg-red-600  active:bg-red-700 text-white focus:ring-red-300',
   custom: '',
 };
 
@@ -40,13 +40,13 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         onClick={onClick}
         disabled={disableButton}
         className={cx(
-          'relative rounded transition transform  active:translate-y-[1px]',
+          'relative rounded-md transition transform active:translate-y-[1px]',
+          SIZE_CLASSNAMES[size],
           [
             disableButton
               ? 'disabled:bg-theme-gray-2 disabled:cursor-not-allowed'
               : ButtonVariantStyle[variant || 'primary'],
           ],
-          SIZE_CLASSNAMES[size],
           className,
         )}
         ref={ref}

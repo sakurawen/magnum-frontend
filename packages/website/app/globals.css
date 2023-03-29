@@ -4,7 +4,7 @@
 
 html,
 body {
-  @apply min-h-screen text-theme-content-2 selection:text-theme-3 selection:bg-theme-3/10;
+  @apply min-h-screen text-theme-content-1 selection:text-theme-3 selection:bg-theme-3/10;
 }
 
 .bg-login {

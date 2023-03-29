@@ -1,5 +1,5 @@
 import { forwardRef, TextareaHTMLAttributes } from 'react';
-import { SIZE_CLASSNAMES } from '../size';
+import { SIZE_CLASSNAMES } from '../consts';
 import cx from 'clsx';
 
 export type TextareaProps = Pick<
@@ -13,7 +13,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   (props, ref) => {
     const { rows, placeholder, size, value, onChange } = props;
     return (
-      <div className={cx('bg-theme-gray-2/70 rounded', SIZE_CLASSNAMES[size])}>
+      <div className={cx('bg-theme-gray-2 rounded-md', SIZE_CLASSNAMES[size])}>
         <textarea
           value={value}
           onChange={onChange}

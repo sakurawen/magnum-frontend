@@ -149,7 +149,7 @@ const Login = () => {
         size="large"
         loading={loading}
         onClick={handleSignIn}
-        className="w-full text-base"
+        className="w-full !text-base"
       >
         登 入
       </Button>
@@ -190,7 +190,7 @@ const Login = () => {
         size="large"
         loading={loading}
         onClick={handleSignUp}
-        className="w-full text-base"
+        className="w-full !text-base"
       >
         注 册
       </Button>
@@ -206,7 +206,7 @@ const Login = () => {
       <div className="mb-8 space-x-4 text-sm">
         <button
           className={c('inline-block cursor-pointer relative px-2', {
-            'after:absolute after:h-0.5 after:w-full after:rounded-sm after:bg-theme-3/50 after:left-0 after:-bottom-2 after:z-0':
+            'after:absolute after:h-0.5 after:w-full after:rounded-sm after:bg-theme-1 after:left-0 after:-bottom-2 after:z-0':
               isLoginMode,
           })}
           onClick={() => setFormMode('login')}
@@ -215,7 +215,7 @@ const Login = () => {
         </button>
         <button
           className={c('inline-block cursor-pointer relative px-2', {
-            'after:absolute after:h-0.5 after:w-full after:rounded-sm after:bg-theme-3/50 after:left-0 after:-bottom-2 after:z-0':
+            'after:absolute after:h-0.5 after:w-full after:rounded-sm after:bg-theme-1 after:left-0 after:-bottom-2 after:z-0':
               !isLoginMode,
           })}
           onClick={() => setFormMode('register')}
@@ -227,9 +227,10 @@ const Login = () => {
       <p className="text-xs mt-6">
         <label
           htmlFor="YesLogin"
-          className="leading-3 inline-flex items-center justify-center"
+          className="inline-flex items-center justify-center"
         >
           <Checkbox
+            id="YesLogin"
             className="mr-1"
             checked={checked}
             onChange={(val) => setChecked(val)}

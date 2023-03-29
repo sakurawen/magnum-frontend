@@ -1,6 +1,6 @@
-import './globals.css';
-import '@magnum/ui/style.css';
 import LoginChecker from '@/app/LoginChecker';
+import '@magnum/ui/style.css';
+import './globals.css';
 import Toaster from './Toaster';
 
 import localFont from 'next/font/local';

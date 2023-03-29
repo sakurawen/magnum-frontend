@@ -1,12 +1,12 @@
 'use client';
-import { materialList } from '@/widget/magnum';
 import {
   createDraftWidget,
   DraftWidget,
-  DraftWidgetSchema,
+  DraftWidgetSchema
 } from '@/schemas/draft';
 import { MaterialSchema } from '@/schemas/material';
 import { useTrackedAppStore } from '@/store';
+import { materialList } from '@/widget/magnum';
 import {
   DndContext,
   DragEndEvent,
@@ -15,7 +15,7 @@ import {
   MouseSensor,
   TouchSensor,
   useSensor,
-  useSensors,
+  useSensors
 } from '@dnd-kit/core';
 import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 import { PropsWithChildren, useState } from 'react';

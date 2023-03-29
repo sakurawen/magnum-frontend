@@ -14,7 +14,7 @@ const Material = ({ item, className }: MaterialProps) => {
         className,
       )}
     >
-      <div className="w-full py-2 rounded  transition bg-theme-gray-1  text-theme-content-2/80 group hover:ring-1 ring-theme-3/20  hover:shadow-sm px-2 flex flex-col items-center justify-center">
+      <div className="w-full py-2 rounded-md ring-1 ring-theme-gray-3 transition bg-theme-gray-1  text-theme-content-2/80 group hover:ring-1 ring-theme-3/20  hover:shadow-sm px-2 flex flex-col items-center justify-center">
         <div className="w-full text-center  flex items-center p-1 min-h-[32px] justify-center rounded">
           <div className="py-1 px-2.5  text-gray-500 transition group-hover:text-theme-content-2 bg-gray-100 rounded">
             {item.preview}

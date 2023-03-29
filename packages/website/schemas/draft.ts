@@ -1,20 +1,20 @@
-import { z } from 'zod';
-import { MaterialSchema } from '@/schemas/material';
 import { immerable } from 'immer';
 import { nanoid } from 'nanoid';
+import { z } from 'zod';
+
+export const DraftWidgetConfig = z.object({
+  key: z.string(),
+  type: z.string(),
+  text: z.string(),
+  value: z.any(),
+});
+
 export const DraftWidgetSchema = z.object({
   id: z.string(),
   name: z.string(),
   text: z.string(),
   internal: z.record(z.string(), z.any()),
-  config: z.array(
-    z.object({
-      key: z.string(),
-      type: z.string(),
-      text: z.string(),
-      value: z.any(),
-    }),
-  ),
+  config: z.array(DraftWidgetConfig),
   componentType: z.custom<React.FC<any>>(),
 });
 
@@ -55,7 +55,7 @@ export function createDraftWidget({
   config,
   text,
   internal,
-}: MaterialSchema['item']) {
+}: DraftWidgetSchema) {
   const properties = {
     name,
     id: nanoid(),

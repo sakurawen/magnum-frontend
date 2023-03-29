@@ -29,14 +29,14 @@ const Navbar = () => {
             <div className="group select-none hover:bg-theme-gray-2   w-80 h-full px-4 flex justify-between items-center  border-r">
               <div className="flex items-center justify-center ">
                 <Icon
-                  className="w-6 h-6 mr-2 text-theme-3"
+                  className="w-6 h-6 mr-2 text-theme-2"
                   icon="iconoir:codepen"
                 />
                 <div>
-                  <h2 className="text-base leading-none mb-0.5 font-bold text-black">
+                  <h2 className="text-base/none  mb-0.5 font-bold text-black">
                     {name}
                   </h2>
-                  <p className="w-[16em] overflow-hidden whitespace-nowrap text-ellipsis text-xs leading-none text-gray-600">
+                  <p className="w-[16em] overflow-hidden whitespace-nowrap text-ellipsis text-xs/none  text-gray-600">
                     {id}
                   </p>
                 </div>

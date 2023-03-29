@@ -1,5 +1,5 @@
-import Draft from '@/app/workspaces/editor/Draft';
 import Configuration from '@/app/workspaces/editor/Configuration';
+import Draft from '@/app/workspaces/editor/Draft';
 import MaterialList from '@/app/workspaces/editor/MaterialList';
 import cx from 'clsx';
 import ClientDndContext from './ClientDndContext';

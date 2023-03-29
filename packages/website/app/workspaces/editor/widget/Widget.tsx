@@ -1,5 +1,5 @@
-import { useTrackedAppStore } from '@/store';
 import { DraftWidget } from '@/schemas/draft';
+import { useTrackedAppStore } from '@/store';
 import cx from 'clsx';
 
 type ElementProps = {
@@ -31,8 +31,8 @@ const Element = (props: ElementProps) => {
   return (
     <div
       data-is-draft-item={true}
-      className={cx('widget px-2.5 py-2 ring-inset ', {
-        'bg-theme-1/50 ring-2': currentDraftWidgetId === item.id,
+      className={cx('widget px-3 py-2 ring-inset ', {
+        'bg-theme-1/5 ring-2': currentDraftWidgetId === item.id,
       })}
       onClick={() => handleSelectElementById(item.id)}
     >

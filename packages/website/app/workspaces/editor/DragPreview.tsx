@@ -1,9 +1,9 @@
-import { createPortal } from 'react-dom';
+import { DraftWidget } from '@/schemas/draft';
+import { MaterialSchema } from '@/schemas/material';
 import { DragOverlay } from '@dnd-kit/core';
+import { createPortal } from 'react-dom';
 import Material from './material/Material';
 import Widget from './widget/Widget';
-import { MaterialSchema } from '@/schemas/material';
-import { DraftWidget } from '@/schemas/draft';
 
 type DragPreviewProps = {
   preview:

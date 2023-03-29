@@ -1,3 +1,4 @@
+import { MaterialSchema } from '@/schemas/material';
 import { Icon } from '@iconify/react';
 import { memo, useEffect, useState } from 'react';
 
@@ -24,7 +25,7 @@ const ImageImpl = (props: ImageProps) => {
       setStatus('fail');
     };
   }, [source]);
-  
+
   if (status === 'fail') {
     return (
       <div className="w-full aspect-video bg-theme-gray-2 rounded-sm flex justify-center items-center">
@@ -46,6 +47,21 @@ const ImageImpl = (props: ImageProps) => {
       <Icon icon="radix-icons:image" className="w-20 h-20 text-theme-gray-4" />
     </div>
   );
+};
+
+export const ImageWidgetConfig: MaterialSchema['item'] = {
+  name: 'Image',
+  text: '图片',
+  componentType: ImageImpl,
+  internal: {},
+  config: [
+    {
+      key: 'source',
+      value: '',
+      type: 'string',
+      text: '资源路径',
+    },
+  ],
 };
 
 export default memo(ImageImpl);

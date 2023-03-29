@@ -5,12 +5,13 @@ import { Icon } from '@iconify/react';
 export type CheckboxProps = {
   checked: boolean;
   className?: string;
+  id?: string;
   onChange?: (checked: boolean) => void;
 };
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (props, ref) => {
-    const { checked, className, onChange } = props;
+    const { checked, id, className, onChange } = props;
     return (
       <label
         className={cx(
@@ -20,11 +21,12 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       >
         <span
           className={cx(
-            'relative overflow-hidden cursor-pointer rounded ring-[1px] ring-inset  ring-theme-2 bg-theme-1 flex transition items-center justify-center ',
+            'relative overflow-hidden cursor-pointer rounded ring-[1px] ring-inset   flex transition items-center justify-center ',
+            [checked ? 'ring-theme-1 bg-theme-1/10' : 'ring-gray-400'],
           )}
         >
           <Icon
-            className={cx('w-4 h-4 text-theme-3  transition ', [
+            className={cx('w-4 h-4 text-theme-1  transition ', [
               checked
                 ? 'visible opacity-100 translate-y-0'
                 : 'opacity-0 invisible translate-y-1',
@@ -32,6 +34,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
             icon="radix-icons:check"
           />
           <input
+            id={id}
             className="hidden"
             checked={checked}
             onChange={(e) => onChange?.(e.target.checked)}

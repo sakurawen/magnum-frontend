@@ -1,10 +1,10 @@
 'use client';
+import { Control, useHotKey } from '@/hooks/use-hot-key';
 import { useTrackedAppStore } from '@/store';
-import { Input, Button } from '@magnum/ui';
+import { Button, Input } from '@magnum/ui';
+import { AnimatePresence, motion } from 'framer-motion';
 import { memo, useMemo } from 'react';
-import { useHotKey, Control } from '@/hooks/use-hot-key';
-import { motion, AnimatePresence } from 'framer-motion';
-import ReactJson from 'react-json-view';
+
 const reactJsonConfig = {
   name: false as const,
   iconStyle: 'triangle' as const,

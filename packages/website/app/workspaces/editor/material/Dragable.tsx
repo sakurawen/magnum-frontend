@@ -1,7 +1,7 @@
 'use client';
-import React, { PropsWithChildren } from 'react';
-import cx from 'clsx';
 import { useDraggable } from '@dnd-kit/core';
+import cx from 'clsx';
+import { PropsWithChildren } from 'react';
 
 type MaterialDragableProps = PropsWithChildren<{
   className?: string;
@@ -34,13 +34,7 @@ const MaterialDragable = ({
       ref={setNodeRef}
       {...listeners}
       {...attributes}
-      className={cx(
-        ['cursor-default'],
-        {
-          // 'opacity-0': isDragging,
-        },
-        className,
-      )}
+      className={cx(['cursor-default'], className)}
     >
       {children}
     </div>

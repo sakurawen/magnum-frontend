@@ -1,6 +1,6 @@
 import { Option } from './Option';
 import cx from 'clsx';
-import { SIZE_CLASSNAMES } from '../size';
+import { SIZE_CLASSNAMES } from '../consts';
 import { ReactNode, FC } from 'react';
 
 export type SelectProps = {
