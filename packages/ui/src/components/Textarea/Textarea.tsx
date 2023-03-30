@@ -1,28 +1,46 @@
 import { forwardRef, TextareaHTMLAttributes } from 'react';
-import { SIZE_CLASSNAMES } from '../consts';
+import { CONTENT_SIZE_CLASSNAMES, ROUNDED_SIZE_CLASSNAMES } from '../consts';
 import cx from 'clsx';
 
 export type TextareaProps = Pick<
   TextareaHTMLAttributes<HTMLTextAreaElement>,
-  'value' | 'rows' | 'className' | 'value' | 'onChange' | 'placeholder'|"tabIndex"
+  'value' | 'rows' | 'className' | 'value' | 'placeholder' | 'tabIndex'
 > & {
   size?: ComponentSize;
+  className?: string;
+  onChange: (val: string) => void;
 };
 
 export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
   (props, ref) => {
-    const { rows, placeholder, size, value, onChange } = props;
+    const {
+      rows,
+      placeholder,
+      className,
+      size = 'middle',
+      value,
+      onChange,
+      ...restProps
+    } = props;
     return (
-      <div className={cx('bg-theme-gray-2 rounded-md', SIZE_CLASSNAMES[size])}>
+      <div
+        className={cx(
+          'bg-theme-gray-2 ring-1 ring-gray-200',
+          ROUNDED_SIZE_CLASSNAMES[size],
+          CONTENT_SIZE_CLASSNAMES[size],
+          className,
+        )}
+      >
         <textarea
           value={value}
-          onChange={onChange}
+          onChange={(e) => onChange(e.target.value)}
           ref={ref}
           placeholder={placeholder}
           className={cx(
-            'w-full  placeholder:text-theme-content-1/50 resize-none outline-none bg-transparent',
+            'w-full block placeholder:text-theme-content-1/50 resize-none outline-none bg-transparent',
           )}
           rows={rows}
+          {...restProps}
         />
       </div>
     );

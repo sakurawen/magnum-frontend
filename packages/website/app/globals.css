@@ -12,7 +12,7 @@ body {
   @apply bg-cover bg-top bg-theme-1;
 }
 
-.bg-login-grid {
+.bg-grid {
   background-image: url(/images/grid.svg);
 }
 *::-webkit-scrollbar {

@@ -1,5 +1,6 @@
 import cx from 'clsx';
 import { MaterialSchema } from '@/schemas/material';
+import { propertyType } from './consts';
 
 type TitleProps = {
   text: string;
@@ -14,16 +15,33 @@ const alignClassName = {
 
 const TitleImpl = ({ text, align }: TitleProps) => {
   return (
-    <h2
-      className={cx(
-        'text-2xl font-bold min-h-[1em]  mt-3 mb-1',
-        alignClassName[align],
-      )}
-    >
-      {text}
-    </h2>
+    <div className='px-3 py-2'>
+      <h2
+        className={cx(
+          'text-2xl whitespace-pre-wrap font-bold min-h-[1em]  mt-3 mb-1',
+          alignClassName[align],
+        )}
+      >
+        {text}
+      </h2>
+    </div>
   );
 };
+
+const alignOptions = [
+  {
+    text: '左对齐',
+    value: 'left',
+  },
+  {
+    text: '居中对齐',
+    value: 'center',
+  },
+  {
+    text: '右对齐',
+    value: 'right',
+  },
+];
 
 export const TitleWidgetConfig: MaterialSchema['item'] = {
   name: 'Title',
@@ -35,15 +53,16 @@ export const TitleWidgetConfig: MaterialSchema['item'] = {
   config: [
     {
       key: 'text',
-      value: '肉食者鄙，未能远谋。',
-      type: 'string',
+      value: 'Lorem ipsum',
+      type: propertyType.INPUT,
       text: '文本',
     },
     {
       key: 'align',
-      value: 'left',
-      type: 'string',
+      value: alignOptions[0],
+      type: propertyType.SELECT,
       text: '对齐方式',
+      options: alignOptions,
     },
   ],
 };

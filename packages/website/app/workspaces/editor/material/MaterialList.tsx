@@ -1,7 +1,7 @@
 'use client';
 import { materialList } from '@/widget/magnum';
-import MaterialDragable from './material/Dragable';
-import Material from './material/Material';
+import MaterialDragable from './Dragable';
+import Material from './Material';
 
 const MaterialList = () => {
   const formMaterial = materialList.filter((m) => m.type === 'Form');

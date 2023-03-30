@@ -7,7 +7,16 @@ export const DraftWidgetConfig = z.object({
   type: z.string(),
   text: z.string(),
   value: z.any(),
+  options: z
+    .array(
+      z.object({
+        text: z.string(),
+        value: z.any(),
+      }),
+    )
+    .optional(),
 });
+export type DraftWidgetConfigSchema = z.infer<typeof DraftWidgetConfig>;
 
 export const DraftWidgetSchema = z.object({
   id: z.string(),

@@ -16,11 +16,7 @@ const Draft = () => {
     app: {
       setCurrentDraftWidgetId,
       setCanvasSize,
-      editor: {
-        canvas: { height, width },
-        draftWidgets,
-        currentDragItemType,
-      },
+      editor: { draftWidgets, currentDragItemType },
     },
   } = useTrackedAppStore();
 
@@ -29,6 +25,7 @@ const Draft = () => {
   const { setNodeRef, isOver } = useDroppable({
     id: 'Draft',
   });
+
   const ref = useRef<HTMLDivElement>(null);
 
   const draftContainerRef = useRef<HTMLDivElement>(null);
@@ -104,10 +101,10 @@ const Draft = () => {
           {dragItemIsMaterial ? (
             MaterialDroppable
           ) : (
-            <div className="w-full h-full relative">
+            <div className="w-full h-full overflow-x-hidden overflow-y-auto">
               <div
                 className={cx(
-                  'w-full h-full pb-20 overflow-x-hidden overflow-y-auto bg-white mx-auto shadow-sm',
+                  'w-full min-h-full pb-20 relative  bg-white mx-auto shadow-sm',
                 )}
                 ref={ref}
               >
@@ -123,6 +120,7 @@ const Draft = () => {
                     );
                   })}
                 </SortableContext>
+                <span className='absolute bottom-0 left-0 right-0 mx-auto text-gray-400 text-center select-none py-2 text-xs'>Power by Magnum Form</span>
               </div>
             </div>
           )}

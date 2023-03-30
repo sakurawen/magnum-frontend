@@ -1,7 +1,7 @@
 'use client';
 import { useTrackedAppStore } from '@/store';
 import { Icon } from '@iconify/react';
-import { Input, Menu } from '@magnum/ui';
+import { Button, Input, Menu } from '@magnum/ui';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { startTransition } from 'react';
@@ -67,8 +67,8 @@ const Navbar = () => {
           </Menu.Items>
         </Menu>
       </div>
-      <div className="flex items-center justify-between h-full w-full pl-2">
-        <div className="py-1 flex-1">
+      <div className="flex items-center justify-between h-full w-full ">
+        <div className="py-2 px-2 flex-1 flex items-center justify-between">
           <Input
             icon={
               <Icon
@@ -77,12 +77,16 @@ const Navbar = () => {
               />
             }
             value={search}
-            onChange={(e) => setNavbarSearch(e.target.value)}
+            onChange={(value) => setNavbarSearch(value)}
             placeholder="搜索已建立的页面..."
             className="!w-72"
             size="middle"
           />
+          <Button className="flex ml-2 items-center">
+            <Icon className="w-5 h-5 mr-2" icon="radix-icons:play" /> Preview
+          </Button>
         </div>
+
         <Menu className="h-full border-l border-light ">
           <Menu.Trigger className="h-full hover:bg-theme-gray-2">
             <div className="group h-full px-6  flex justify-center items-center">

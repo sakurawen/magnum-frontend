@@ -2,8 +2,8 @@ import { MaterialSchema } from '@/schemas/material';
 
 const DividerImpl = () => {
   return (
-    <div className="py-2">
-      <div className="divider  h-[1px] bg-theme-gray-3"></div>
+    <div className="px-3 py-2">
+      <div className="divider my-2  h-[1px] bg-theme-gray-3"></div>
     </div>
   );
 };

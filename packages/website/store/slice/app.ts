@@ -25,7 +25,7 @@ export type AppSliceState = {
     // 根据id删除element，返回删除element的idx
     delDraftWidgetWithId(id: string): number;
     setDraftWidgetProperties(
-      elementId: string,
+      elementId: string | undefined,
       propertyIdx: number,
       value: any,
     ): void;
@@ -115,9 +115,15 @@ const appSlice: SliceCreator<AppSliceState> = (set, get) => {
         );
       },
       setDraftWidgetProperties(elementId, propertyIdx, value) {
+        if (!elementId) return;
         const elementIdx = get().app.editor.draftWidgets.findIndex(
           (item) => item.id === elementId,
         );
+        console.log({
+          elementId,
+          propertyIdx,
+          value,
+        });
         set(
           (state) => {
             state.app.editor.draftWidgets[elementIdx].configuration[

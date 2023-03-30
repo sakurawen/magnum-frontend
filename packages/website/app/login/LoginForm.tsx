@@ -129,21 +129,21 @@ const Login = () => {
     <div className="space-y-5">
       <Input
         fill
-        size="large"
+        size="middle"
         disabled={loading}
         placeholder="用户名"
         value={loginForm.username}
-        onChange={(e) => handleSetLoginForm('username', e.target.value)}
+        onChange={(val) => handleSetLoginForm('username', val)}
       />
       <Input
         fill
         className="w-full"
-        size="large"
+        size="middle"
         disabled={loading}
         placeholder="密码"
         type="password"
         value={loginForm.password}
-        onChange={(e) => handleSetLoginForm('password', e.target.value)}
+        onChange={(val) => handleSetLoginForm('password', val)}
       />
       <Button
         size="large"
@@ -160,31 +160,29 @@ const Login = () => {
     <div className="space-y-5">
       <Input
         fill
-        size="large"
+        size="middle"
         disabled={loading}
         placeholder="用户名"
         value={registerForm.username}
-        onChange={(e) => handleSetRegisterForm('username', e.target.value)}
+        onChange={(val) => handleSetRegisterForm('username', val)}
       />
       <Input
         fill
-        size="large"
+        size="middle"
         disabled={loading}
         placeholder="密码"
         type="password"
         value={registerForm.password}
-        onChange={(e) => handleSetRegisterForm('password', e.target.value)}
+        onChange={(val) => handleSetRegisterForm('password', val)}
       />
       <Input
         fill
-        size="large"
+        size="middle"
         disabled={loading}
         placeholder="确认密码"
         type="password"
         value={registerForm.passwordRepeat}
-        onChange={(e) =>
-          handleSetRegisterForm('passwordRepeat', e.target.value)
-        }
+        onChange={(val) => handleSetRegisterForm('passwordRepeat', val)}
       />
       <Button
         size="large"
@@ -232,7 +230,7 @@ const Login = () => {
           <Checkbox
             id="YesLogin"
             className="mr-1"
-            checked={checked}
+            value={checked}
             onChange={(val) => setChecked(val)}
           />
           <span>登录注册即同意Magnum《隐私政策》及《服务协议》</span>

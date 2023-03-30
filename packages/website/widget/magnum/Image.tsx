@@ -1,13 +1,16 @@
 import { MaterialSchema } from '@/schemas/material';
 import { Icon } from '@iconify/react';
 import { memo, useEffect, useState } from 'react';
+import { propertyType } from './consts';
+import cx from 'clsx';
 
 type ImageProps = {
   source: string;
+  fill?: boolean;
 };
 
 const ImageImpl = (props: ImageProps) => {
-  const { source } = props;
+  const { source, fill } = props;
   const [status, setStatus] = useState<'wait' | 'load' | 'fail'>('wait');
   useEffect(() => {
     setStatus('wait');
@@ -25,26 +28,33 @@ const ImageImpl = (props: ImageProps) => {
       setStatus('fail');
     };
   }, [source]);
-
-  if (status === 'fail') {
+  const renderImage = () => {
+    if (status === 'fail') {
+      return <span>加载图片失败</span>;
+    }
+    if (status === 'load') {
+      return (
+        <img
+          src={source}
+          alt="image"
+          className={cx('shadow-sm', [fill ? '' : 'rounded-sm'])}
+        />
+      );
+    }
     return (
-      <div className="w-full aspect-video bg-theme-gray-2 rounded-sm flex justify-center items-center">
-        加载图片失败
-      </div>
-    );
-  }
-  if (status === 'load') {
-    return (
-      <div>
-        <div className="w-full aspect-video bg-theme-gray-2 rounded-sm flex justify-center items-center">
-          <img src={source} alt="image" className="rounded shadow-sm" />
-        </div>
-      </div>
-    );
-  }
-  return (
-    <div className="w-full aspect-video bg-theme-gray-2 rounded-sm flex justify-center items-center">
       <Icon icon="radix-icons:image" className="w-20 h-20 text-theme-gray-4" />
+    );
+  };
+  return (
+    <div className={cx('transition', [fill ? undefined : 'px-3 py-2'])}>
+      <div
+        className={cx(
+          'w-full aspect-video bg-theme-gray-3/70 flex justify-center items-center',
+          [!fill && 'rounded-sm'],
+        )}
+      >
+        {renderImage()}
+      </div>
     </div>
   );
 };
@@ -58,8 +68,14 @@ export const ImageWidgetConfig: MaterialSchema['item'] = {
     {
       key: 'source',
       value: '',
-      type: 'string',
+      type: propertyType.INPUT,
       text: '资源路径',
+    },
+    {
+      key: 'fill',
+      value: false,
+      type: propertyType.CHECKBOX,
+      text: '填充间隙',
     },
   ],
 };

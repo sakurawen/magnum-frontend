@@ -3,15 +3,15 @@ import cx from 'clsx';
 import { Icon } from '@iconify/react';
 
 export type CheckboxProps = {
-  checked: boolean;
+  value: boolean;
   className?: string;
   id?: string;
-  onChange?: (checked: boolean) => void;
+  onChange?: (value: boolean) => void;
 };
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
   (props, ref) => {
-    const { checked, id, className, onChange } = props;
+    const { value, id, className, onChange } = props;
     return (
       <label
         className={cx(
@@ -21,13 +21,13 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       >
         <span
           className={cx(
-            'relative overflow-hidden cursor-pointer rounded ring-[1px] ring-inset   flex transition items-center justify-center ',
-            [checked ? 'ring-theme-1 bg-theme-1/10' : 'ring-gray-400'],
+            'relative overflow-hidden cursor-pointer rounded ring-1 ring-inset   flex transition items-center justify-center ',
+            [value ? 'ring-theme-1 bg-theme-1/10' : 'ring-gray-400'],
           )}
         >
           <Icon
             className={cx('w-4 h-4 text-theme-1  transition ', [
-              checked
+              value
                 ? 'visible opacity-100 translate-y-0'
                 : 'opacity-0 invisible translate-y-1',
             ])}
@@ -36,7 +36,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           <input
             id={id}
             className="hidden"
-            checked={checked}
+            checked={value}
             onChange={(e) => onChange?.(e.target.checked)}
             type="checkbox"
           />

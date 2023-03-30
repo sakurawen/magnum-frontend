@@ -1,5 +1,6 @@
 import { Textarea, TextareaProps } from '@magnum/ui';
 import { MaterialSchema } from '@/schemas/material';
+import { propertyType, sizeOptions } from './consts';
 
 const TextareaImpl = (
   props: TextareaProps & {
@@ -7,8 +8,9 @@ const TextareaImpl = (
   },
 ) => {
   const { label, ...restProps } = props;
+  console.log();
   return (
-    <div>
+    <div className="px-3 py-2">
       <span className="mb-1 inline-block text-sm text-theme-content-1/90">
         {label}
       </span>
@@ -19,7 +21,7 @@ const TextareaImpl = (
 
 export const TextareaWidgetConfig: MaterialSchema['item'] = {
   name: 'Textarea',
-  text: '多行文本输入',
+  text: '文本输入块',
   componentType: TextareaImpl,
   internal: {
     tabIndex: -1,
@@ -27,26 +29,27 @@ export const TextareaWidgetConfig: MaterialSchema['item'] = {
   config: [
     {
       key: 'size',
-      value: 'large',
-      type: 'string',
+      value: sizeOptions[2],
+      type: propertyType.SELECT,
       text: '尺寸',
+      options: sizeOptions,
     },
     {
       key: 'placeholder',
       value: '随便写点什么吧...',
-      type: 'string',
+      type: propertyType.TEXTAREA,
       text: '提示文本',
     },
     {
       key: 'label',
       value: '标签',
-      type: 'string',
+      type: propertyType.INPUT,
       text: '标签',
     },
     {
       key: 'rows',
       value: 4,
-      type: 'number',
+      type: propertyType.INPUT,
       text: '行数',
     },
   ],

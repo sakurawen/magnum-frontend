@@ -1,8 +1,13 @@
-import { Button, ButtonProps } from '@magnum/ui';
 import { MaterialSchema } from '@/schemas/material';
+import { Button, ButtonProps } from '@magnum/ui';
+import { propertyType, sizeOptions } from './consts';
 
 const ButtonImpl = (props: ButtonProps) => {
-  return <Button className="p-2" {...props} />;
+  return (
+    <div className="px-3 py-2">
+      <Button className="p-2" {...props} />
+    </div>
+  );
 };
 
 export const ButtonWidgetConfig: MaterialSchema['item'] = {
@@ -17,20 +22,21 @@ export const ButtonWidgetConfig: MaterialSchema['item'] = {
     {
       key: 'size',
       text: '尺寸',
-      value: 'large',
-      type: 'string',
+      value: sizeOptions[2],
+      type: propertyType.SELECT,
+      options: sizeOptions,
     },
     {
       key: 'children',
       text: '文本',
       value: '提 交',
-      type: 'string',
+      type: propertyType.INPUT,
     },
     {
       key: 'variant',
       text: '变体',
       value: 'primary',
-      type: 'string',
+      type: propertyType.INPUT,
     },
   ],
 };

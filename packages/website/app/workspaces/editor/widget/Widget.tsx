@@ -1,5 +1,6 @@
 import { DraftWidget } from '@/schemas/draft';
 import { useTrackedAppStore } from '@/store';
+import { propertyType } from '@/widget/magnum/consts';
 import cx from 'clsx';
 
 type ElementProps = {
@@ -11,6 +12,11 @@ const getProperties = (conf: DraftWidget['configuration']) => {
   const properties: Record<string, any> = {};
   for (let idx in conf) {
     const property = conf[idx];
+    if (property.type === propertyType.SELECT) {
+      const option = property.value;
+      properties[property.key] = option.value;
+      continue;
+    }
     properties[property.key] = property.value;
   }
   return properties;
@@ -31,19 +37,20 @@ const Element = (props: ElementProps) => {
   return (
     <div
       data-is-draft-item={true}
-      className={cx('widget px-3 py-2 ring-inset ', {
-        'bg-theme-1/5 ring-2': currentDraftWidgetId === item.id,
-      })}
+      className={cx('widget')}
       onClick={() => handleSelectElementById(item.id)}
     >
-      <div className="pointer-events-none select-none ring-theme-2 ring-inset">
+      <div className="pointer-events-none select-none relative ring-theme-2 ring-inset">
+        <div
+          className={cx(
+            'select-ring absolute z-10 h-full w-full ring-2 ring-inset bg-theme-1/5',
+            [currentDraftWidgetId === item.id ? 'block' : 'hidden'],
+          )}
+        ></div>
         <item.componentType
           {...item.internal}
           {...getProperties(item.configuration)}
-          className={cx(
-            item.internal.className,
-            className,
-          )}
+          className={cx(item.internal.className, className)}
         />
       </div>
     </div>

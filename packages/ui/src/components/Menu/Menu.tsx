@@ -17,17 +17,17 @@ export const Menu = (props: MenuProps) => {
   >(
     (state, action) => {
       switch (action) {
-      case 'close':
-        state.open = false;
-        return { ...state };
-      case 'open':
-        state.open = true;
-        return { ...state };
-      case 'toggle':
-        state.open = !state.open;
-        return { ...state };
-      default:
-        return state;
+        case 'close':
+          state.open = false;
+          return { ...state };
+        case 'open':
+          state.open = true;
+          return { ...state };
+        case 'toggle':
+          state.open = !state.open;
+          return { ...state };
+        default:
+          return state;
       }
     },
     {
@@ -36,8 +36,8 @@ export const Menu = (props: MenuProps) => {
   );
   const menuRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    const listenMenuOutClick = (e) => {
-      if (menuRef.current.contains(e.target)) return;
+    const listenMenuOutClick = (e: MouseEvent) => {
+      if (menuRef.current.contains(e.target as HTMLElement)) return;
       reducer[1]('close');
     };
     document.addEventListener('click', listenMenuOutClick);

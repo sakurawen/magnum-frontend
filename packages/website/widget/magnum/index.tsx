@@ -55,4 +55,11 @@ export const materialList: MaterialSchema[] = [
     preview: <Icon className="w-6 h-6" icon="radix-icons:video" />,
     item: getWidgetConfig('video'),
   },
+  {
+    type: 'Form',
+    preview: (
+      <Icon className="w-6 h-6" icon="material-symbols:space-bar-rounded" />
+    ),
+    item: getWidgetConfig('space'),
+  },
 ];

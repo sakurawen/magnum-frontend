@@ -1,13 +1,11 @@
 import { forwardRef, ButtonHTMLAttributes } from 'react';
 import { Icon } from '@iconify/react';
 import cx from 'clsx';
-import { SIZE_CLASSNAMES, FOCUS_RING_CLASSNAMES } from '../consts';
+import { SIZE_CLASSNAMES, ROUNDED_SIZE_CLASSNAMES } from '../consts';
 
 const ButtonVariantStyle = {
-  primary:
-    'bg-theme-1 hover:bg-theme-2  active:bg-theme-3 text-white  focus:ring-theme-1/80',
-  danger:
-    'bg-red-500 hover:bg-red-600  active:bg-red-700 text-white focus:ring-red-300',
+  primary: 'bg-theme-1 hover:bg-theme-2  active:bg-theme-3 text-white',
+  danger: 'bg-red-500 hover:bg-red-600  active:bg-red-700 text-white',
   custom: '',
 };
 
@@ -29,7 +27,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       loading,
       children,
       onClick,
-      size,
+      size = 'middle',
       ...restProps
     } = props;
     const disableButton = disabled || loading;
@@ -40,8 +38,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         onClick={onClick}
         disabled={disableButton}
         className={cx(
-          'relative rounded-md transition transform active:translate-y-[1px]',
+          'relative transition select-none  min-h-[1em]',
           SIZE_CLASSNAMES[size],
+          ROUNDED_SIZE_CLASSNAMES[size],
           [
             disableButton
               ? 'disabled:bg-theme-gray-2 disabled:cursor-not-allowed'
@@ -57,7 +56,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             icon="radix-icons:reload"
           />
         ) : (
-          <span className="inline-block min-h-[1em]">{children}</span>
+          children
         )}
       </button>
     );

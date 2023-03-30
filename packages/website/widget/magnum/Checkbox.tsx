@@ -1,5 +1,6 @@
 import { Checkbox, CheckboxProps } from '@magnum/ui';
 import { MaterialSchema } from '@/schemas/material';
+import { propertyType } from './consts';
 
 const CheckboxImpl = (
   props: CheckboxProps & {
@@ -8,12 +9,14 @@ const CheckboxImpl = (
 ) => {
   const { description, ...restProps } = props;
   return (
-    <p className="inline-flex ">
-      <Checkbox {...restProps} />
-      <span className="ml-1 text-sm text-theme-content-1/90">
-        {description}
-      </span>
-    </p>
+    <div className="px-3 py-2">
+      <p className="inline-flex">
+        <Checkbox {...restProps} />
+        <span className="ml-1 text-sm text-theme-content-1/90">
+          {description}
+        </span>
+      </p>
+    </div>
   );
 };
 
@@ -29,12 +32,12 @@ export const CheckboxWidgetConfig: MaterialSchema['item'] = {
     {
       key: 'description',
       value: '同意协议',
-      type: 'string',
+      type: propertyType.INPUT,
       text: '说明文本',
     },
     {
       key: 'checked',
-      type: 'boolean',
+      type: propertyType.CHECKBOX,
       value: true,
       text: '是否勾选',
     },
