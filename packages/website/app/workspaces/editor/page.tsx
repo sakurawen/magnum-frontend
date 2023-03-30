@@ -13,7 +13,7 @@ const Editor = () => {
         <div className={'h-full relative ml-80 mr-96'}>
           <Draft />
         </div>
-        <div className="absolute right-0 top-0 bg-white  z-10 h-full w-96  border-l border-light">
+        <div className="absolute right-0 top-0 bg-white z-10 h-full w-96  border-l border-light">
           <Configuration />
         </div>
       </div>

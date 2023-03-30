@@ -68,7 +68,7 @@ const Navbar = () => {
         </Menu>
       </div>
       <div className="flex items-center justify-between h-full w-full ">
-        <div className="py-2 px-2 flex-1 flex items-center justify-between">
+        <div className="py-1.5 px-2 flex-1 flex items-center justify-between">
           <Input
             icon={
               <Icon
@@ -82,7 +82,7 @@ const Navbar = () => {
             className="!w-72"
             size="middle"
           />
-          <Button className="flex ml-2 items-center">
+          <Button size="middle" className="flex ml-2 items-center">
             <Icon className="w-5 h-5 mr-2" icon="radix-icons:play" /> Preview
           </Button>
         </div>
