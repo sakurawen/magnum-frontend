@@ -1,5 +1,12 @@
 import { PropsWithChildren } from 'react';
-export const Box = (props: PropsWithChildren) => {
-  const { children } = props;
-  return <div>{children}</div>;
+import cx from 'clsx';
+
+export type BoxProps = PropsWithChildren<{
+  className?: string;
+}>;
+export const Box = (props: BoxProps) => {
+  const { children, className } = props;
+  return (
+    <div className={cx(className, 'rounded p-2 shadow-md')}>{children}</div>
+  );
 };

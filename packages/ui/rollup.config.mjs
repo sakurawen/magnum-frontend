@@ -41,6 +41,6 @@ export default defineConfig([
         plugins: [autoprefixer()],
       }),
     ],
-    external: ['react'],
+    external: ['react', 'react-dom'],
   },
 ]);

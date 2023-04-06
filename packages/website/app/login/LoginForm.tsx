@@ -1,7 +1,7 @@
 'use client';
 import { userService } from '@/services';
 import { useTrackedAppStore } from '@/store';
-import { Button, Checkbox, Input } from '@magnum/ui';
+import { Button, Checkbox, Input, Box } from '@magnum/ui';
 import c from 'clsx';
 import { useRouter } from 'next/navigation';
 import { startTransition, useEffect, useState } from 'react';
@@ -129,7 +129,7 @@ const Login = () => {
     <div className="space-y-5">
       <Input
         fill
-        size="middle"
+        size="large"
         disabled={loading}
         placeholder="用户名"
         value={loginForm.username}
@@ -138,7 +138,7 @@ const Login = () => {
       <Input
         fill
         className="w-full"
-        size="middle"
+        size="large"
         disabled={loading}
         placeholder="密码"
         type="password"
@@ -160,7 +160,7 @@ const Login = () => {
     <div className="space-y-5">
       <Input
         fill
-        size="middle"
+        size="large"
         disabled={loading}
         placeholder="用户名"
         value={registerForm.username}
@@ -168,7 +168,7 @@ const Login = () => {
       />
       <Input
         fill
-        size="middle"
+        size="large"
         disabled={loading}
         placeholder="密码"
         type="password"
@@ -177,7 +177,7 @@ const Login = () => {
       />
       <Input
         fill
-        size="middle"
+        size="large"
         disabled={loading}
         placeholder="确认密码"
         type="password"
@@ -196,15 +196,15 @@ const Login = () => {
   );
 
   return (
-    <div className="w-[500px]  px-12 py-24 bg-white rounded-lg shadow ">
-      <h2 className="text-4xl font-bold mb-8 text-theme-content-1">
+    <Box className="w-[500px]  rounded-lg bg-white px-12 py-20 shadow ">
+      <h2 className="text-theme-content-1 mb-8 text-4xl font-bold">
         欢迎使用
         <br /> Magnum Form
       </h2>
       <div className="mb-8 space-x-4 text-sm">
         <button
-          className={c('inline-block cursor-pointer relative px-2', {
-            'after:absolute after:h-0.5 after:w-full after:rounded-sm after:bg-theme-1 after:left-0 after:-bottom-2 after:z-0':
+          className={c('relative inline-block cursor-pointer px-2', {
+            'after:bg-theme-1 after:absolute after:-bottom-2 after:left-0 after:z-0 after:h-0.5 after:w-full after:rounded-sm':
               isLoginMode,
           })}
           onClick={() => setFormMode('login')}
@@ -212,8 +212,8 @@ const Login = () => {
           <span className="relative z-10 select-none">登 录</span>
         </button>
         <button
-          className={c('inline-block cursor-pointer relative px-2', {
-            'after:absolute after:h-0.5 after:w-full after:rounded-sm after:bg-theme-1 after:left-0 after:-bottom-2 after:z-0':
+          className={c('relative inline-block cursor-pointer px-2', {
+            'after:bg-theme-1 after:absolute after:-bottom-2 after:left-0 after:z-0 after:h-0.5 after:w-full after:rounded-sm':
               !isLoginMode,
           })}
           onClick={() => setFormMode('register')}
@@ -222,7 +222,7 @@ const Login = () => {
         </button>
       </div>
       <div>{isLoginMode ? Login : Register}</div>
-      <p className="text-xs mt-6">
+      <p className="mt-6 text-xs">
         <label
           htmlFor="YesLogin"
           className="inline-flex items-center justify-center"
@@ -233,10 +233,12 @@ const Login = () => {
             value={checked}
             onChange={(val) => setChecked(val)}
           />
-          <span>登录注册即同意Magnum《隐私政策》及《服务协议》</span>
+          <span className="select-none">
+            登录注册即同意Magnum《隐私政策》及《服务协议》
+          </span>
         </label>
       </p>
-    </div>
+    </Box>
   );
 };
 

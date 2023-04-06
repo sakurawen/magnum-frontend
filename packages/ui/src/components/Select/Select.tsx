@@ -7,6 +7,7 @@ import {
   Reducer,
   useCallback,
   useEffect,
+  useMemo,
   useReducer,
   useRef,
   useState,
@@ -38,6 +39,11 @@ export const Select = (props: SelectProps) => {
   const reducer = useReducer<Reducer<SelectContextValue, SelectContextAction>>(
     (state, action) => {
       switch (action.type) {
+        case ACTIONS.UPDATE_SIZE:
+          return {
+            ...state,
+            size: action.data,
+          };
         case ACTIONS.OPTION_SELECT:
           return {
             ...state,
@@ -52,6 +58,13 @@ export const Select = (props: SelectProps) => {
       onChange: optionChange,
     },
   );
+
+  useEffect(() => {
+    reducer[1]({
+      type: ACTIONS.UPDATE_SIZE,
+      data: size,
+    });
+  }, [size]);
 
   const selectContainerRef = useRef<HTMLButtonElement>(null);
 
@@ -72,7 +85,7 @@ export const Select = (props: SelectProps) => {
         <button
           ref={selectContainerRef}
           role="listbox"
-          className={cx('text-left inline-block z-10 relative', className)}
+          className={cx('relative z-10 inline-block text-left', className)}
         >
           {children}
         </button>

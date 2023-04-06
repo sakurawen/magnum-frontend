@@ -25,7 +25,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
   return (
     <div
       className={cx(
-        'inline-flex ring-1 ring-gray-200 bg-theme-gray-2',
+        'bg-theme-gray-2 inline-flex ring-1 ring-gray-200',
         ROUNDED_SIZE_CLASSNAMES[size],
         {
           'w-full': fill,
@@ -33,15 +33,15 @@ export const Input = forwardRef<HTMLInputElement, InputProps>((props, ref) => {
       )}
     >
       {enableIcon && (
-        <div className="flex pl-2 items-center justify-center">{icon}</div>
+        <div className="flex items-center justify-center pl-2">{icon}</div>
       )}
       <input
         {...restProps}
         onChange={(e) => onChange(e.target.value)}
         className={cx(
-          'outline-none bg-transparent block transition w-full rounded',
+          'block w-full rounded bg-transparent outline-none transition focus:outline-none',
           'placeholder:text-theme-content-1/50',
-          'disabled:cursor-not-allowed disabled:!',
+          'disabled:! disabled:cursor-not-allowed',
           CONTENT_SIZE_CLASSNAMES[size],
           props.className,
         )}

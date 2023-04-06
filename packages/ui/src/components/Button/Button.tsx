@@ -7,6 +7,7 @@ const ButtonVariantStyle = {
   primary: 'bg-theme-1 hover:bg-theme-2  active:bg-theme-3 text-white',
   danger: 'bg-red-500 hover:bg-red-600  active:bg-red-700 text-white',
   custom: '',
+  gray: 'bg-gray-100 hover:bg-gray-200 active:bg-gray-300 text-black',
 };
 
 export type ButtonProps = Pick<
@@ -38,7 +39,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         onClick={onClick}
         disabled={disableButton}
         className={cx(
-          'relative transition select-none  min-h-[1em]',
+          'relative min-h-[1em] select-none  transition',
           SIZE_CLASSNAMES[size],
           ROUNDED_SIZE_CLASSNAMES[size],
           [
@@ -52,7 +53,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       >
         {enableLoading ? (
           <Icon
-            className="inline-block animate-spin w-4 h-4"
+            className="inline-block h-4 w-4 animate-spin"
             icon="radix-icons:reload"
           />
         ) : (

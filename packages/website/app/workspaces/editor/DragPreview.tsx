@@ -21,7 +21,7 @@ const DragPreview = ({ preview }: DragPreviewProps) => {
         <Material item={preview.data as MaterialSchema} />
       ) : null}
       {preview?.type === 'element' ? (
-        <div className="bg-white rounded shadow">
+        <div className="rounded bg-white shadow">
           <Widget item={preview.data as DraftWidget} />
         </div>
       ) : null}

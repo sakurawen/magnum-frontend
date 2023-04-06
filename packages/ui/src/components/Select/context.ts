@@ -13,6 +13,7 @@ export type SelectContextAction<T extends string = any> = {
 
 export const ACTIONS = {
   OPTION_SELECT: 'OPTION_SELECT',
+  UPDATE_SIZE: 'UPDATE_SIZE',
 };
 
 export type SelectContextDispatch = Dispatch<SelectContextAction>;

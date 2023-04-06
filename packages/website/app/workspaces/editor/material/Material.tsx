@@ -10,17 +10,17 @@ const Material = ({ item, className }: MaterialProps) => {
   return (
     <div
       className={cx(
-        'flex p-1.5 justify-center items-center rounded',
+        'flex items-center justify-center rounded p-1.5',
         className,
       )}
     >
-      <div className="w-full py-2 rounded-md ring-1 ring-theme-gray-3 transition bg-theme-gray-1  text-theme-content-2/80 group hover:ring-1 ring-theme-3/20  hover:shadow-sm px-2 flex flex-col items-center justify-center">
-        <div className="w-full text-center  flex items-center p-1 min-h-[32px] justify-center rounded">
-          <div className="py-1 px-2.5  text-gray-500 transition group-hover:text-theme-content-2 bg-gray-100 rounded">
+      <div className="ring-theme-gray-3 bg-theme-gray-1 text-theme-content-2/80 ring-theme-3/20 group flex w-full  flex-col items-center justify-center rounded-md  px-2 py-2 ring-1 transition hover:shadow-sm hover:ring-1">
+        <div className="flex min-h-[32px]  w-full items-center justify-center rounded p-1 text-center">
+          <div className="group-hover:text-theme-content-2 rounded  bg-gray-100 px-2.5 py-1 text-gray-500 transition">
             {item.preview}
           </div>
         </div>
-        <span className="mt-1 text-xs text-gray-500 select-none group-hover:text-theme-content-2">
+        <span className="group-hover:text-theme-content-2 mt-1 select-none text-xs text-gray-500">
           {item.item.text}
         </span>
       </div>

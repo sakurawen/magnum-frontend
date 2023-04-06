@@ -4,19 +4,19 @@
 
 html,
 body {
-  @apply min-h-screen text-theme-content-1 selection:text-theme-3 selection:bg-theme-3/10;
+  @apply text-theme-content-1 selection:text-theme-3 selection:bg-theme-3/10 min-h-screen;
 }
 
 .bg-login {
   background-image: url(/images/bg-login.jpg);
-  @apply bg-cover bg-top bg-theme-1;
+  @apply bg-theme-1 bg-cover bg-top;
 }
 
 .bg-grid {
   background-image: url(/images/grid.svg);
 }
 *::-webkit-scrollbar {
-  @apply w-1.5 rounded bg-theme-gray-2/50;
+  @apply bg-theme-gray-2/50 w-1.5 rounded;
 }
 
 *::-webkit-scrollbar-thumb {

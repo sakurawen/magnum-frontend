@@ -16,7 +16,7 @@ export const SelectButton = (props: SelectButtonProps) => {
   return (
     <div
       className={cx(
-        'bg-theme-gray-2 ring-1 flex items-center justify-between ring-gray-200',
+        'bg-theme-gray-2 flex items-center justify-between ring-1 ring-gray-200',
         CONTENT_SIZE_CLASSNAMES[size],
         ROUNDED_SIZE_CLASSNAMES[size],
         {},
@@ -25,7 +25,7 @@ export const SelectButton = (props: SelectButtonProps) => {
       onClick={() => setOpen((open) => !open)}
     >
       <span>{children}</span>
-      <Icon className="w-5 h-5" icon="radix-icons:caret-sort" />
+      <Icon className="h-5 w-5" icon="radix-icons:caret-sort" />
     </div>
   );
 };

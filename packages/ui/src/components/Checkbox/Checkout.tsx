@@ -15,21 +15,21 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
     return (
       <label
         className={cx(
-          'inline-flex items-center  rounded overflow-hidden',
+          'inline-flex items-center  overflow-hidden rounded',
           className,
         )}
       >
         <span
           className={cx(
-            'relative overflow-hidden cursor-pointer rounded ring-1 ring-inset   flex transition items-center justify-center ',
+            'relative flex cursor-pointer items-center justify-center overflow-hidden   rounded ring-1 ring-inset transition ',
             [value ? 'ring-theme-1 bg-theme-1/10' : 'ring-gray-400'],
           )}
         >
           <Icon
-            className={cx('w-4 h-4 text-theme-1  transition ', [
+            className={cx('text-theme-1 h-4 w-4  transition-all ', [
               value
-                ? 'visible opacity-100 translate-y-0'
-                : 'opacity-0 invisible translate-y-1',
+                ? 'visible translate-y-0 opacity-100'
+                : 'invisible translate-y-1 opacity-0',
             ])}
             icon="radix-icons:check"
           />

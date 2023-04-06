@@ -6,11 +6,7 @@ export const metadata = {
 };
 
 const LoginLayout = ({ children }: PropsWithChildren) => {
-  return (
-    <>
-      {children}
-    </>
-  );
+  return <>{children}</>;
 };
 
 export default LoginLayout;

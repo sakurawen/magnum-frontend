@@ -17,5 +17,4 @@ export const useAppStore = create<RootState>()(
   ),
 );
 
-
 export const useTrackedAppStore = createTrackedSelector(useAppStore);

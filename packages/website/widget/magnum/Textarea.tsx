@@ -11,7 +11,7 @@ const TextareaImpl = (
   console.log();
   return (
     <div className="px-3 py-2">
-      <span className="mb-1 inline-block text-sm text-theme-content-1/90">
+      <span className="text-theme-content-1/90 mb-1 inline-block text-sm">
         {label}
       </span>
       <Textarea {...restProps} />
@@ -42,7 +42,7 @@ export const TextareaWidgetConfig: MaterialSchema['item'] = {
     },
     {
       key: 'label',
-      value: '标签',
+      value: 'Textarea标签',
       type: propertyType.INPUT,
       text: '标签',
     },

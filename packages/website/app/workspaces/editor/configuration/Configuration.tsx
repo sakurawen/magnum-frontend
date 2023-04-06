@@ -9,6 +9,7 @@ import { memo, PropsWithChildren, useMemo, useState } from 'react';
 import TextAlignHandler from './TextAlignHandler';
 import cx from 'clsx';
 import JsonView from 'react-json-view';
+import SelectOptionEditor from './SelectOptionEditor';
 
 const reactJsonConfig = {
   name: false as const,
@@ -29,9 +30,9 @@ const ConfigurationProperty = ({
   children,
 }: ConfigurationPropertyProps) => {
   return (
-    <div className="mb-2 px-4 py-1 flex items-center justify-between">
-      <span className="inline-block text-xs w-[6em]">{label}:</span>
-      <div className="flex-1 flex items-center">{children}</div>
+    <div className="mb-2 flex items-center justify-between px-4 py-1">
+      <span className="inline-block w-[6em] text-xs">{label}:</span>
+      <div className="flex flex-1 items-center">{children}</div>
     </div>
   );
 };
@@ -89,6 +90,15 @@ const Configuration = () => {
             }}
           />
         );
+      case propertyType.OPTIONS_EDIT:
+        return (
+          <SelectOptionEditor
+            value={property.value}
+            onChange={(value) => {
+              setDraftWidgetProperties(draftWidgetId, propertyIdx, value);
+            }}
+          />
+        );
       case propertyType.SELECT:
         return (
           <Select
@@ -131,6 +141,7 @@ const Configuration = () => {
             }}
           />
         );
+
       default:
         return (
           <Input
@@ -158,7 +169,7 @@ const Configuration = () => {
           </ConfigurationProperty>
         );
       })}
-      <div className="px-4 mt-4">
+      <div className="mt-4 px-4">
         <Button
           className="w-full"
           variant="danger"
@@ -179,7 +190,7 @@ const Configuration = () => {
     <AnimatePresence>
       {currentDraftWidgetId !== null && (
         <motion.div
-          className=" overflow-auto h-full"
+          className=" h-full overflow-auto"
           initial={{
             opacity: 0,
           }}
@@ -190,25 +201,25 @@ const Configuration = () => {
             opacity: 0,
           }}
         >
-          <div className="h-12 flex items-center px-2 absolute w-full bg-white/60 backdrop-blur z-50 space-x-2">
+          <div className="absolute z-50 flex h-12 w-full items-center space-x-2 bg-white/60 px-2 backdrop-blur">
             <button
               onClick={() => setTab('configuration')}
-              className={cx('text-sm select-none p-2 text-gray-400', {
-                'font-bold text-theme-content-2': isConfigTab,
+              className={cx('select-none p-2 text-sm text-gray-400', {
+                'text-theme-content-2 font-bold': isConfigTab,
               })}
             >
               配置
             </button>
             <button
               onClick={() => setTab('json')}
-              className={cx('text-sm select-none p-2 text-gray-400', {
-                'font-bold text-theme-content-2': isJSONTab,
+              className={cx('select-none p-2 text-sm text-gray-400', {
+                'text-theme-content-2 font-bold': isJSONTab,
               })}
             >
               JSON
             </button>
           </div>
-          <div className='w-full pt-12'>
+          <div className="w-full pt-12">
             {isConfigTab && ConfigurationTab}
             {isJSONTab && JSONTab}
           </div>

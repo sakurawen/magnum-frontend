@@ -1,9 +1,8 @@
-import LoginChecker from '@/app/LoginChecker';
+import AutoLoginEffect from '@/app/AutoLoginEffect';
 import '@magnum/ui/style.css';
+import localFont from 'next/font/local';
 import './globals.css';
 import Toaster from './Toaster';
-
-import localFont from 'next/font/local';
 
 const harmonySans = localFont({
   src: [
@@ -46,7 +45,7 @@ export default function RootLayout({
       <head />
       <body className={harmonySans.className}>
         <Toaster />
-        <LoginChecker />
+        <AutoLoginEffect />
         {children}
       </body>
     </html>

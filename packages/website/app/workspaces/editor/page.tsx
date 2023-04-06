@@ -6,14 +6,14 @@ import ClientDndContext from './ClientDndContext';
 const Editor = () => {
   return (
     <ClientDndContext>
-      <div className="h-full relative">
-        <div className="absolute left-0 top-0 bg-white  z-20 h-full components-container w-80  border-r border-light">
+      <div className="relative h-full">
+        <div className="components-container border-light absolute left-0  top-0 z-20 h-full w-80  border-r bg-white">
           <MaterialList />
         </div>
-        <div className={'h-full relative ml-80 mr-96'}>
+        <div className={'relative ml-80 mr-96 h-full'}>
           <Draft />
         </div>
-        <div className="absolute right-0 top-0 bg-white z-10 h-full w-96  border-l border-light">
+        <div className="border-light absolute right-0 top-0 z-10 h-full w-96  border-l bg-white">
           <Configuration />
         </div>
       </div>

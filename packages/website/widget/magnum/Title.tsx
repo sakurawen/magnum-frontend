@@ -5,7 +5,7 @@ import { alignClassName } from './consts';
 
 type TitleProps = {
   text: string;
-  align: 'left' | 'right' | 'center';
+  align: 'left' | 'right' | 'center' | 'justify';
 };
 
 const TitleImpl = ({ text, align }: TitleProps) => {
@@ -13,7 +13,7 @@ const TitleImpl = ({ text, align }: TitleProps) => {
     <div className="px-3 py-2">
       <h2
         className={cx(
-          'text-2xl whitespace-pre-wrap font-bold min-h-[1em]  mt-3 mb-1',
+          'mb-1 mt-3 min-h-[1em] whitespace-pre-wrap  text-2xl font-bold',
           alignClassName[align],
         )}
       >

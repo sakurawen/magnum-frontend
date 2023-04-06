@@ -37,7 +37,7 @@ export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
           ref={ref}
           placeholder={placeholder}
           className={cx(
-            'w-full block placeholder:text-theme-content-1/50 resize-none outline-none bg-transparent',
+            'placeholder:text-theme-content-1/50 block w-full resize-none bg-transparent outline-none focus:outline-none',
           )}
           rows={rows}
           {...restProps}

@@ -11,7 +11,7 @@ const MaterialList = () => {
     <div className="px-2">
       <div>
         <h2 className="px-2 pt-4 text-sm">表单组件</h2>
-        <div className="flex items-center mt-2 flex-wrap">
+        <div className="mt-2 flex flex-wrap items-center">
           {formMaterial.map((m) => {
             return (
               <MaterialDragable
@@ -28,7 +28,7 @@ const MaterialList = () => {
       </div>
       <div>
         <h2 className="px-2 pt-4 text-sm">媒体组件</h2>
-        <div className="flex items-center mt-2 flex-wrap">
+        <div className="mt-2 flex flex-wrap items-center">
           {mediaMaterial.map((m) => {
             return (
               <MaterialDragable

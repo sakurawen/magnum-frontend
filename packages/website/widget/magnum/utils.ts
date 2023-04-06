@@ -9,6 +9,7 @@ import { TextareaWidgetConfig } from './Textarea';
 import { TitleWidgetConfig } from './Title';
 import { VideoWidgetConfig } from './Video';
 import { SpaceWidgetConfig } from './Space';
+import { SelectWidgetConfig } from './Select';
 
 const widgetConfigMap = {
   button: ButtonWidgetConfig,
@@ -21,6 +22,7 @@ const widgetConfigMap = {
   textarea: TextareaWidgetConfig,
   video: VideoWidgetConfig,
   space: SpaceWidgetConfig,
+  select: SelectWidgetConfig,
 };
 
 export const getWidgetConfig = (

@@ -119,11 +119,6 @@ const appSlice: SliceCreator<AppSliceState> = (set, get) => {
         const elementIdx = get().app.editor.draftWidgets.findIndex(
           (item) => item.id === elementId,
         );
-        console.log({
-          elementId,
-          propertyIdx,
-          value,
-        });
         set(
           (state) => {
             state.app.editor.draftWidgets[elementIdx].configuration[

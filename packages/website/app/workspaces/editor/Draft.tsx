@@ -4,7 +4,7 @@ import { useTrackedAppStore } from '@/store';
 import { useDroppable } from '@dnd-kit/core';
 import {
   SortableContext,
-  verticalListSortingStrategy
+  verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import cx from 'clsx';
 import { useEffect, useMemo, useRef } from 'react';
@@ -71,16 +71,16 @@ const Draft = () => {
     <div
       ref={setNodeRef}
       className={cx(
-        'draft-element-insert-layer flex justify-center items-center h-full w-full ',
+        'draft-element-insert-layer flex h-full w-full items-center justify-center ',
         {},
         [
           isOver
-            ? 'bg-green-50 border-2 border-dashed border-green-300'
-            : 'bg-white border-2 border-dashed border-theme-gray-4',
+            ? 'border-2 border-dashed border-green-300 bg-green-50'
+            : 'border-theme-gray-4 border-2 border-dashed bg-white',
         ],
       )}
     >
-      <div className="flex text-center justify-center items-center">
+      <div className="flex items-center justify-center text-center">
         <div>
           <p>将物料拖动至此</p>
         </div>
@@ -89,22 +89,22 @@ const Draft = () => {
   );
 
   return (
-    <div className="h-full w-full flex flex-col">
-      <h1 className=" z-10 p-2  border-b border-theme-border text-sm select-none text-center">
+    <div className="flex h-full w-full flex-col">
+      <h1 className=" border-theme-border z-10  select-none border-b p-2 text-center text-sm">
         草稿
       </h1>
       <div
         ref={draftContainerRef}
-        className="draft-container flex-1 flex justify-center items-center bg-theme-gray-2"
+        className="draft-container bg-theme-gray-2 flex flex-1 items-center justify-center"
       >
-        <div className="w-[50.625vh] h-[86vh]">
+        <div className="h-[86vh] w-[50.625vh]">
           {dragItemIsMaterial ? (
             MaterialDroppable
           ) : (
-            <div className="w-full h-full overflow-x-hidden overflow-y-auto">
+            <div className="h-full w-full overflow-y-auto overflow-x-hidden">
               <div
                 className={cx(
-                  'w-full min-h-full pb-20 relative  bg-white mx-auto shadow-sm',
+                  'relative mx-auto min-h-full w-full  bg-white pb-20 shadow-sm',
                 )}
                 ref={ref}
               >
@@ -120,7 +120,9 @@ const Draft = () => {
                     );
                   })}
                 </SortableContext>
-                <span className='absolute bottom-0 left-0 right-0 mx-auto text-gray-400 text-center select-none py-2 text-xs'>Power by Magnum Form</span>
+                <span className="absolute bottom-0 left-0 right-0 mx-auto select-none py-2 text-center text-xs text-gray-400">
+                  Power by Magnum Form
+                </span>
               </div>
             </div>
           )}

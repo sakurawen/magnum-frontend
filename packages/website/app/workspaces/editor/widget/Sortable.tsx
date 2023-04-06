@@ -20,9 +20,7 @@ const defaultRect = {
 const ElementSortable = ({ item, children }: ElementSortableProps) => {
   const {
     app: {
-      editor: {
-        currentDragItemType,
-      },
+      editor: { currentDragItemType },
     },
   } = useTrackedAppStore();
 
@@ -57,17 +55,17 @@ const ElementSortable = ({ item, children }: ElementSortableProps) => {
         pointerEvents: dragItemIsMaterial ? 'none' : undefined,
       }}
     >
-      <div className="sortable relative overflow-hidden group">
+      <div className="sortable group relative overflow-hidden">
         {children}
-        <div className="group-hover:right-0 -right-20 h-full transition-all top-0 flex flex-col justify-center items-center  absolute  z-50  overflow-hidden ">
+        <div className="absolute -right-20 top-0 z-50 flex h-full flex-col items-center justify-center  overflow-hidden  transition-all  group-hover:right-0 ">
           <div
-            className="shadow bg-white  rounded cursor-grab"
+            className="cursor-grab rounded  bg-white shadow"
             {...attributes}
             {...listeners}
             tabIndex={-1}
           >
             <Icon
-              className="w-6 h-6  text-gray-800"
+              className="h-6 w-6  text-gray-800"
               icon="radix-icons:drag-handle-dots-2"
             />
           </div>

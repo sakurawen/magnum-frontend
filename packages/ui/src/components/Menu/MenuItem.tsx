@@ -17,7 +17,7 @@ export const MenuItem = (props: MenuItemProps) => {
       onClick={handleClick}
       role="menuitem"
       className={cx(
-        'menu-item select-none py-2 px-4 hover:bg-theme-gray-2',
+        'menu-item hover:bg-theme-gray-2 select-none px-4 py-2',
         className,
       )}
     >

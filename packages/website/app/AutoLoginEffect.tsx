@@ -4,7 +4,7 @@ import { validateToken } from '@/utils';
 import { useRouter } from 'next/navigation';
 import { startTransition, useEffect } from 'react';
 
-const LoginChecker = () => {
+const AutoLoginEffect = () => {
   const {
     user: { init, logout },
   } = useTrackedAppStore();
@@ -30,4 +30,4 @@ const LoginChecker = () => {
   return null;
 };
 
-export default LoginChecker;
+export default AutoLoginEffect;

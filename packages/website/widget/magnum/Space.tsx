@@ -8,7 +8,7 @@ type SpaceImplProps = {
 const SpaceImpl = ({ size }: SpaceImplProps) => {
   return (
     <div
-      className={cx({
+      className={cx('border-b border-t border-dashed border-gray-200 px-2', {
         'py-2': size === 'small',
         'py-6': size === 'middle',
         'py-12': size === 'large',
@@ -25,7 +25,7 @@ export const SpaceWidgetConfig: MaterialSchema['item'] = {
   config: [
     {
       key: 'size',
-      value: sizeOptions[0],
+      value: sizeOptions[1],
       type: propertyType.SELECT,
       options: sizeOptions,
       text: '尺寸',

@@ -22,27 +22,27 @@ const Navbar = () => {
     });
   };
   return (
-    <nav className="navbar flex relative z-50 items-center justify-between text-xs border-b  ">
+    <nav className="navbar relative z-50 flex items-center justify-between border-b text-xs  ">
       <div className="flex h-full items-center  space-x-4">
         <Menu className="h-full">
           <Menu.Trigger className="h-full">
-            <div className="group select-none hover:bg-theme-gray-2   w-80 h-full px-4 flex justify-between items-center  border-r">
+            <div className="hover:bg-theme-gray-2 group flex   h-full w-80 select-none items-center justify-between border-r  px-4">
               <div className="flex items-center justify-center ">
                 <Icon
-                  className="w-6 h-6 mr-2 text-theme-2"
+                  className="text-theme-2 mr-2 h-6 w-6"
                   icon="iconoir:codepen"
                 />
                 <div>
-                  <h2 className="text-base/none  mb-0.5 font-bold text-black">
+                  <h2 className="mb-0.5  text-base/none font-bold text-black">
                     {name}
                   </h2>
-                  <p className="w-[16em] overflow-hidden whitespace-nowrap text-ellipsis text-xs/none  text-gray-600">
+                  <p className="w-[16em] overflow-hidden text-ellipsis whitespace-nowrap text-xs/none  text-gray-600">
                     {id}
                   </p>
                 </div>
               </div>
               <Icon
-                className="w-3 h-3 mt-0.5 group-hover:translate-y-0.5 transition"
+                className="mt-0.5 h-3 w-3 transition group-hover:translate-y-0.5"
                 icon="radix-icons:chevron-down"
               />
             </div>
@@ -50,7 +50,7 @@ const Navbar = () => {
           <Menu.Items>
             <Menu.Item>
               <Link
-                className="block h-full p-2 cursor-default"
+                className="block h-full cursor-default p-2"
                 href="/workspaces"
               >
                 工作空间
@@ -58,7 +58,7 @@ const Navbar = () => {
             </Menu.Item>
             <Menu.Item>
               <Link
-                className="block h-full p-2 cursor-default "
+                className="block h-full cursor-default p-2 "
                 href="/workspaces/editor"
               >
                 编辑器
@@ -67,12 +67,12 @@ const Navbar = () => {
           </Menu.Items>
         </Menu>
       </div>
-      <div className="flex items-center justify-between h-full w-full ">
-        <div className="py-1.5 px-2 flex-1 flex items-center justify-between">
+      <div className="flex h-full w-full items-center justify-between ">
+        <div className="flex flex-1 items-center justify-between px-2 py-1.5">
           <Input
             icon={
               <Icon
-                className="w-5 h-5 mt-0.5 text-gray-400"
+                className="mt-0.5 h-5 w-5 text-gray-400"
                 icon="radix-icons:magnifying-glass"
               />
             }
@@ -82,19 +82,19 @@ const Navbar = () => {
             className="!w-72"
             size="middle"
           />
-          <Button size="middle" className="flex ml-2 items-center">
-            <Icon className="w-5 h-5 mr-2" icon="radix-icons:play" /> Preview
+          <Button size="middle" className="ml-2 flex items-center">
+            <Icon className="mr-2 h-5 w-5" icon="radix-icons:play" /> Preview
           </Button>
         </div>
 
-        <Menu className="h-full border-l border-light ">
-          <Menu.Trigger className="h-full hover:bg-theme-gray-2">
-            <div className="group h-full px-6  flex justify-center items-center">
-              <div className="w-6 h-6 mr-2 flex items-center justify-center rounded-full">
-                <Icon className="w-5 h-5" icon="heroicons:cog-8-tooth" />
+        <Menu className="border-light h-full border-l ">
+          <Menu.Trigger className="hover:bg-theme-gray-2 h-full">
+            <div className="group flex h-full  items-center justify-center px-6">
+              <div className="mr-2 flex h-6 w-6 items-center justify-center rounded-full">
+                <Icon className="h-5 w-5" icon="heroicons:cog-8-tooth" />
               </div>
               <Icon
-                className="w-3 h-3 mt-0.5 group-hover:translate-y-0.5 transition"
+                className="mt-0.5 h-3 w-3 transition group-hover:translate-y-0.5"
                 icon="radix-icons:chevron-down"
               />
             </div>

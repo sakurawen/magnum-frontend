@@ -11,8 +11,12 @@ export const SelectOptions = (props: SelectOptions) => {
   return (
     <div
       className={cx(
-        'absolute mt-2 ring-1 ring-gray-200 shadow transition-all rounded bg-white z-40 min-w-full',
-        [open ? 'visible opacity-100' : 'invisible opacity-0'],
+        'absolute z-40 mt-2 min-w-full origin-top transform rounded bg-white shadow-sm ring-1 ring-gray-200 transition-all',
+        [
+          open
+            ? 'visible scale-y-100 opacity-100'
+            : 'invisible scale-y-95 opacity-0',
+        ],
       )}
     >
       {children}

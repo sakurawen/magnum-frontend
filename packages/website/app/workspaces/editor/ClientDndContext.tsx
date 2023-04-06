@@ -2,7 +2,7 @@
 import {
   createDraftWidget,
   DraftWidget,
-  DraftWidgetSchema
+  DraftWidgetSchema,
 } from '@/schemas/draft';
 import { MaterialSchema } from '@/schemas/material';
 import { useTrackedAppStore } from '@/store';
@@ -15,7 +15,7 @@ import {
   MouseSensor,
   TouchSensor,
   useSensor,
-  useSensors
+  useSensors,
 } from '@dnd-kit/core';
 import { arrayMove, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 import { PropsWithChildren, useState } from 'react';
@@ -93,8 +93,9 @@ const ClientDndContext = ({ children }: PropsWithChildren) => {
     const { active, over } = e;
     const activeId = active.id as string;
     const overId = over?.id as string;
-    const [activeTag, activeUUID] = activeId.split('|');
-    const [overTag, overUUID] = overId.split('|');
+    if (!activeId || !overId) return;
+    const [activeTag, activeUUID] = activeId?.split('|');
+    const [overTag, overUUID] = overId?.split('|');
     if (
       activeId &&
       overId &&

@@ -10,7 +10,7 @@ export const metadata = {
 
 const WorkspacesLayout = ({ children }: WorkspacesLayoutProps) => {
   return (
-    <div className="h-screen flex flex-col">
+    <div className="flex h-screen flex-col">
       <Navbar />
       <div className="flex-1">{children}</div>
     </div>

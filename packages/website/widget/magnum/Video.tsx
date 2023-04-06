@@ -4,8 +4,8 @@ import { propertyType } from './consts';
 
 const VideoImpl = () => {
   return (
-    <div className="px-3 py-2 w-full aspect-video bg-theme-gray-2 rounded-sm flex justify-center items-center">
-      <Icon icon="radix-icons:video" className="w-20 h-20 text-theme-gray-4" />
+    <div className="bg-theme-gray-2 flex aspect-video w-full items-center justify-center rounded-sm px-3 py-2">
+      <Icon icon="radix-icons:video" className="text-theme-gray-4 h-20 w-20" />
     </div>
   );
 };

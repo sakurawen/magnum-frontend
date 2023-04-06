@@ -42,14 +42,14 @@ const ImageImpl = (props: ImageProps) => {
       );
     }
     return (
-      <Icon icon="radix-icons:image" className="w-20 h-20 text-theme-gray-4" />
+      <Icon icon="radix-icons:image" className="text-theme-gray-4 h-20 w-20" />
     );
   };
   return (
     <div className={cx('transition', [fill ? undefined : 'px-3 py-2'])}>
       <div
         className={cx(
-          'w-full aspect-video bg-theme-gray-3/70 flex justify-center items-center',
+          'bg-theme-gray-3/70 flex aspect-video w-full items-center justify-center ring-1 ring-gray-200',
           [!fill && 'rounded-sm'],
         )}
       >

@@ -10,14 +10,19 @@ export type MenuItemsProps = {
 export const MenuItems = (props: MenuItemsProps) => {
   const { children, className } = props;
   const [context] = useContext(MenuContext);
-  return context.open ? (
+  return (
     <div
       className={cx(
-        'menu-items border border-light bg-white w-full absolute  z-20 left-0',
+        'menu-items border-light absolute left-0 z-20 min-w-full origin-top transform border bg-white shadow-sm transition-all',
+        [
+          context.open
+            ? 'visible scale-y-100 opacity-100'
+            : 'invisible scale-y-95 opacity-0',
+        ],
         className,
       )}
     >
       {children}
     </div>
-  ) : null;
+  );
 };
