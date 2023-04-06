@@ -1,7 +1,7 @@
-import { useRef } from 'react';
+import * as React from 'react';
 
 export function useLatest<T = any>(val: T) {
-  const ref = useRef<T>(val);
+  const ref = React.useRef<T>(val);
   ref.current = val;
   return ref;
 }

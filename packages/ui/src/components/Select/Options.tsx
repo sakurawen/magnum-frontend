@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import * as React from 'react';
 import { SelectOpenCloseContext } from './context';
 import cx from 'clsx';
 
@@ -7,7 +7,7 @@ type SelectOptions = {
 };
 export const SelectOptions = (props: SelectOptions) => {
   const { children } = props;
-  const [open] = useContext(SelectOpenCloseContext);
+  const [open] = React.useContext(SelectOpenCloseContext);
   return (
     <div
       className={cx(

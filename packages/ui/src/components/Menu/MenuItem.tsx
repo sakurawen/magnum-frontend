@@ -1,13 +1,14 @@
 import cx from 'clsx';
-import { useContext, PropsWithChildren } from 'react';
+import * as React from 'react';
 import { MenuContext } from './context';
-export type MenuItemProps = PropsWithChildren<{
+
+export type MenuItemProps = React.PropsWithChildren<{
   className?: string;
   onClick?: React.MouseEventHandler;
 }>;
 export const MenuItem = (props: MenuItemProps) => {
   const { children, className, onClick } = props;
-  const [, dispatch] = useContext(MenuContext);
+  const [, dispatch] = React.useContext(MenuContext);
   const handleClick: React.MouseEventHandler = (e) => {
     onClick?.(e);
     dispatch('close');

@@ -1,4 +1,4 @@
-import { forwardRef, ButtonHTMLAttributes } from 'react';
+import * as React from 'react';
 import { Icon } from '@iconify/react';
 import cx from 'clsx';
 import { SIZE_CLASSNAMES, ROUNDED_SIZE_CLASSNAMES } from '../consts';
@@ -11,7 +11,7 @@ const ButtonVariantStyle = {
 };
 
 export type ButtonProps = Pick<
-  ButtonHTMLAttributes<HTMLButtonElement>,
+  React.ButtonHTMLAttributes<HTMLButtonElement>,
   'children' | 'className' | 'disabled' | 'onClick' | 'style'
 > & {
   variant?: keyof typeof ButtonVariantStyle;
@@ -19,7 +19,10 @@ export type ButtonProps = Pick<
   loading?: boolean;
 };
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+/**
+ * Button
+ */
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   (props, ref) => {
     const {
       className,

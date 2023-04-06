@@ -1,11 +1,23 @@
-import { createContext, useContext } from 'react';
+import * as React from 'react';
 
-export type DialogContextValue = {
+export type DispatchAction = {
+  type: string;
+  data: any;
+};
+
+export type DialogContextState = {
   open: boolean;
 };
 
-export const DialogContext = createContext<DialogContextValue | null>(null);
+export type DialogContextValue = [
+  DialogContextState,
+  React.Dispatch<DispatchAction>,
+];
+
+export const DialogContext = React.createContext<DialogContextValue | null>(
+  null,
+);
 
 export function useDialogContext() {
-  return useContext(DialogContext);
+  return React.useContext(DialogContext);
 }

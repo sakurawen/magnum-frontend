@@ -1,4 +1,4 @@
-import { createContext, Dispatch, useContext } from 'react';
+import * as React from 'react';
 
 export const MenuContextDefaultValue = {
   open: false,
@@ -6,10 +6,10 @@ export const MenuContextDefaultValue = {
 
 export type MenuContextValue = typeof MenuContextDefaultValue;
 
-export type MenuContextDispatcher = Dispatch<'open' | 'close' | 'toggle'>;
+export type MenuContextDispatcher = React.Dispatch<'open' | 'close' | 'toggle'>;
 
-export const MenuContext = createContext<
+export const MenuContext = React.createContext<
   [MenuContextValue, MenuContextDispatcher] | null
 >(null);
 
-export const useMenuContext = () => useContext(MenuContext);
+export const useMenuContext = () => React.useContext(MenuContext);

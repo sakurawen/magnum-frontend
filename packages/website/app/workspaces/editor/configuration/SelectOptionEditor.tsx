@@ -35,6 +35,7 @@ const SelectOptionEditor = (props: SelectOptionEditorProps) => {
       </Button>
       <Dialog>
         <Dialog.Portal>
+          <Dialog.Overlay />
           <div>wuhu</div>
         </Dialog.Portal>
       </Dialog>

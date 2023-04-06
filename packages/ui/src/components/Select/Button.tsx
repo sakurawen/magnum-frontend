@@ -1,17 +1,22 @@
-import { CONTENT_SIZE_CLASSNAMES, ROUNDED_SIZE_CLASSNAMES } from '../consts';
-import cx from 'clsx';
-import { PropsWithChildren, useContext } from 'react';
-import { SelectContext, SelectOpenCloseContext } from './context';
 import { Icon } from '@iconify/react';
+import cx from 'clsx';
+import * as React from 'react';
+import { CONTENT_SIZE_CLASSNAMES, ROUNDED_SIZE_CLASSNAMES } from '../consts';
+import { SelectContext, SelectOpenCloseContext } from './context';
 
-type SelectButtonProps = PropsWithChildren<{
+type SelectButtonProps = React.PropsWithChildren<{
   className?: string;
 }>;
 
+/**
+ * Select Button
+ * @param props
+ * @returns
+ */
 export const SelectButton = (props: SelectButtonProps) => {
-  const [value] = useContext(SelectContext);
+  const [value] = React.useContext(SelectContext);
   const { size } = value;
-  const [, setOpen] = useContext(SelectOpenCloseContext);
+  const [, setOpen] = React.useContext(SelectOpenCloseContext);
   const { children, className } = props;
   return (
     <div

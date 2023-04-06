@@ -196,7 +196,7 @@ const Login = () => {
   );
 
   return (
-    <Box className="w-[500px]  rounded-lg bg-white px-12 py-20 shadow ">
+    <Box className="w-[500px] rounded-lg bg-white px-12 py-20 shadow ">
       <h2 className="text-theme-content-1 mb-8 text-4xl font-bold">
         欢迎使用
         <br /> Magnum Form

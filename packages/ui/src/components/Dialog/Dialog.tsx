@@ -1,11 +1,23 @@
-import { PropsWithChildren } from 'react';
+import * as React from 'react';
 import { DialogOverlay } from './Overlay';
 import { DialogPortal } from './Portal';
-export type DialogProps = PropsWithChildren<{}>;
+import { DialogContextState, DispatchAction } from './context';
+export type DialogProps = React.PropsWithChildren<{}>;
 
 export const Dialog = (props: DialogProps) => {
   const { children } = props;
-  return <div>{children}</div>;
+  const reducer = React.useReducer<
+    React.Reducer<DialogContextState, DispatchAction>
+  >(
+    (state, action) => {
+      switch (action.type) {
+        default:
+          return { ...state };
+      }
+    },
+    { open: false },
+  );
+  return <div className="dialog">{children}</div>;
 };
 Dialog.Overlay = DialogOverlay;
 Dialog.Portal = DialogPortal;

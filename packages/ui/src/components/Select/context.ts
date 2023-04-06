@@ -1,4 +1,4 @@
-import { createContext, Dispatch, SetStateAction } from 'react';
+import * as React from 'react';
 
 export type SelectContextValue<T = any> = {
   size?: ComponentSize;
@@ -16,9 +16,9 @@ export const ACTIONS = {
   UPDATE_SIZE: 'UPDATE_SIZE',
 };
 
-export type SelectContextDispatch = Dispatch<SelectContextAction>;
+export type SelectContextDispatch = React.Dispatch<SelectContextAction>;
 
-export const SelectContext = createContext<
+export const SelectContext = React.createContext<
   [SelectContextValue, SelectContextDispatch] | null
 >(null);
 
@@ -26,8 +26,8 @@ SelectContext.displayName = 'SelectContext';
 
 export type SelectOpenCLoseContextValue = [
   boolean,
-  Dispatch<SetStateAction<Boolean>>,
+  React.Dispatch<React.SetStateAction<Boolean>>,
 ];
 
 export const SelectOpenCloseContext =
-  createContext<SelectOpenCLoseContextValue | null>(null);
+  React.createContext<SelectOpenCLoseContextValue | null>(null);

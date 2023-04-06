@@ -1,9 +1,9 @@
-import { forwardRef, TextareaHTMLAttributes } from 'react';
-import { CONTENT_SIZE_CLASSNAMES, ROUNDED_SIZE_CLASSNAMES } from '../consts';
 import cx from 'clsx';
+import * as React from 'react';
+import { CONTENT_SIZE_CLASSNAMES, ROUNDED_SIZE_CLASSNAMES } from '../consts';
 
 export type TextareaProps = Pick<
-  TextareaHTMLAttributes<HTMLTextAreaElement>,
+  React.TextareaHTMLAttributes<HTMLTextAreaElement>,
   'value' | 'rows' | 'className' | 'value' | 'placeholder' | 'tabIndex'
 > & {
   size?: ComponentSize;
@@ -11,7 +11,7 @@ export type TextareaProps = Pick<
   onChange: (val: string) => void;
 };
 
-export const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(
+export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   (props, ref) => {
     const {
       rows,

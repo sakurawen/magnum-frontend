@@ -1,9 +1,9 @@
+import cx from 'clsx';
+import * as React from 'react';
+import { MenuContext, MenuContextValue } from './context';
 import { MenuItem } from './MenuItem';
 import { MenuItems } from './MenuItems';
 import { MenuTrigger } from './MenuTrigger';
-import { MenuContext, MenuContextValue } from './context';
-import React, { useReducer, Reducer, useEffect, useRef } from 'react';
-import cx from 'clsx';
 
 export type MenuProps = {
   children?: React.ReactNode | React.ReactNode[];
@@ -12,8 +12,8 @@ export type MenuProps = {
 
 export const Menu = (props: MenuProps) => {
   const { children, className } = props;
-  const reducer = useReducer<
-    Reducer<MenuContextValue, 'open' | 'close' | 'toggle'>
+  const reducer = React.useReducer<
+    React.Reducer<MenuContextValue, 'open' | 'close' | 'toggle'>
   >(
     (state, action) => {
       switch (action) {
@@ -34,8 +34,8 @@ export const Menu = (props: MenuProps) => {
       open: false,
     },
   );
-  const menuRef = useRef<HTMLDivElement>(null);
-  useEffect(() => {
+  const menuRef = React.useRef<HTMLDivElement>(null);
+  React.useEffect(() => {
     const listenMenuOutClick = (e: MouseEvent) => {
       if (menuRef.current.contains(e.target as HTMLElement)) return;
       reducer[1]('close');

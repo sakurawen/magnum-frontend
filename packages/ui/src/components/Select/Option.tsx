@@ -1,8 +1,8 @@
-import { PropsWithChildren, useContext, useEffect } from 'react';
+import * as React from 'react';
 import { SelectContext, ACTIONS, SelectOpenCloseContext } from './context';
 import cx from 'clsx';
 
-type SelectOptionProps<T = any> = PropsWithChildren<{
+type SelectOptionProps<T = any> = React.PropsWithChildren<{
   value: T;
 }>;
 
@@ -14,9 +14,9 @@ const OPTION_SIZE = {
 
 export const SelectOption = (props: SelectOptionProps) => {
   const { children, value } = props;
-  const [, setOpen] = useContext(SelectOpenCloseContext);
+  const [, setOpen] = React.useContext(SelectOpenCloseContext);
   const [{ size, value: current, onChange }, dispatch] =
-    useContext(SelectContext);
+    React.useContext(SelectContext);
 
   const handleSelect = () => {
     onChange(value);

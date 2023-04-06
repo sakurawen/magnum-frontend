@@ -1,5 +1,5 @@
 import { MenuContext } from './context';
-import { useContext } from 'react';
+import * as React from 'react';
 import cx from 'clsx';
 
 export type MenuItemsProps = {
@@ -9,7 +9,7 @@ export type MenuItemsProps = {
 
 export const MenuItems = (props: MenuItemsProps) => {
   const { children, className } = props;
-  const [context] = useContext(MenuContext);
+  const [context] = React.useContext(MenuContext);
   return (
     <div
       className={cx(

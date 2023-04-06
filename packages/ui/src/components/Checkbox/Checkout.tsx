@@ -1,6 +1,6 @@
-import { forwardRef } from 'react';
-import cx from 'clsx';
 import { Icon } from '@iconify/react';
+import cx from 'clsx';
+import * as React from 'react';
 
 export type CheckboxProps = {
   value: boolean;
@@ -9,7 +9,10 @@ export type CheckboxProps = {
   onChange?: (value: boolean) => void;
 };
 
-export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
+/**
+ * Checkbox
+ */
+export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   (props, ref) => {
     const { value, id, className, onChange } = props;
     return (

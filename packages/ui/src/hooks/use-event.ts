@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import * as React from 'react';
 import { useLatest } from './use-latest';
 
 export function useEvent<
@@ -7,7 +7,7 @@ export function useEvent<
   R = ReturnType<F>,
 >(cb: (...args: P) => R) {
   const ref = useLatest(cb);
-  return useCallback((...args: P) => ref.current(...args), [ref.current]);
+  return React.useCallback((...args: P) => ref.current(...args), [ref.current]);
 }
 
 export default useEvent;

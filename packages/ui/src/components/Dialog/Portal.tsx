@@ -1,12 +1,12 @@
 import { createPortal } from 'react-dom';
-import { forwardRef } from 'react';
+import * as React from 'react';
 
 export type DialogPortalProps = {
   container?: HTMLElement | null;
   children?: React.ReactNode;
 };
 
-export const DialogPortal = forwardRef<HTMLDivElement, DialogPortalProps>(
+export const DialogPortal = React.forwardRef<HTMLDivElement, DialogPortalProps>(
   (props, ref) => {
     const { container = globalThis.document.body, children } = props;
     return container
