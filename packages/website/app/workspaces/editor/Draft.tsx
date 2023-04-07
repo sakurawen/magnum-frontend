@@ -34,6 +34,7 @@ const Draft = () => {
     window,
     () => {
       const clientHeight = document.body.clientHeight;
+      if (!clientHeight) return;
       const height = clientHeight * 0.86;
       const width = clientHeight * 0.50625;
       setCanvasSize({
@@ -43,6 +44,7 @@ const Draft = () => {
     },
     [],
   );
+
   /**
    * 监听取消选中
    */

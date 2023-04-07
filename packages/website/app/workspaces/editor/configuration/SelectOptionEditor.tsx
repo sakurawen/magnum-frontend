@@ -1,3 +1,4 @@
+"use client"
 import { Button, Dialog } from '@magnum/ui';
 import { Icon } from '@iconify/react';
 
@@ -36,7 +37,9 @@ const SelectOptionEditor = (props: SelectOptionEditorProps) => {
       <Dialog>
         <Dialog.Portal>
           <Dialog.Overlay />
-          <div>wuhu</div>
+          <Dialog.Content>
+            <div>wuhu</div>
+          </Dialog.Content>
         </Dialog.Portal>
       </Dialog>
     </div>

@@ -1,3 +1,4 @@
+'use client';
 import { DraftWidget } from '@/schemas/draft';
 import { MaterialSchema } from '@/schemas/material';
 import { DragOverlay } from '@dnd-kit/core';
@@ -15,6 +16,7 @@ type DragPreviewProps = {
 };
 
 const DragPreview = ({ preview }: DragPreviewProps) => {
+  if (typeof document === 'undefined') return null;
   return createPortal(
     <DragOverlay>
       {preview?.type === 'material' ? (

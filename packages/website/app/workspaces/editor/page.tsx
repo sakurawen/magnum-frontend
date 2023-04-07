@@ -8,13 +8,13 @@ const Editor = () => {
     <ClientDndContext>
       <div className="relative h-full">
         <div className="components-container border-light absolute left-0  top-0 z-20 h-full w-80  border-r bg-white">
-          <MaterialList />
+          {/* <MaterialList /> */}
         </div>
         <div className={'relative ml-80 mr-96 h-full'}>
-          <Draft />
+          {/* <Draft /> */}
         </div>
         <div className="border-light absolute right-0 top-0 z-10 h-full w-96  border-l bg-white">
-          <Configuration />
+          {/* <Configuration /> */}
         </div>
       </div>
     </ClientDndContext>

@@ -1,7 +1,7 @@
 import { useEffect, useRef, DependencyList } from 'react';
 
 export const useResize = (
-  target: Window | Document | HTMLElement | undefined,
+  target: Window | Document | HTMLElement | undefined | null,
   cb: (e?: Event) => void,
   deps?: DependencyList,
 ) => {

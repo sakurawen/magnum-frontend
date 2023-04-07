@@ -1,3 +1,4 @@
+'use client';
 import { DraftWidget } from '@/schemas/draft';
 import { useTrackedAppStore } from '@/store';
 import { propertyType } from '@/widget/magnum/consts';
