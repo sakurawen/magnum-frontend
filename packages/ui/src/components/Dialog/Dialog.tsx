@@ -1,7 +1,9 @@
 import * as React from 'react';
+import { DialogContent } from './Content';
+import { DialogContext, DialogContextState, DispatchAction } from './context';
 import { DialogOverlay } from './Overlay';
 import { DialogPortal } from './Portal';
-import { DialogContextState, DispatchAction } from './context';
+
 export type DialogProps = React.PropsWithChildren<{}>;
 
 export const Dialog = (props: DialogProps) => {
@@ -17,7 +19,11 @@ export const Dialog = (props: DialogProps) => {
     },
     { open: false },
   );
-  return <div className="dialog">{children}</div>;
+  return (
+    <DialogContext.Provider value={reducer}>{children}</DialogContext.Provider>
+  );
 };
+
 Dialog.Overlay = DialogOverlay;
 Dialog.Portal = DialogPortal;
+Dialog.Content = DialogContent;
