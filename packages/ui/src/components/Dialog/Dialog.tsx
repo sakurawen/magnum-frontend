@@ -15,7 +15,6 @@ export const [DialogProvider, useDialogContext] = createContext<{
 
 export const Dialog = (props: DialogProps) => {
   const { children, open: propOpen, onOpenChange } = props;
-  console.log({propOpen})
   return (
     <DialogProvider open={propOpen} onOpenChange={onOpenChange}>
       {children}

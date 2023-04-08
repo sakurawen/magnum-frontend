@@ -8,7 +8,6 @@ const TextareaImpl = (
   },
 ) => {
   const { label, ...restProps } = props;
-  console.log();
   return (
     <div className="px-3 py-2">
       <span className="text-theme-content-1/90 mb-1 inline-block text-sm">
