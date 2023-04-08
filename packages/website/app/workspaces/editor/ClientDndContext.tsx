@@ -79,7 +79,7 @@ const ClientDndContext = ({ children }: PropsWithChildren) => {
     if ((active.id as string).startsWith('Material|') && over?.id === 'Draft') {
       draftDragEnd(e);
     }
-    if ((active.id as string).startsWith('Element')) {
+    if ((active.id as string).startsWith('Element|')) {
       sortDraft(e);
     }
   };
@@ -93,6 +93,7 @@ const ClientDndContext = ({ children }: PropsWithChildren) => {
     const { active, over } = e;
     const activeId = active.id as string;
     const overId = over?.id as string;
+    console.log('wuhu');
     if (!activeId || !overId) return;
     const [activeTag, activeUUID] = activeId?.split('|');
     const [overTag, overUUID] = overId?.split('|');

@@ -49,7 +49,7 @@ const ImageImpl = (props: ImageProps) => {
     <div className={cx('transition', [fill ? undefined : 'px-3 py-2'])}>
       <div
         className={cx(
-          'bg-theme-gray-3/70 flex aspect-video w-full items-center justify-center ring-1 ring-gray-200',
+          'bg-gray-blue-50 flex aspect-video w-full items-center justify-center ring-1 ring-gray-200',
           [!fill && 'rounded-sm'],
         )}
       >

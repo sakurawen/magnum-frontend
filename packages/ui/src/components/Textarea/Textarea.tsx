@@ -25,7 +25,7 @@ export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
     return (
       <div
         className={cx(
-          'bg-theme-gray-2 ring-1 ring-gray-200',
+          'bg-gray-blue-50 ring-gray-blue-100 ring-1',
           ROUNDED_SIZE_CLASSNAMES[size],
           CONTENT_SIZE_CLASSNAMES[size],
           className,

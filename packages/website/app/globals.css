@@ -4,25 +4,25 @@
 
 html,
 body {
-  @apply text-theme-content-1 selection:text-theme-3 selection:bg-theme-3/10 min-h-screen;
+  @apply text-theme-content-1 selection:text-theme-950 selection:bg-theme-100 min-h-screen;
 }
 
 .bg-login {
   background-image: url(/images/bg-login.jpg);
-  @apply bg-theme-1 bg-cover bg-top;
+  @apply bg-cover bg-top;
 }
 
 .bg-grid {
   background-image: url(/images/grid.svg);
 }
 *::-webkit-scrollbar {
-  @apply bg-theme-gray-2/50 w-1.5 rounded;
+  @apply bg-gray-blue-50 w-1.5 rounded;
 }
 
 *::-webkit-scrollbar-thumb {
-  @apply bg-theme-gray-3 rounded;
+  @apply bg-gray-blue-200 rounded;
 }
 
 *::-webkit-scrollbar-thumb:hover {
-  @apply bg-gray-500;
+  @apply bg-gray-blue-300;
 }

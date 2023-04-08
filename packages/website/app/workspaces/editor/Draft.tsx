@@ -31,7 +31,7 @@ const Draft = () => {
   const draftContainerRef = useRef<HTMLDivElement>(null);
 
   useResize(
-    window,
+    typeof window !== 'undefined' ? window : undefined,
     () => {
       const clientHeight = document.body.clientHeight;
       if (!clientHeight) return;
@@ -97,9 +97,9 @@ const Draft = () => {
       </h1>
       <div
         ref={draftContainerRef}
-        className="draft-container bg-theme-gray-2 flex flex-1 items-center justify-center"
+        className="draft-container bg-gray-blue-50 flex flex-1 items-center justify-center"
       >
-        <div className="h-[86vh] w-[50.625vh]">
+        <div className="h-[86vh] w-[50.625vh] overflow-hidden rounded shadow-md">
           {dragItemIsMaterial ? (
             MaterialDroppable
           ) : (

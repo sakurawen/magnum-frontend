@@ -4,12 +4,12 @@ import { DraftWidgetConfigSchema } from '@/schemas/draft';
 import { useTrackedAppStore } from '@/store';
 import { propertyType } from '@/widget/magnum/consts';
 import { Button, Checkbox, Input, Select, Textarea } from '@magnum/ui';
+import cx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';
 import { memo, PropsWithChildren, useMemo, useState } from 'react';
-import TextAlignHandler from './TextAlignHandler';
-import cx from 'clsx';
 import JsonView from 'react-json-view';
 import SelectOptionEditor from './SelectOptionEditor';
+import TextAlignHandler from './TextAlignHandler';
 
 const reactJsonConfig = {
   name: false as const,
@@ -180,11 +180,13 @@ const Configuration = () => {
       </div>
     </div>
   );
-  const JSONTab = (
-    <div className="p-2">
-      <JsonView {...reactJsonConfig} src={currentDraftWidget || {}} />
-    </div>
-  );
+  const JSONTab =
+    typeof document !== 'undefined' ? (
+      <div className="p-2">
+        todo
+        {/* <JsonView {...reactJsonConfig} src={currentDraftWidget || {}} /> */}
+      </div>
+    ) : null;
 
   return (
     <AnimatePresence>

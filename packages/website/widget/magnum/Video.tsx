@@ -4,7 +4,7 @@ import { propertyType } from './consts';
 
 const VideoImpl = () => {
   return (
-    <div className="bg-theme-gray-2 flex aspect-video w-full items-center justify-center rounded-sm px-3 py-2">
+    <div className="bg-gray-blue-50   flex aspect-video w-full items-center justify-center rounded-sm px-3 py-2">
       <Icon icon="radix-icons:video" className="text-theme-gray-4 h-20 w-20" />
     </div>
   );

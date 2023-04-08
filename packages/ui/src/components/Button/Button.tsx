@@ -4,10 +4,10 @@ import cx from 'clsx';
 import { SIZE_CLASSNAMES, ROUNDED_SIZE_CLASSNAMES } from '../consts';
 
 const ButtonVariantStyle = {
-  primary: 'bg-theme-1 hover:bg-theme-2  active:bg-theme-3 text-white',
+  primary: 'bg-theme-500 hover:bg-theme-600  active:bg-theme-800 text-white',
   danger: 'bg-red-500 hover:bg-red-600  active:bg-red-700 text-white',
   custom: '',
-  gray: 'bg-gray-100 hover:bg-gray-200 active:bg-gray-300 text-black',
+  gray: 'bg-gray-100 hover:bg-gray-200 active:bg-gray-blue-200 text-black',
 };
 
 export type ButtonProps = Pick<
@@ -47,7 +47,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           ROUNDED_SIZE_CLASSNAMES[size],
           [
             disableButton
-              ? 'disabled:bg-theme-gray-2 disabled:cursor-not-allowed'
+              ? 'disabled:bg-gray-blue-200 disabled:cursor-not-allowed'
               : ButtonVariantStyle[variant || 'primary'],
           ],
           className,

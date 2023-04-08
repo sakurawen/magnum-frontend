@@ -24,12 +24,12 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
       >
         <span
           className={cx(
-            'relative flex cursor-pointer items-center justify-center overflow-hidden   rounded ring-1 ring-inset transition ',
-            [value ? 'ring-theme-1 bg-theme-1/10' : 'ring-gray-400'],
+            'relative flex cursor-pointer items-center justify-center overflow-hidden rounded ring-1 ring-inset transition ',
+            [value ? 'ring-theme-500 bg-theme-500/10' : 'ring-gray-blue-400'],
           )}
         >
           <Icon
-            className={cx('text-theme-1 h-4 w-4  transition-all ', [
+            className={cx('text-theme-500 h-4 w-4  transition-all ', [
               value
                 ? 'visible translate-y-0 opacity-100'
                 : 'invisible translate-y-1 opacity-0',

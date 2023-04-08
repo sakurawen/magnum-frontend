@@ -16,8 +16,8 @@ const TextAlignHandler = (props: TextAlignHandlerProps) => {
       <div
         onClick={() => onChange('left')}
         className={cx(
-          'hover:bg-theme-gray-2 rounded p-1',
-          isLeft && 'bg-theme-gray-2',
+          'hover:bg-gray-blue-50   rounded p-1',
+          isLeft && 'bg-gray-blue-50  ',
         )}
       >
         <Icon className="h-5 w-5" icon="radix-icons:text-align-left" />
@@ -25,8 +25,8 @@ const TextAlignHandler = (props: TextAlignHandlerProps) => {
       <div
         onClick={() => onChange('center')}
         className={cx(
-          'hover:bg-theme-gray-2 rounded p-1',
-          isCenter && 'bg-theme-gray-2',
+          'hover:bg-gray-blue-50   rounded p-1',
+          isCenter && 'bg-gray-blue-50  ',
         )}
       >
         <Icon className="h-5 w-5" icon="radix-icons:text-align-center" />
@@ -34,8 +34,8 @@ const TextAlignHandler = (props: TextAlignHandlerProps) => {
       <div
         onClick={() => onChange('right')}
         className={cx(
-          'hover:bg-theme-gray-2 rounded p-1',
-          isRight && 'bg-theme-gray-2',
+          'hover:bg-gray-blue-50   rounded p-1',
+          isRight && 'bg-gray-blue-50  ',
         )}
       >
         <Icon className="h-5 w-5" icon="radix-icons:text-align-right" />
@@ -43,8 +43,8 @@ const TextAlignHandler = (props: TextAlignHandlerProps) => {
       <div
         onClick={() => onChange('justify')}
         className={cx(
-          'hover:bg-theme-gray-2 rounded p-1',
-          isJustify && 'bg-theme-gray-2',
+          'hover:bg-gray-blue-50   rounded p-1',
+          isJustify && 'bg-gray-blue-50  ',
         )}
       >
         <Icon className="h-5 w-5" icon="radix-icons:text-align-justify" />

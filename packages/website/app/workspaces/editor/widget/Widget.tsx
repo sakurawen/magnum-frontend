@@ -41,10 +41,10 @@ const Element = (props: ElementProps) => {
       className={cx('widget')}
       onClick={() => handleSelectElementById(item.id)}
     >
-      <div className="ring-theme-2 pointer-events-none relative select-none ring-inset">
+      <div className="ring-theme-400 pointer-events-none relative select-none ring-inset">
         <div
           className={cx(
-            'select-ring bg-theme-1/5 absolute z-10 h-full w-full ring-2 ring-inset',
+            'select-ring bg-theme-50/5 absolute z-10 h-full w-full ring-2 ring-inset',
             [currentDraftWidgetId === item.id ? 'block' : 'hidden'],
           )}
         ></div>

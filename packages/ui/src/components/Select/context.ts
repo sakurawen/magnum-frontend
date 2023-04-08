@@ -26,7 +26,7 @@ SelectContext.displayName = 'SelectContext';
 
 export type SelectOpenCLoseContextValue = [
   boolean,
-  React.Dispatch<React.SetStateAction<Boolean>>,
+  React.Dispatch<React.SetStateAction<boolean>>,
 ];
 
 export const SelectOpenCloseContext =

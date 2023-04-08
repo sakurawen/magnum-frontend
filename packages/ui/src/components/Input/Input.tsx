@@ -28,7 +28,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <div
         className={cx(
-          'bg-theme-gray-2 inline-flex ring-1 ring-gray-200',
+          'bg-gray-blue-50 inline-flex ring-1 ring-gray-blue-100',
           ROUNDED_SIZE_CLASSNAMES[size],
           {
             'w-full': fill,
