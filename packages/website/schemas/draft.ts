@@ -24,7 +24,6 @@ export const DraftWidgetSchema = z.object({
   text: z.string(),
   internal: z.record(z.string(), z.any()),
   config: z.array(DraftWidgetConfig),
-  componentType: z.custom<React.FC<any>>(),
 });
 
 export type DraftWidgetSchema = z.infer<typeof DraftWidgetSchema>;
@@ -35,18 +34,15 @@ export class DraftWidget {
   name;
   value: any;
   configuration;
-  componentType: React.FC<any>;
   internal;
   constructor({
     id,
-    componentType,
     name,
     config,
     internal,
   }: DraftWidgetSchema) {
     this.id = id;
     this.name = name;
-    this.componentType = componentType;
     this.internal = internal;
     this.configuration = config;
   }
@@ -60,7 +56,6 @@ export function isDraftWidget(item: any) {
 
 export function createDraftWidget({
   name,
-  componentType,
   config,
   text,
   internal,
@@ -69,7 +64,6 @@ export function createDraftWidget({
     name,
     id: nanoid(),
     text,
-    componentType,
     config: config,
     internal,
   };

@@ -39,7 +39,7 @@ const SelectOptionEditor = (props: SelectOptionEditorProps) => {
         <Dialog.Portal>
           <Dialog.Overlay />
           <Dialog.Content>
-            <div className="h-96 w-96 rounded-lg bg-white p-4 shadow-md">
+            <div className="h-96 w-96 rounded-lg bg-white p-4 shadow">
               <h2 className="mb-2 text-xl font-bold">Edit options</h2>
               <p>编辑选择器选项</p>
             </div>

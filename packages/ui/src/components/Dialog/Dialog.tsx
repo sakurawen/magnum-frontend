@@ -77,7 +77,7 @@ export const DialogContent = React.forwardRef<
       className="dialog-content absolute left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 transform"
       ref={ref}
     >
-      <div className="relative rounded shadow-md">{children}</div>
+      <div className="relative rounded-lg shadow ring-1 ring-gray-blue-100">{children}</div>
     </div>
   ) : null;
 });

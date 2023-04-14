@@ -62,7 +62,7 @@ export const Select = (props: SelectProps) => {
     });
   }, [size]);
 
-  const selectContainerRef = React.useRef<HTMLButtonElement>(null);
+  const selectContainerRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     const handleCloseSelectOption = (e: MouseEvent) => {
@@ -78,13 +78,13 @@ export const Select = (props: SelectProps) => {
   return (
     <SelectOpenCloseContext.Provider value={openClose}>
       <SelectContext.Provider value={reducer}>
-        <button
+        <div
           ref={selectContainerRef}
           role="listbox"
           className={cx('relative z-10 inline-block text-left', className)}
         >
           {children}
-        </button>
+        </div>
       </SelectContext.Provider>
     </SelectOpenCloseContext.Provider>
   );
@@ -105,19 +105,18 @@ export const SelectButton = (props: SelectButtonProps) => {
   const [, setOpen] = React.useContext(SelectOpenCloseContext)!;
   const { children, className } = props;
   return (
-    <div
+    <button
       className={cx(
-        'bg-gray-blue-50 ring-gray-blue-100 flex items-center justify-between ring-1',
+        'bg-gray-blue-50 w-full shadow-sm ring-gray-blue-100 flex items-center justify-between ring-1',
         CONTENT_SIZE_CLASSNAMES[size],
         ROUNDED_SIZE_CLASSNAMES[size],
-        {},
         className,
       )}
       onClick={() => setOpen((open) => !open)}
     >
       <span>{children}</span>
       <Icon className="h-5 w-5" icon="radix-icons:caret-sort" />
-    </div>
+    </button>
   );
 };
 

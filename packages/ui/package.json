@@ -45,6 +45,7 @@
     "typescript": "5.0.2"
   },
   "dependencies": {
+    "@tw-classed/react": "^1.4.4",
     "@types/react": "18.0.28",
     "clsx": "^1.2.1",
     "rollup-plugin-dts": "^5.3.0"

@@ -73,7 +73,7 @@ const Draft = () => {
     <div
       ref={setNodeRef}
       className={cx(
-        'draft-element-insert-layer flex h-full w-full items-center justify-center ',
+        'draft-element-insert-layer relative z-10 flex h-full w-full items-center justify-center ',
         {},
         [
           isOver
@@ -97,16 +97,17 @@ const Draft = () => {
       </h1>
       <div
         ref={draftContainerRef}
-        className="draft-container bg-gray-blue-50 flex flex-1 items-center justify-center"
+        className="draft-container bg-gray-blue-50 relative flex flex-1 items-center justify-center"
       >
-        <div className="h-[86vh] w-[50.625vh] overflow-hidden rounded shadow-md">
+        <div className="bg-grid absolute z-0 h-full w-full opacity-10"></div>
+        <div className="ring-gray-blue-100 h-[86vh] w-[50.625vh] overflow-hidden rounded shadow ring-1">
           {dragItemIsMaterial ? (
             MaterialDroppable
           ) : (
             <div className="h-full w-full overflow-y-auto overflow-x-hidden">
               <div
                 className={cx(
-                  'relative mx-auto min-h-full w-full  bg-white pb-20 shadow-sm',
+                  'relative mx-auto min-h-full w-full  bg-white pb-20 shadow',
                 )}
                 ref={ref}
               >

@@ -3,6 +3,7 @@ import { DraftWidget } from '@/schemas/draft';
 import { useTrackedAppStore } from '@/store';
 import { useSortable } from '@dnd-kit/sortable';
 import { Icon } from '@iconify/react';
+import cx from 'clsx';
 import { PropsWithChildren } from 'react';
 
 type ElementSortableProps = PropsWithChildren<{
@@ -20,7 +21,7 @@ const defaultRect = {
 const ElementSortable = ({ item, children }: ElementSortableProps) => {
   const {
     app: {
-      editor: { currentDragItemType },
+      editor: { currentDragItemType, currentDraftWidgetId },
     },
   } = useTrackedAppStore();
 
@@ -33,7 +34,6 @@ const ElementSortable = ({ item, children }: ElementSortableProps) => {
     transition,
     isDragging,
     listeners,
-    node,
   } = useSortable({
     id: `Element|${item.id}`,
     data: item,

@@ -7,7 +7,7 @@ export type BoxProps = React.PropsWithChildren<{
 export const Box = (props: BoxProps) => {
   const { children, className } = props;
   return (
-    <div className={cx('relative rounded-lg shadow-lg', className)}>
+    <div className={cx('relative rounded-lg shadow', className)}>
       {children}
     </div>
   );

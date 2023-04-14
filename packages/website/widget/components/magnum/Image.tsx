@@ -1,8 +1,8 @@
 import { MaterialSchema } from '@/schemas/material';
 import { Icon } from '@iconify/react';
-import { memo, useEffect, useState } from 'react';
-import { propertyType } from './consts';
 import cx from 'clsx';
+import { memo, useEffect, useState } from 'react';
+import { propertyType } from '../../consts';
 
 type ImageProps = {
   source: string;
@@ -37,7 +37,7 @@ const ImageImpl = (props: ImageProps) => {
         <img
           src={source}
           alt="image"
-          className={cx('shadow-sm', [fill ? '' : 'rounded-sm'])}
+          className={cx('shadow', [fill ? '' : 'rounded-sm'])}
         />
       );
     }
@@ -49,7 +49,7 @@ const ImageImpl = (props: ImageProps) => {
     <div className={cx('transition', [fill ? undefined : 'px-3 py-2'])}>
       <div
         className={cx(
-          'bg-gray-blue-50 flex aspect-video w-full items-center justify-center ring-1 ring-gray-200',
+          'bg-gray-blue-50 flex aspect-video w-full items-center justify-center ring-1 ring-gray-blue-100',
           [!fill && 'rounded-sm'],
         )}
       >
@@ -62,7 +62,6 @@ const ImageImpl = (props: ImageProps) => {
 export const ImageWidgetConfig: MaterialSchema['item'] = {
   name: 'Image',
   text: '图片',
-  componentType: ImageImpl,
   internal: {},
   config: [
     {

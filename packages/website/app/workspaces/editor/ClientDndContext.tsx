@@ -6,7 +6,7 @@ import {
 } from '@/schemas/draft';
 import { MaterialSchema } from '@/schemas/material';
 import { useTrackedAppStore } from '@/store';
-import { materialList } from '@/widget/magnum';
+import { materialList } from '@/widget/list';
 import {
   DndContext,
   DragEndEvent,
@@ -93,7 +93,6 @@ const ClientDndContext = ({ children }: PropsWithChildren) => {
     const { active, over } = e;
     const activeId = active.id as string;
     const overId = over?.id as string;
-    console.log('wuhu');
     if (!activeId || !overId) return;
     const [activeTag, activeUUID] = activeId?.split('|');
     const [overTag, overUUID] = overId?.split('|');

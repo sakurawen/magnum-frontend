@@ -29,7 +29,7 @@ const Navbar = () => {
             <div className="hover:bg-gray-blue-50   group flex   h-full w-80 select-none items-center justify-between border-r  px-4">
               <div className="flex items-center justify-center ">
                 <Icon
-                  className="text-theme-2 mr-2 h-6 w-6"
+                  className="text-theme-500 mr-2 h-6 w-6"
                   icon="iconoir:codepen"
                 />
                 <div>

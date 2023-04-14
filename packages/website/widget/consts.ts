@@ -1,3 +1,7 @@
+import { MaterialSchema } from '@/schemas/material';
+
+export type WidgetSchema = MaterialSchema['item'];
+
 export const propertyType = {
   // 文字输入
   INPUT: 'INPUT',

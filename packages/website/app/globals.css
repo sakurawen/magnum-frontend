@@ -8,7 +8,7 @@ body {
 }
 
 .bg-login {
-  background-image: url(/images/bg-login.jpg);
+  background-image: url(/images/bg-login-old.jpg);
   @apply bg-cover bg-top;
 }
 

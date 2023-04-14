@@ -2,7 +2,7 @@
 import { Control, useHotKey } from '@/hooks/use-hot-key';
 import { DraftWidgetConfigSchema } from '@/schemas/draft';
 import { useTrackedAppStore } from '@/store';
-import { propertyType } from '@/widget/magnum/consts';
+import { propertyType } from '@/widget/consts';
 import { Button, Checkbox, Input, Select, Textarea } from '@magnum/ui';
 import cx from 'clsx';
 import { AnimatePresence, motion } from 'framer-motion';

@@ -1,5 +1,5 @@
 'use client';
-import { materialList } from '@/widget/magnum';
+import { materialList } from '@/widget/list';
 import MaterialDragable from './Dragable';
 import Material from './Material';
 

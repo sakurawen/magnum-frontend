@@ -1,19 +1,8 @@
-import { MaterialSchema } from '@/schemas/material';
-import { Button, ButtonProps } from '@magnum/ui';
-import { propertyType, sizeOptions } from './consts';
+import { WidgetSchema, propertyType, sizeOptions } from '../consts';
 
-const ButtonImpl = (props: ButtonProps) => {
-  return (
-    <div className="px-3 py-2">
-      <Button className="p-2" {...props} />
-    </div>
-  );
-};
-
-export const ButtonWidgetConfig: MaterialSchema['item'] = {
+export const ButtonSchema: WidgetSchema = {
   name: 'Button',
   text: '按钮',
-  componentType: ButtonImpl,
   internal: {
     className: 'w-full',
     tabIndex: -1,
@@ -40,5 +29,3 @@ export const ButtonWidgetConfig: MaterialSchema['item'] = {
     },
   ],
 };
-
-export default ButtonImpl;
