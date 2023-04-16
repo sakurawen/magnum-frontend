@@ -3,7 +3,7 @@ import { Icon } from '@iconify/react';
 import { classed, VariantProps } from '@tw-classed/react';
 
 const InternalButton = classed.button(
-  'relative min-h-[1em] select-none transition',
+  'relative min-h-[1em] select-none  transition',
   'disabled:bg-gray-blue-200 disabled:cursor-not-allowed',
   {
     variants: {
@@ -13,9 +13,8 @@ const InternalButton = classed.button(
         small: 'px-3 py-1 text-xs rounded',
       },
       variant: {
-        primary:
-          'bg-theme-500 hover:bg-theme-600  active:bg-theme-800 text-white',
-        danger: 'bg-red-500 hover:bg-red-600  active:bg-red-700 text-white',
+        primary: 'bg-theme-200 hover:bg-theme-300 active:bg-theme-400 text-gray-800',
+        danger: 'bg-red-100 hover:bg-red-200  active:bg-red-300 text-red-700',
         gray: 'bg-gray-100 hover:bg-gray-200 active:bg-gray-blue-200 text-black',
         custom: '',
       },

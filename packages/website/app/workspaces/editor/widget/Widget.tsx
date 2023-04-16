@@ -49,7 +49,7 @@ const Element = (props: ElementProps) => {
       <div className=" pointer-events-none relative select-none ring-inset">
         <div
           className={cx(
-            'select-ring bg-theme-400/10 ring-theme-500 absolute z-40 h-full w-full rounded ring-2 ring-inset',
+            'select-ring bg-theme-400/10 ring-theme-200 absolute z-40 h-full w-full rounded ring-2 ring-inset',
             [currentDraftWidgetId === item.id ? 'block' : 'hidden'],
           )}
         ></div>

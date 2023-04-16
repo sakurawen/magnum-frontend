@@ -204,7 +204,7 @@ const Login = () => {
       <div className="mb-8 space-x-4 text-sm">
         <button
           className={c('relative inline-block cursor-pointer px-2', {
-            'after:bg-theme-500 after:absolute after:-bottom-2 after:left-0 after:z-0 after:h-0.5 after:w-full after:rounded-sm':
+            'after:bg-theme-200 after:absolute after:-bottom-2 after:left-0 after:z-0 after:h-0.5 after:w-full after:rounded-sm':
               isLoginMode,
           })}
           onClick={() => setFormMode('login')}
@@ -213,7 +213,7 @@ const Login = () => {
         </button>
         <button
           className={c('relative inline-block cursor-pointer px-2', {
-            'after:bg-theme-500 after:absolute after:-bottom-2 after:left-0 after:z-0 after:h-0.5 after:w-full after:rounded-sm':
+            'after:bg-theme-200 after:absolute after:-bottom-2 after:left-0 after:z-0 after:h-0.5 after:w-full after:rounded-sm':
               !isLoginMode,
           })}
           onClick={() => setFormMode('register')}
