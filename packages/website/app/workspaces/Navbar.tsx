@@ -1,61 +1,26 @@
 'use client';
 import { useTrackedAppStore } from '@/store';
 import { Icon } from '@iconify/react';
-import { Button, Input, Menu } from '@magnum/ui';
+import { Menu } from '@magnum/ui';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { startTransition } from 'react';
+import  EditorBar from './EditorBar';
 
 const Navbar = () => {
   const {
-    app: {
-      setNavbarSearch,
-      navbar: { search },
-    },
     user: { logout, id, name },
   } = useTrackedAppStore();
   const router = useRouter();
   const pathname = usePathname();
   const handleLogout = () => {
-    logout();
-    startTransition(() => {
-      router.replace('/login');
+    logout().then(() => {
+      startTransition(() => {
+        router.replace('/login');
+      });
     });
   };
-  const inEditorPage = pathname === '/workspaces/editor';
-  const EditorBar = (
-    <div className="flex flex-1 items-center justify-between px-2 py-1.5">
-      <Input
-        icon={
-          <Icon
-            className="mt-0.5 h-5 w-5 text-gray-400"
-            icon="radix-icons:magnifying-glass"
-          />
-        }
-        value={search}
-        onChange={(value) => setNavbarSearch(value)}
-        placeholder="搜索已建立的页面..."
-        className="!w-72"
-        size="middle"
-      />
-      <div className="flex items-center space-x-2">
-        <Button
-          size="middle"
-          variant="primary"
-          className=" ml-2 flex items-center"
-        >
-          <Icon className="mr-2 h-5 w-5" icon="radix-icons:play" /> 预 览
-        </Button>
-        <Button
-          size="middle"
-          variant="custom"
-          className="flex items-center bg-gray-700 text-white hover:bg-gray-800 active:bg-gray-950"
-        >
-          <Icon icon="mdi:publish" className="mr-2 h-5 w-5" />发 布
-        </Button>
-      </div>
-    </div>
-  );
+  const inEditorPage = pathname.startsWith('/workspaces/editor');
 
   return (
     <nav className="navbar relative z-50 flex h-12 items-center justify-between border-b text-xs  ">
@@ -65,7 +30,7 @@ const Navbar = () => {
             <div className="hover:bg-gray-blue-50   group flex   h-full w-80 select-none items-center justify-between border-r  px-4">
               <div className="flex items-center justify-center ">
                 <Icon
-                  className="text-theme-300 mr-2 h-6 w-6"
+                  className="text-theme-400 mr-2 h-6 w-6"
                   icon="iconoir:codepen"
                 />
                 <div>
@@ -92,19 +57,11 @@ const Navbar = () => {
                 工作空间
               </Link>
             </Menu.Item>
-            <Menu.Item>
-              <Link
-                className="block h-full cursor-default p-2 "
-                href="/workspaces/editor"
-              >
-                编辑器
-              </Link>
-            </Menu.Item>
           </Menu.Items>
         </Menu>
       </div>
       <div className="flex h-full w-full items-center justify-between ">
-        {inEditorPage ? EditorBar : <div></div>}
+        {inEditorPage ? <EditorBar /> : <div></div>}
         <Menu className="border-light h-full border-l ">
           <Menu.Trigger className="hover:bg-gray-blue-50   h-full">
             <div className="group flex h-full  items-center justify-center px-6">

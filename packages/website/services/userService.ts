@@ -16,17 +16,18 @@ export type UserLoginResult = {
 };
 
 export const login = (form: { username: string; password: string }) => {
-  return request.post<
-    any,
-    Service.Response<{
-      token: string;
-      user: UserLoginResult;
-    }>
-  >('/user/login', form);
+  return request.post<any, Service.Response<UserLoginResult>>(
+    '/user/login',
+    form,
+  );
 };
 
 export const validateToken = () => {
   return request.post<any, Service.Response<UserLoginResult>>(
     '/user/validate_token',
   );
+};
+
+export const logout = () => {
+  return request.post('/user/logout');
 };

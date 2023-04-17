@@ -61,16 +61,14 @@ const Login = () => {
     userService
       .login(loginForm)
       .then((res) => {
-        const { token, user } = res.data;
-        localStorage.setItem('token', token);
+        const { id, account, name } = res.data;
         init({
-          token,
-          id: user.id,
-          account: user.account,
-          name: user.name,
+          id,
+          account,
+          name,
         });
         startTransition(() => {
-          router.replace('/workspaces/editor');
+          router.replace('/workspaces');
         });
       })
       .catch((err) => {
@@ -90,9 +88,19 @@ const Login = () => {
     userService
       .register(registerForm)
       .then((res) => {
-        console.log('register result:', res);
+        toast.success('注册成功，自动登录');
+        const { id, account, name } = res.data;
+        init({
+          id,
+          account,
+          name,
+        });
+        startTransition(() => {
+          router.replace('/workspaces');
+        });
       })
       .catch((err) => {
+        toast.error('注册失败，请检查');
         console.error('register fail:', err);
       })
       .finally(() => {
@@ -116,14 +124,6 @@ const Login = () => {
       document.removeEventListener('keydown', keydown);
     };
   }, [loginForm.password, loginForm.username, router]);
-
-  useEffect(() => {
-    if (userID === undefined) {
-      startTransition(() => {
-        router.replace('/workspaces/editor');
-      });
-    }
-  }, [userID]);
 
   const Login = (
     <div className="space-y-5">

@@ -4,7 +4,7 @@ import { CONTENT_SIZE_CLASSNAMES, ROUNDED_SIZE_CLASSNAMES } from '../consts';
 import { classed } from '@tw-classed/react';
 
 const InternalTextarea = classed.textarea(
-  'placeholder:text-theme-content-1/50 block w-full resize-none bg-transparent outline-none focus:outline-none',
+  'placeholder:text-theme-content-1/50 inline-block w-full resize-none bg-transparent outline-none focus:outline-none',
 );
 
 const TextareaWrap = classed.div(
@@ -22,7 +22,7 @@ const TextareaWrap = classed.div(
 
 export type TextareaProps = Pick<
   React.TextareaHTMLAttributes<HTMLTextAreaElement>,
-  'value' | 'rows' | 'className' | 'value' | 'placeholder' | 'tabIndex'
+  'value' | 'rows' | 'className' | 'value' | 'placeholder' | 'tabIndex' | 'id'
 > & {
   size?: ComponentSize;
   className?: string;

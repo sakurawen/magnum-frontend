@@ -10,8 +10,13 @@ import cx from 'clsx';
 import { useEffect, useMemo, useRef } from 'react';
 import WidgetSortable from './widget/Sortable';
 import DraftWidget from './widget/Widget';
+import { useParams } from 'next/navigation';
 
 const Draft = () => {
+  const param = useParams();
+  useEffect(() => {
+    console.log('id:', param.id);
+  }, []);
   const {
     app: {
       setCurrentDraftWidgetId,

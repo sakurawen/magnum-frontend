@@ -1,7 +1,6 @@
+import { userService } from '@/services';
 import { SliceCreator } from '../store';
-
 type InitParams = {
-  token: string;
   id: string;
   name: string;
   account: string;
@@ -9,18 +8,16 @@ type InitParams = {
 
 export type UserSliceState = {
   user: {
-    token?: string;
     name?: string;
     account?: string;
     id?: string;
-    logout(): void;
+    logout(): Promise<void>;
     init(initParams: InitParams): void;
   };
 };
 
 const userSlice: SliceCreator<UserSliceState> = (set, get) => {
   const rawState = {
-    token: undefined,
     name: undefined,
     account: undefined,
     id: undefined,
@@ -28,11 +25,10 @@ const userSlice: SliceCreator<UserSliceState> = (set, get) => {
   return {
     user: {
       ...rawState,
-      init({ id, name, account, token }) {
+      init({ id, name, account }) {
         set(
           (state) => {
             state.user.id = id;
-            state.user.token = token;
             state.user.account = account;
             state.user.name = name;
           },
@@ -41,20 +37,26 @@ const userSlice: SliceCreator<UserSliceState> = (set, get) => {
         );
       },
       logout: () => {
-        localStorage.removeItem('token');
-        set(
-          (state) => {
-            state.user.token = undefined;
-            state.user.id = '';
-            state.user.account = '';
-            state.user.name = '';
-          },
-          false,
-          'user/logout',
-        );
-        setTimeout(() => {
-          get().app.resetAppState();
-        }, 500);
+        return new Promise<void>((resolve, reject) => {
+          userService
+            .logout()
+            .then(() => {
+              set(
+                (state) => {
+                  state.user.id = '';
+                  state.user.account = '';
+                  state.user.name = '';
+                },
+                false,
+                'user/logout',
+              );
+              setTimeout(() => {
+                get().app.resetAppState();
+              }, 500);
+              resolve();
+            })
+            .catch(reject);
+        });
       },
     },
   };

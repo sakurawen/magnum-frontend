@@ -171,7 +171,7 @@ const Configuration = () => {
       })}
       <div className="mt-4 px-4">
         <Button
-          className="w-full"
+          className="w-full py-2.5"
           variant="danger"
           onClick={() => handleDeleteDraftWidget(currentDraftWidgetId)}
         >

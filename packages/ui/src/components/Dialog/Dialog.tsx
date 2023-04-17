@@ -22,8 +22,15 @@ export const Dialog = (props: DialogProps) => {
   );
 };
 
-export const DialogOverlay = React.forwardRef<HTMLDivElement>((_, ref) => {
+type DialogOverlayProps = {
+  className?: string;
+};
+export const DialogOverlay = React.forwardRef<
+  HTMLDivElement,
+  DialogOverlayProps
+>((props, ref) => {
   const { open, onOpenChange } = useDialogContext();
+  const { className } = props;
   const handleClose = () => {
     onOpenChange(false);
   };
@@ -31,7 +38,10 @@ export const DialogOverlay = React.forwardRef<HTMLDivElement>((_, ref) => {
     <div
       onClick={handleClose}
       ref={ref}
-      className="animate-fade-in fixed left-0 top-0 z-40 h-full w-full bg-black/60"
+      className={cx(
+        'animate-fade-in fixed left-0 top-0 z-40 h-full w-full ',
+        className ? className : 'bg-black/60',
+      )}
     ></div>
   ) : null;
 });
@@ -48,9 +58,12 @@ export const DialogPortal = React.forwardRef<HTMLDivElement, DialogPortalProps>(
     return container
       ? createPortal(
           <div
-            className={cx('dialog-portal-container fixed left-0 top-0 z-50', {
-              'h-full w-full': open,
-            })}
+            className={cx(
+              'dialog-portal-container fixed left-0 top-0 z-[9999]',
+              {
+                'h-full w-full': open,
+              },
+            )}
             ref={ref}
           >
             {children}
@@ -77,7 +90,7 @@ export const DialogContent = React.forwardRef<
       className="dialog-content absolute left-1/2 top-1/2 z-50 -translate-x-1/2 -translate-y-1/2 transform"
       ref={ref}
     >
-      <div className="relative rounded-lg shadow ring-1 ring-gray-blue-100">{children}</div>
+      <div className="relative">{children}</div>
     </div>
   ) : null;
 });

@@ -3,6 +3,7 @@ import Navbar from './Navbar';
 type WorkspacesLayoutProps = {
   children: React.ReactNode;
 };
+
 export const metadata = {
   title: 'Magnum Form - Workspaces',
   description: 'Magnum Form Workspaces',

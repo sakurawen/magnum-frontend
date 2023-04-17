@@ -10,18 +10,15 @@ const AutoLoginEffect = () => {
   } = useTrackedAppStore();
   const router = useRouter();
   useEffect(() => {
-    const token = localStorage.getItem('token');
-    validateToken(token)
+    validateToken()
       .then((res) => {
         init({
           id: res.id,
           account: res.account,
           name: res.name,
-          token: token || '',
         });
       })
       .catch(() => {
-        logout();
         startTransition(() => {
           router.replace('/login');
         });

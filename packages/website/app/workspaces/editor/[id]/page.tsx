@@ -1,9 +1,14 @@
-import Configuration from '@/app/workspaces/editor/configuration/Configuration';
-import Draft from '@/app/workspaces/editor/Draft';
-import MaterialList from '@/app/workspaces/editor/material/MaterialList';
+import Configuration from '@/app/workspaces/editor/[id]/configuration/Configuration';
+import Draft from '@/app/workspaces/editor/[id]/Draft';
+import MaterialList from '@/app/workspaces/editor/[id]/material/MaterialList';
 import ClientDndContext from './ClientDndContext';
 
-const Editor = () => {
+const Editor = (props: {
+  params: {
+    id: string;
+  };
+}) => {
+  const id = props.params.id;
   return (
     <ClientDndContext>
       <div className="relative h-full">

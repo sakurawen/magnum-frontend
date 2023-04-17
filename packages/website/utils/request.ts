@@ -5,20 +5,11 @@ const HTTP_STATUS = {
   OK: 200,
 };
 
-const request = axios.create({
+export const request = axios.create({
   baseURL: '/api',
 });
 
-let token: string | null;
-if (typeof localStorage !== 'undefined') {
-  token = localStorage.getItem('token');
-}
-
 request.interceptors.request.use((config) => {
-  if (!token && typeof localStorage !== 'undefined') {
-    token = localStorage.getItem('token');
-  }
-  config.headers.set('Authorization', token);
   return config;
 });
 

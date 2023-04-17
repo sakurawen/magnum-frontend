@@ -34,7 +34,14 @@ const InputWrap = classed.div(
 
 export type InputProps = Pick<
   React.InputHTMLAttributes<HTMLInputElement>,
-  'className' | 'placeholder' | 'disabled' | 'value' | 'type' | 'tabIndex'
+  | 'className'
+  | 'placeholder'
+  | 'disabled'
+  | 'value'
+  | 'type'
+  | 'tabIndex'
+  | 'id'
+  | 'autoComplete'
 > & {
   size?: ComponentSize;
   fill?: boolean;

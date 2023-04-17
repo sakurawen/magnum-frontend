@@ -34,6 +34,7 @@ export type AppSliceState = {
     setDraftWidgets(elements: DraftWidget[]): void;
     setNavbarSearch(val: string): void;
     resetAppState(): void;
+    resetEditor(): void;
     setCanvasSize(size: { height: number; width: number }): void;
   };
 };
@@ -93,6 +94,17 @@ const appSlice: SliceCreator<AppSliceState> = (set, get) => {
           'app/delDraftWidgetWithId',
         );
         return idx;
+      },
+      resetEditor() {
+        set(
+          (state) => {
+            state.app.editor.draftWidgets = [];
+            (state.app.editor.currentDraftWidgetId = null),
+              (state.app.editor.currentDragItemType = undefined);
+          },
+          false,
+          'app/resetEditor',
+        );
       },
       resetAppState() {
         set(

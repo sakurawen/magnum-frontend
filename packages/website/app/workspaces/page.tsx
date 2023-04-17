@@ -1,5 +1,11 @@
+import WorkspaceDashboard from './Dashboard';
+
 const Workspaces = () => {
-  return <div className="p-2">this is Workspaces</div>;
+  return (
+    <div className="workspaces h-full">
+      <WorkspaceDashboard />
+    </div>
+  );
 };
 
 export default Workspaces;
