@@ -12,21 +12,22 @@ import { VideoSchema } from './schema/Video';
 import { InputSchema } from './schema/Input';
 
 const widgetSchemaMap = {
-  button: ButtonSchema,
-  checkbox: CheckboxSchema,
-  divider: DividerSchema,
-  image: ImageSchema,
-  input: InputSchema,
-  p: ParagraphSchema,
-  title: TitleSchema,
-  textarea: TextareaSchema,
-  video: VideoSchema,
-  space: SpaceSchema,
-  select: SelectSchema,
+  Button: ButtonSchema,
+  Checkbox: CheckboxSchema,
+  Divider: DividerSchema,
+  Image: ImageSchema,
+  Input: InputSchema,
+  Paragraph: ParagraphSchema,
+  Title: TitleSchema,
+  Textarea: TextareaSchema,
+  Video: VideoSchema,
+  Space: SpaceSchema,
+  Select: SelectSchema,
 };
+export type WidgetSchemaName = keyof typeof widgetSchemaMap;
 
 export const getWidgetSchema = (
-  widgetName: keyof typeof widgetSchemaMap,
+  widgetName: WidgetSchemaName,
 ): MaterialSchema['item'] => {
   return widgetSchemaMap[widgetName];
 };

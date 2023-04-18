@@ -3,7 +3,7 @@ import { Icon } from '@iconify/react';
 import { classed, VariantProps } from '@tw-classed/react';
 
 const InternalButton = classed.button(
-  'relative min-h-[1em] select-none  transition',
+  'relative min-h-[1em] select-none whitespace-nowrap transition',
   'disabled:bg-gray-blue-200 disabled:cursor-not-allowed',
   {
     variants: {

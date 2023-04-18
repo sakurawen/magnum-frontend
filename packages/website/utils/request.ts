@@ -7,6 +7,7 @@ const HTTP_STATUS = {
 
 export const request = axios.create({
   baseURL: '/api',
+  withCredentials:true
 });
 
 request.interceptors.request.use((config) => {

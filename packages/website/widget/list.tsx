@@ -8,32 +8,32 @@ export const materialList: MaterialSchema[] = [
   {
     type: 'Form',
     preview: <Icon className="h-6 w-6" icon="ic:baseline-title" />,
-    item: getWidgetSchema('title'),
+    item: getWidgetSchema('Title'),
   },
   {
     type: 'Form',
     preview: <Icon className="h-6 w-6" icon="bi:text-paragraph" />,
-    item: getWidgetSchema('p'),
+    item: getWidgetSchema('Paragraph'),
   },
   {
     type: 'Form',
     preview: <Icon icon="radix-icons:button" className="h-6 w-6" />,
-    item: getWidgetSchema('button'),
+    item: getWidgetSchema('Button'),
   },
   {
     type: 'Form',
     preview: <Icon icon="ri:checkbox-multiple-line" className="h-6 w-6" />,
-    item: getWidgetSchema('checkbox'),
+    item: getWidgetSchema('Checkbox'),
   },
   {
     type: 'Form',
     preview: <Icon className="h-6 w-6" icon="bi:textarea-resize" />,
-    item: getWidgetSchema('textarea'),
+    item: getWidgetSchema('Textarea'),
   },
   {
     type: 'Form',
     preview: <Icon icon="bi:input-cursor-text" className="h-6 w-6" />,
-    item: getWidgetSchema('input'),
+    item: getWidgetSchema('Input'),
   },
   {
     type: 'Form',
@@ -43,28 +43,28 @@ export const materialList: MaterialSchema[] = [
         icon="radix-icons:divider-horizontal"
       />
     ),
-    item: getWidgetSchema('divider'),
+    item: getWidgetSchema('Divider'),
   },
   {
     type: 'Media',
     preview: <Icon className="h-6 w-6" icon="radix-icons:image" />,
-    item: getWidgetSchema('image'),
+    item: getWidgetSchema('Image'),
   },
   {
     type: 'Media',
     preview: <Icon className="h-6 w-6" icon="radix-icons:video" />,
-    item: getWidgetSchema('video'),
+    item: getWidgetSchema('Video'),
   },
   {
     type: 'Form',
     preview: (
       <Icon className="h-6 w-6" icon="material-symbols:space-bar-rounded" />
     ),
-    item: getWidgetSchema('space'),
+    item: getWidgetSchema('Space'),
   },
   {
     type: 'Form',
     preview: <Icon className="h-6 w-6" icon="iconoir:list-select" />,
-    item: getWidgetSchema('select'),
+    item: getWidgetSchema('Select'),
   },
 ];

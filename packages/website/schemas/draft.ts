@@ -1,6 +1,7 @@
 import { immerable } from 'immer';
 import { nanoid } from 'nanoid';
 import { z } from 'zod';
+import { WidgetSchemaName, getWidgetSchema } from '@/widget/utils';
 
 export const DraftWidgetConfig = z.object({
   key: z.string(),
@@ -35,12 +36,7 @@ export class DraftWidget {
   value: any;
   configuration;
   internal;
-  constructor({
-    id,
-    name,
-    config,
-    internal,
-  }: DraftWidgetSchema) {
+  constructor({ id, name, config, internal }: DraftWidgetSchema) {
     this.id = id;
     this.name = name;
     this.internal = internal;
@@ -54,18 +50,11 @@ export function isDraftWidget(item: any) {
   return testDraftWidget.parse(item);
 }
 
-export function createDraftWidget({
-  name,
-  config,
-  text,
-  internal,
-}: DraftWidgetSchema) {
+export function createDraftWidget(name: string) {
+  const schema = getWidgetSchema(name as WidgetSchemaName);
   const properties = {
-    name,
     id: nanoid(),
-    text,
-    config: config,
-    internal,
+    ...schema,
   };
   return new DraftWidget(properties);
 }

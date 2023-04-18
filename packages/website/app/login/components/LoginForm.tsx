@@ -125,6 +125,21 @@ const Login = () => {
     };
   }, [loginForm.password, loginForm.username, router]);
 
+  useEffect(() => {
+    const checked = localStorage.getItem('login-checked');
+    if (!checked) return;
+    setChecked(true);
+  }, []);
+
+  const handleCheck = (val: boolean) => {
+    if (val) {
+      localStorage.setItem('login-checked', 'true');
+    } else {
+      localStorage.removeItem('login-checked');
+    }
+    setChecked(val);
+  };
+
   const Login = (
     <div className="space-y-5">
       <Input
@@ -231,7 +246,7 @@ const Login = () => {
             id="YesLogin"
             className="mr-1"
             value={checked}
-            onChange={(val) => setChecked(val)}
+            onChange={(val) => handleCheck(val)}
           />
           <span className="select-none">
             登录注册即同意Magnum《隐私政策》及《服务协议》

@@ -17,7 +17,7 @@ export const InputSchema: WidgetSchema = {
     },
     {
       key: 'placeholder',
-      value: '随便写点什么吧...',
+      value: 'Input Placeholder',
       type: propertyType.INPUT,
       text: '提示文本',
     },

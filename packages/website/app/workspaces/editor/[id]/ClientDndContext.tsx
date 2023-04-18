@@ -86,7 +86,7 @@ const ClientDndContext = ({ children }: PropsWithChildren) => {
 
   const draftDragEnd = (e: DragStartEvent) => {
     const item = e.active.data.current as DraftWidgetSchema;
-    addDraftWidget(createDraftWidget(item));
+    addDraftWidget(createDraftWidget(item.name));
   };
 
   const sortDraft = (e: DragEndEvent) => {

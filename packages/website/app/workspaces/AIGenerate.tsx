@@ -28,14 +28,13 @@ const AIGenerate = (props: AIGenerateProps) => {
                 输入需求：
               </label>
               <Textarea
-                size="large"
                 rows={10}
                 placeholder="详细描述你的需求，让AI自动帮你生成表单。"
                 id="GTPPrompt"
                 value={prompt}
                 onChange={setPrompt}
               />
-              <Button size="large" className="mt-4 w-full">
+              <Button  size='large' className="mt-4 w-full">
                 生 成
               </Button>
             </div>

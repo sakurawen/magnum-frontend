@@ -105,7 +105,7 @@ const WorkspaceDashboard = () => {
             />
           </div>
           <div className="mx-2 text-left">
-            <p className="mb-0.5 font-bold leading-none">新建表单</p>
+            <p className="mb-0.5 leading-none">新建表单</p>
             <span className="text-xs leading-none text-gray-400">
               New Magnum Form
             </span>
@@ -115,18 +115,18 @@ const WorkspaceDashboard = () => {
           </div>
         </Button>
       </div>
-      <div className="form-list mt-4 flex flex-wrap">
+      <div className="form-list mt-6  grid grid-cols-2 gap-4 px-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
         {list?.data.map((form) => {
           return (
-            <div
+            <a
               key={form.id}
               onDoubleClick={() => handleEditForm(form.id)}
               onClick={() => setCurrentSelectId(form.id)}
-              className="w-1/2 select-none p-2 sm:w-1/2 md:w-1/3 lg:w-1/4 2xl:w-1/6"
+              className="relative h-[60px]  select-none pt-[70%]"
             >
               <div
                 className={cx(
-                  'w-full  overflow-hidden  rounded bg-white  ring-1 hover:shadow hover:ring-[2px]',
+                  'absolute left-0 top-0 flex h-full w-full flex-col overflow-hidden rounded bg-white ring-1 hover:shadow hover:ring-[2px]',
                   [
                     form.id === currentSelectId
                       ? 'ring-theme-400 hover:ring-theme-400 ring-2'
@@ -134,8 +134,8 @@ const WorkspaceDashboard = () => {
                   ],
                 )}
               >
-                <div className="bg-gray-blue-50 h-32"></div>
-                <div className="form-info flex items-start p-2">
+                <div className="relative h-full flex-grow bg-gray-100"></div>
+                <div className="form-info flex w-full items-start px-2 py-2">
                   <div className="mt-1 px-2">
                     <Icon
                       className="text-theme-400 h-8 w-8"
@@ -150,7 +150,7 @@ const WorkspaceDashboard = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </a>
           );
         })}
       </div>

@@ -10,20 +10,25 @@ import cx from 'clsx';
 import { useEffect, useMemo, useRef } from 'react';
 import WidgetSortable from './widget/Sortable';
 import DraftWidget from './widget/Widget';
-import { useParams } from 'next/navigation';
 
-const Draft = () => {
-  const param = useParams();
-  useEffect(() => {
-    console.log('id:', param.id);
-  }, []);
+type DraftProps = {
+  data: App.FormTemplate;
+};
+const Draft = (props: DraftProps) => {
   const {
     app: {
       setCurrentDraftWidgetId,
       setCanvasSize,
-      editor: { draftWidgets, currentDragItemType },
+      setEditorFormTemplate,
+      editor: { draftWidgets, currentDragItemType, form },
     },
   } = useTrackedAppStore();
+
+  const { data } = props;
+  useEffect(() => {
+    console.log('edit data:', data);
+    setEditorFormTemplate(data);
+  }, [data]);
 
   const dragItemIsMaterial = currentDragItemType === 'Material';
 
@@ -98,7 +103,7 @@ const Draft = () => {
   return (
     <div className="flex h-full w-full flex-col">
       <h1 className=" border-theme-border z-10  select-none border-b p-2 text-center text-sm">
-        草稿
+        草稿 / {form?.title}
       </h1>
       <div
         ref={draftContainerRef}

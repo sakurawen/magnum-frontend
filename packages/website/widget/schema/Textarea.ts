@@ -16,7 +16,7 @@ export const TextareaSchema: WidgetSchema = {
     },
     {
       key: 'placeholder',
-      value: '随便写点什么吧...',
+      value: 'Textarea Placeholder',
       type: propertyType.TEXTAREA,
       text: '提示文本',
     },

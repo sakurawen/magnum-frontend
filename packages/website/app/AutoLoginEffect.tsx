@@ -1,13 +1,13 @@
 'use client';
 import { useTrackedAppStore } from '@/store';
 import { validateToken } from '@/utils';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { startTransition, useEffect } from 'react';
-
 const AutoLoginEffect = () => {
   const {
     user: { init, logout },
   } = useTrackedAppStore();
+  const pathname = usePathname();
   const router = useRouter();
   useEffect(() => {
     validateToken()
@@ -17,6 +17,9 @@ const AutoLoginEffect = () => {
           account: res.account,
           name: res.name,
         });
+        if (pathname === '/login') {
+          router.push('/workspaces');
+        }
       })
       .catch(() => {
         startTransition(() => {

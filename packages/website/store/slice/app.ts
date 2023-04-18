@@ -1,5 +1,7 @@
 import { SliceCreator } from '../store';
 import { DraftWidget } from '@/schemas/draft';
+import { formService } from '@/services';
+import { createDraftWidget } from '@/schemas/draft';
 
 export type AppSliceState = {
   app: {
@@ -7,6 +9,8 @@ export type AppSliceState = {
       search: string;
     };
     editor: {
+      form: App.FormTemplate['form'] | null;
+      template: App.FormTemplate['template'] | null;
       canvas: {
         height: number;
         width: number;
@@ -35,7 +39,10 @@ export type AppSliceState = {
     setNavbarSearch(val: string): void;
     resetAppState(): void;
     resetEditor(): void;
+    release(): void;
+    setEditorFormTemplate(formTemplate: App.FormTemplate): void;
     setCanvasSize(size: { height: number; width: number }): void;
+    initTemplate(): void;
   };
 };
 const appSlice: SliceCreator<AppSliceState> = (set, get) => {
@@ -44,6 +51,8 @@ const appSlice: SliceCreator<AppSliceState> = (set, get) => {
       search: '',
     },
     editor: {
+      form: null,
+      template: null,
       canvas: {
         height: 0,
         width: 0,
@@ -57,6 +66,52 @@ const appSlice: SliceCreator<AppSliceState> = (set, get) => {
   return {
     app: {
       ...rawAppState,
+      initTemplate() {
+        const { form, template } = get().app.editor;
+      },
+      release() {
+        const { form, draftWidgets } = get().app.editor;
+        if (form === null) {
+          return;
+        }
+        const data = {
+          form_id: form.id,
+          fields: draftWidgets.map((field, fi) => {
+            return {
+              field_type: field.name,
+              field_name: field.name,
+              order_index: fi,
+              config: field.configuration.map((c, i) => ({
+                field_id: field.id,
+                key: c.key,
+                text: c.text,
+                type: c.type,
+                value: JSON.stringify(c.value),
+                json_string_value: JSON.stringify(c.value),
+                order_index: i,
+              })),
+            };
+          }),
+        };
+        formService
+          .releaseForm(data)
+          .then((res) => {
+            console.log('发布成功：', data);
+          })
+          .catch((err) => {
+            console.log('发布失败:', err);
+          });
+      },
+      setEditorFormTemplate(formTemplate: App.FormTemplate) {
+        set(
+          (state) => {
+            state.app.editor.form = formTemplate.form;
+            state.app.editor.template = formTemplate.template;
+          },
+          false,
+          'app/setEditorForm',
+        );
+      },
       setCanvasSize(size) {
         set((state) => {
           state.app.editor.canvas.width = size.width;
