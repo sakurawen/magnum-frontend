@@ -3,8 +3,8 @@ import { DraftWidget } from '@/schemas/draft';
 import { MaterialSchema } from '@/schemas/material';
 import { DragOverlay } from '@dnd-kit/core';
 import { createPortal } from 'react-dom';
-import Material from './material/Material';
-import Widget from './widget/Widget';
+import Material from './Materials/Material';
+import Widget from './Widgets/Widget';
 
 type DragPreviewProps = {
   preview:

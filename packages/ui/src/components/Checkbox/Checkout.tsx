@@ -38,6 +38,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
           />
           <input
             id={id}
+            ref={ref}
             className="hidden"
             checked={value}
             onChange={(e) => onChange?.(e.target.checked)}

@@ -8,8 +8,8 @@ import {
 } from '@dnd-kit/sortable';
 import cx from 'clsx';
 import { useEffect, useMemo, useRef } from 'react';
-import WidgetSortable from './widget/Sortable';
-import DraftWidget from './widget/Widget';
+import WidgetSortable from './Widgets/Sortable';
+import DraftWidget from './Widgets/Widget';
 
 type DraftProps = {
   data: App.FormTemplate;
@@ -20,14 +20,15 @@ const Draft = (props: DraftProps) => {
       setCurrentDraftWidgetId,
       setCanvasSize,
       setEditorFormTemplate,
+      initTemplate,
       editor: { draftWidgets, currentDragItemType, form },
     },
   } = useTrackedAppStore();
 
   const { data } = props;
   useEffect(() => {
-    console.log('edit data:', data);
     setEditorFormTemplate(data);
+    initTemplate();
   }, [data]);
 
   const dragItemIsMaterial = currentDragItemType === 'Material';

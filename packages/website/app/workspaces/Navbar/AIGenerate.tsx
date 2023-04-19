@@ -2,6 +2,7 @@
 import { Icon } from '@iconify/react';
 import { Dialog, Textarea, Button } from '@magnum/ui';
 import { useState } from 'react';
+import { openaiService } from '@/services';
 
 type AIGenerateProps = {
   open: boolean;
@@ -9,6 +10,11 @@ type AIGenerateProps = {
 };
 const AIGenerate = (props: AIGenerateProps) => {
   const [prompt, setPrompt] = useState('');
+  const handleGenerate = () => {
+    openaiService.test(prompt).then((res) => {
+      console.log(res);
+    });
+  };
   return (
     <Dialog {...props}>
       <Dialog.Portal>
@@ -34,7 +40,11 @@ const AIGenerate = (props: AIGenerateProps) => {
                 value={prompt}
                 onChange={setPrompt}
               />
-              <Button  size='large' className="mt-4 w-full">
+              <Button
+                onClick={handleGenerate}
+                size="large"
+                className="mt-4 w-full cursor-default"
+              >
                 生 成
               </Button>
             </div>

@@ -1,7 +1,8 @@
 import { SliceCreator } from '../store';
 import { DraftWidget } from '@/schemas/draft';
 import { formService } from '@/services';
-import { createDraftWidget } from '@/schemas/draft';
+import { transformDraftWidget, DraftWidgetConfigSchema } from '@/schemas/draft';
+import { AxiosResponse } from 'axios';
 
 export type AppSliceState = {
   app: {
@@ -39,10 +40,11 @@ export type AppSliceState = {
     setNavbarSearch(val: string): void;
     resetAppState(): void;
     resetEditor(): void;
-    release(): void;
+    release(): Promise<Service.Response<App.FormTemplate['template']>>;
     setEditorFormTemplate(formTemplate: App.FormTemplate): void;
     setCanvasSize(size: { height: number; width: number }): void;
     initTemplate(): void;
+    parserTemplate(template: App.FormTemplate['template']): void;
   };
 };
 const appSlice: SliceCreator<AppSliceState> = (set, get) => {
@@ -67,12 +69,31 @@ const appSlice: SliceCreator<AppSliceState> = (set, get) => {
     app: {
       ...rawAppState,
       initTemplate() {
-        const { form, template } = get().app.editor;
+        const { template } = get().app.editor;
+        const result = template?.fields.map((field) => {
+          return transformDraftWidget(field, template.configs);
+        });
+        if (result) {
+          get().app.setDraftWidgets(result);
+        }
+      },
+      parserTemplate(template) {
+        const { currentDraftWidgetId, draftWidgets } = get().app.editor;
+        const selectIndex = draftWidgets.findIndex(
+          (i) => i.id === currentDraftWidgetId,
+        );
+        const result = template.fields.map((field) => {
+          return transformDraftWidget(field, template.configs);
+        });
+        get().app.setDraftWidgets(result);
+        if (selectIndex !== -1) {
+          get().app.setCurrentDraftWidgetIdWithIndex(selectIndex);
+        }
       },
       release() {
         const { form, draftWidgets } = get().app.editor;
         if (form === null) {
-          return;
+          return Promise.reject();
         }
         const data = {
           form_id: form.id,
@@ -93,14 +114,7 @@ const appSlice: SliceCreator<AppSliceState> = (set, get) => {
             };
           }),
         };
-        formService
-          .releaseForm(data)
-          .then((res) => {
-            console.log('发布成功：', data);
-          })
-          .catch((err) => {
-            console.log('发布失败:', err);
-          });
+        return formService.releaseForm(data);
       },
       setEditorFormTemplate(formTemplate: App.FormTemplate) {
         set(

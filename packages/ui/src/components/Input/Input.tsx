@@ -46,7 +46,7 @@ export type InputProps = Pick<
   size?: ComponentSize;
   fill?: boolean;
   icon?: React.ReactElement;
-  onChange: (val: string) => void;
+  onChange?: (val: string) => void;
 };
 
 /**
@@ -71,7 +71,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         <InternalInput
           {...restProps}
           size={size}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => onChange?.(e.target.value)}
           className={props.className}
           ref={ref}
         />

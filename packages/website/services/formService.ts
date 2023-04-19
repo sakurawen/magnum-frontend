@@ -29,5 +29,8 @@ type ReleaseFormData = {
   }>;
 };
 export const releaseForm = (form: ReleaseFormData) => {
-  return request.post('/form/release', form);
+  return request.post<any, Service.Response<App.FormTemplate['template']>>(
+    '/form/release',
+    form,
+  );
 };

@@ -1,14 +1,13 @@
-import { propertyType, WidgetSchema } from "../consts";
+import { propertyType, WidgetSchema } from '../consts';
 
-export const ParagraphSchema:WidgetSchema= {
+export const ParagraphSchema: WidgetSchema = {
   name: 'Paragraph',
   text: '文本段落',
   internal: {},
   config: [
     {
       key: 'text',
-      value:
-        'Lorem ipsum dolor sit amet consectetur adipisicing elit. Quas ut aliquid, aperiam accusamus, adipisci ab, quod veniam illo reprehenderit nulla modi corporis perspiciatis. Deleniti totam architecto laborum perferendis laboriosam voluptas.',
+      value: `初めてのルーブルは,なんてことは ,なかったわ,私だけのモナリザ もうとっくに出会ってたから。初めてあなたを見た,あの日動き出した歯車 止められない喪失の予感, もういっぱいあるけれど もう一つ増やしましょう。`,
       text: '文本',
       type: propertyType.TEXTAREA,
     },

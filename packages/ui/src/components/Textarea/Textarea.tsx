@@ -1,6 +1,4 @@
-import cx from 'clsx';
 import * as React from 'react';
-import { CONTENT_SIZE_CLASSNAMES, ROUNDED_SIZE_CLASSNAMES } from '../consts';
 import { classed } from '@tw-classed/react';
 
 const InternalTextarea = classed.textarea(
@@ -26,17 +24,16 @@ export type TextareaProps = Pick<
 > & {
   size?: ComponentSize;
   className?: string;
-  onChange: (val: string) => void;
+  onChange?: (val: string) => void;
 };
 
 export const Textarea = React.forwardRef<HTMLTextAreaElement, TextareaProps>(
   (props, ref) => {
-    const { className, size = 'middle', value, onChange, ...restProps } = props;
+    const { className, size = 'middle', onChange, ...restProps } = props;
     return (
       <TextareaWrap size={size} className={className}>
         <InternalTextarea
-          value={value}
-          onChange={(e) => onChange(e.target.value)}
+          onChange={(e) => onChange?.(e.target.value)}
           {...restProps}
           ref={ref}
         />

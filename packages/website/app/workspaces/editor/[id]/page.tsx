@@ -1,32 +1,10 @@
-import Configuration from '@/app/workspaces/editor/[id]/configuration/Configuration';
+import Configuration from '@/app/workspaces/editor/[id]/Configurations/Configuration';
 import Draft from '@/app/workspaces/editor/[id]/Draft';
-import MaterialList from '@/app/workspaces/editor/[id]/material/MaterialList';
-import ClientDndContext from './ClientDndContext';
-import { cookies } from 'next/headers';
-import { request } from '@/utils/request';
-import { Suspense } from 'react';
-import { proxyBaseUrl } from '@/consts';
+import MaterialList from '@/app/workspaces/editor/[id]/Materials/MaterialList';
 import { redirect } from 'next/navigation';
-
-const getFormDate = async (id: string) => {
-  const cookie = cookies().toString();
-  try {
-    const result = await request.post<any, Service.Response<App.FormTemplate>>(
-      proxyBaseUrl + '/form/temp',
-      {
-        id,
-      },
-      {
-        headers: {
-          Cookie: cookie,
-        },
-      },
-    );
-    return result;
-  } catch (err) {
-    console.error('获取表单信息失败:', err);
-  }
-};
+import { Suspense } from 'react';
+import ClientDndContext from './ClientDndContext';
+import { getFormDate } from '@/utils/server-only';
 
 const Editor = async (props: {
   params: {

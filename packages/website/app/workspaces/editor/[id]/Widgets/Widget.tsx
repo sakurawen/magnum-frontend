@@ -1,28 +1,14 @@
 'use client';
 import { DraftWidget } from '@/schemas/draft';
 import { useTrackedAppStore } from '@/store';
-import { propertyType } from '@/widget/consts';
-import cx from 'clsx';
+import { getFormComponentProperties } from '@/utils/form';
 import * as MagnumImpl from '@/widget/components/magnum';
-import { useEffect } from 'react';
+import cx from 'clsx';
+
 type MagnumImplKeys = keyof typeof MagnumImpl;
 type ElementProps = {
   item: DraftWidget;
   className?: string;
-};
-
-const getProperties = (conf: DraftWidget['configuration']) => {
-  const properties: Record<string, any> = {};
-  for (let idx in conf) {
-    const property = conf[idx];
-    if (property.type === propertyType.SELECT) {
-      const option = property.value;
-      properties[property.key] = option.value;
-      continue;
-    }
-    properties[property.key] = property.value;
-  }
-  return properties;
 };
 
 const Element = (props: ElementProps) => {
@@ -38,7 +24,9 @@ const Element = (props: ElementProps) => {
     setCurrentDraftWidgetId(id);
   };
 
-  const ElementComponent = MagnumImpl[item.name as MagnumImplKeys] as React.ElementType;
+  const ElementComponent = MagnumImpl[
+    item.name as MagnumImplKeys
+  ] as React.ElementType;
 
   return (
     <div
@@ -55,7 +43,7 @@ const Element = (props: ElementProps) => {
         ></div>
         <ElementComponent
           {...item.internal}
-          {...getProperties(item.configuration)}
+          {...getFormComponentProperties(item.configuration)}
           className={cx(item.internal.className, className)}
         />
       </div>
