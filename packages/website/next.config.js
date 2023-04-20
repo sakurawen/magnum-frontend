@@ -11,6 +11,10 @@ const nextConfig = {
           source: '/api/:path*',
           destination: 'http://localhost:9009/:path*',
         },
+        {
+          source: '/openai/:path*',
+          destination: 'http://localhost:3670/:path*',
+        },
       ],
     };
   },

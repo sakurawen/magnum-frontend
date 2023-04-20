@@ -24,11 +24,11 @@ export const SelectSchema: WidgetSchema = {
       key: 'options',
       value: [
         {
-          label: 'option1',
+          text: 'option1',
           value: 'option1',
         },
         {
-          label: 'option2',
+          text: 'option2',
           value: 'option2',
         },
       ],

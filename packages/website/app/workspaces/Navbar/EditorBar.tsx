@@ -38,7 +38,7 @@ const EditorBar = () => {
           className="flex cursor-default items-center bg-gray-50 ring-1 ring-gray-200 hover:bg-gray-100 active:bg-gray-200"
         >
           <Icon className="mr-2 h-5 w-5" icon="logos:openai-icon" />
-          <div>Magnum Form AI Generate</div>
+          <div>Magnum AI Generate</div>
         </Button>
         <div className="flex items-center space-x-2">
           <Button

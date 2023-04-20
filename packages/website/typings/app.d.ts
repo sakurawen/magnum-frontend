@@ -63,4 +63,41 @@ declare namespace App {
     create_at: string;
     is_deleted: 0 | 1;
   };
+  type AISchemaMap = {
+    Input: {
+      type: 'Input';
+      label: string;
+      placeholder: string;
+    };
+    Textarea: {
+      type: 'Textarea';
+      label: string;
+      placeholder: string;
+    };
+    Select: {
+      type: 'Select';
+      label: string;
+      options: Array<{
+        text: string;
+        value: any;
+      }>;
+    };
+    Checkbox: {
+      type: 'Checkbox';
+      text: string;
+    };
+    Button: {
+      type: 'Button';
+      text: string;
+    };
+    Title: {
+      type: 'Title';
+      text: string;
+    };
+    Paragraph: {
+      type: 'Paragraph';
+      text: string;
+    };
+  };
+  type AISchema = AISchemaMap[keyof AISchemaMap];
 }

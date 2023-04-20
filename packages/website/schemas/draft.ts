@@ -2,6 +2,7 @@ import { immerable } from 'immer';
 import { nanoid } from 'nanoid';
 import { z } from 'zod';
 import { WidgetSchemaName, getWidgetSchema } from '@/widget/utils';
+import { cloneDeep } from 'lodash-es';
 
 export const DraftWidgetConfig = z.object({
   key: z.string(),
@@ -51,7 +52,7 @@ export function isDraftWidget(item: any) {
   return testDraftWidget.parse(item);
 }
 
-export function createDraftWidget(name: string) {
+export function createDraftWidget(name: string): DraftWidget {
   const schema = getWidgetSchema(name as WidgetSchemaName);
   const properties = {
     id: nanoid(),
@@ -60,10 +61,30 @@ export function createDraftWidget(name: string) {
   return new DraftWidget(properties);
 }
 
+export function transformAIDraftWidget(aiSchema: App.AISchema): DraftWidget {
+  const result = cloneDeep(getWidgetSchema(aiSchema.type as WidgetSchemaName));
+  const { type, ...keys } = aiSchema;
+  Object.keys(keys).forEach((key) => {
+    const idx = result.config.findIndex((c) => c.key === key);
+    const k = key as keyof typeof keys;
+    if (idx !== -1) {
+      // if (type === 'Select' && k === 'options') {
+      //   result.config[idx]['options'] = aiSchema[k as 'options'];
+      // } else {
+      result.config[idx]['value'] = aiSchema[k];
+      // }
+    }
+  });
+  return new DraftWidget({
+    id: nanoid(),
+    ...result,
+  });
+}
+
 export function transformDraftWidget(
   field: App.FormFieldModel,
   configs: App.FormFieldConfigModel[],
-) {
+): DraftWidget {
   const { config: rawConfigs, ...schema } = getWidgetSchema(
     field.field_name as WidgetSchemaName,
   );

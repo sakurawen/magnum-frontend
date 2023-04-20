@@ -20,7 +20,14 @@ const TextareaWrap = classed.div(
 
 export type TextareaProps = Pick<
   React.TextareaHTMLAttributes<HTMLTextAreaElement>,
-  'value' | 'rows' | 'className' | 'value' | 'placeholder' | 'tabIndex' | 'id'
+  | 'value'
+  | 'rows'
+  | 'className'
+  | 'value'
+  | 'placeholder'
+  | 'tabIndex'
+  | 'id'
+  | 'disabled'
 > & {
   size?: ComponentSize;
   className?: string;

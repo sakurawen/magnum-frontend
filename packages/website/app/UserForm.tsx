@@ -1,5 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import * as MagnumImpl from '@/widget/components/magnum';
 import { transformDraftWidget } from '@/schemas/draft';
 import { getFormComponentProperties } from '@/utils/form';
@@ -35,6 +35,9 @@ const UserForm = ({ data }: UserFormProps) => {
         ...transformDraftWidget(field, data.template.configs),
       };
     });
+    console.log({
+      widgets,
+    });
     return widgets;
   });
 
@@ -42,22 +45,22 @@ const UserForm = ({ data }: UserFormProps) => {
     console.log(formData);
   };
   return (
-    <div className="h-[86vh]  w-[46vh] overflow-y-auto">
+    <div className="md:h-[86vh] h-full  md:w-[46vh] overflow-y-auto">
       {widgets.map((item) => {
         const ElementComponent = MagnumImpl[
           item.name as MagnumImplKeys
         ] as React.ElementType;
+        const configuration = getFormComponentProperties(item.configuration)
+        console.log(configuration)
         return (
           <ElementComponent
             {...item.internal}
-            {...getFormComponentProperties(item.configuration)}
+            {...configuration}
             className={item.internal.className}
-            {...item.event}
             key={item.id}
           />
         );
       })}
-      <button onClick={showData}>preview</button>
     </div>
   );
 };

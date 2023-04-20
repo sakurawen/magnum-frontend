@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 type SelectOptionEditorProps = {
   value: Array<{
-    label: string;
+    text: string;
     value: any;
   }>;
   onChange: (...args: any[]) => void;
@@ -15,13 +15,13 @@ const SelectOptionEditor = (props: SelectOptionEditorProps) => {
   const [open, setOpen] = useState(false);
   return (
     <div className="w-full">
-      {value.map((item) => {
+      {value?.map((item) => {
         return (
           <div
             className="mb-2 flex select-none items-center justify-between rounded bg-gray-100 px-3 py-2"
             key={item.value}
           >
-            <span>{item.label}</span>
+            <span>{item.text}</span>
             <div className="hover:bg-gray-blue-100 rounded-md p-1">
               <Icon icon="radix-icons:pencil-2" className="h-5 w-5" />
             </div>
