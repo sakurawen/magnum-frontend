@@ -72,10 +72,16 @@ export const submissions = (formID: string) => {
 };
 
 export const submissionRecord = (submissionID: string) => {
-  return request.post<any, Service.Response<App.FormSubmissionDataModel>>(
+  return request.post<any, Service.Response<App.FormSubmissionDataModel[]>>(
     '/form/submission-data',
     {
       submission_id: submissionID,
     },
   );
+};
+
+export const item = (id: string) => {
+  return request.post<any, Service.Response<App.FormModel>>('/form/item', {
+    id,
+  });
 };

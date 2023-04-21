@@ -7,6 +7,7 @@ import { formService } from '@/services';
 import { toast } from 'sonner';
 import cx from 'clsx';
 import { usePathname } from 'next/navigation';
+import { Icon } from '@iconify/react';
 
 type MagnumImplKeys = keyof typeof MagnumImpl;
 type UserFormProps = {
@@ -20,6 +21,7 @@ const UserForm = ({ data }: UserFormProps) => {
   const pathname = usePathname();
   const isPreview = pathname.startsWith('/preview');
   const [submitLoading, setSubmitLoading] = useState(false);
+  const [finish, setFinish] = useState(false);
   const { widgets, formId } = useMemo<{
     formId: string;
     widgets: UserFormWidget[];
@@ -117,6 +119,7 @@ const UserForm = ({ data }: UserFormProps) => {
       .submit(formId, submissions)
       .then(() => {
         toast.success('表单提交成功');
+        setFinish(true);
       })
       .catch((err) => {
         toast.error('表单提交失败，请稍后再试');
@@ -154,38 +157,53 @@ const UserForm = ({ data }: UserFormProps) => {
       className={cx(
         'h-full overflow-y-auto pb-8 md:h-[86vh] md:w-[46vh]   md:pb-[4vh] ',
         {
-          'pt-4 md:pt-[4vh]': widgets[0].name !== 'Image',
+          'pt-4 md:pt-[4vh]': widgets[0]?.name !== 'Image',
         },
       )}
     >
-      {widgets.map((item) => {
-        const ElementComponent = MagnumImpl[
-          item.name as MagnumImplKeys
-        ] as React.ElementType;
-        const configuration = getFormComponentProperties(item.configuration);
-        const disabledProps =
-          item.name === 'Button'
-            ? {
-                loading: submitLoading,
-              }
-            : {};
-        const loadingProps = ['Input', 'Select', 'Textarea', 'Checkbox']
-          ? {
-              disabled: submitLoading,
-            }
-          : {};
-        return (
-          <ElementComponent
-            onControl={(val: any) => controls[item.id]?.(item.name, val)}
-            value={formData[item.id].value}
-            {...configuration}
-            {...disabledProps}
-            {...loadingProps}
-            className={item.internal.className}
-            key={item.id}
-          />
-        );
-      })}
+      {finish ? (
+        <div className="flex h-full items-center justify-center">
+          <div className="text-center">
+            <div className="rounded-full w-20 h-20 flex items-center justify-center mx-auto bg-green-200 p-3">
+              <Icon icon="ph:check-fat-duotone" className=" m-auto block h-12 w-12" />
+            </div>
+            <p className="mt-4 text-xl font-bold">提交成功</p>
+          </div>
+        </div>
+      ) : (
+        <div>
+          {widgets.map((item) => {
+            const ElementComponent = MagnumImpl[
+              item.name as MagnumImplKeys
+            ] as React.ElementType;
+            const configuration = getFormComponentProperties(
+              item.configuration,
+            );
+            const disabledProps =
+              item.name === 'Button'
+                ? {
+                    loading: submitLoading,
+                  }
+                : {};
+            const loadingProps = ['Input', 'Select', 'Textarea', 'Checkbox']
+              ? {
+                  disabled: submitLoading,
+                }
+              : {};
+            return (
+              <ElementComponent
+                onControl={(val: any) => controls[item.id]?.(item.name, val)}
+                value={formData[item.id].value}
+                {...configuration}
+                {...disabledProps}
+                {...loadingProps}
+                className={item.internal.className}
+                key={item.id}
+              />
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };

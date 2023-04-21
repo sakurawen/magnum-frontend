@@ -28,7 +28,7 @@ export const getFormSnapshot = async (id: string) => {
     const result = await request.post<any, Service.Response<App.FormTemplate>>(
       proxyBaseUrl + '/form/preview',
       {
-        snapshot_id:id,
+        snapshot_id: id,
       },
       {
         headers: {
@@ -40,4 +40,19 @@ export const getFormSnapshot = async (id: string) => {
   } catch (err) {
     console.error('获取表单信息失败:', err);
   }
+};
+
+export const getFormItem = (id: string) => {
+  const cookie = cookies().toString();
+  return request.post<any, Service.Response<App.FormModel>>(
+    proxyBaseUrl + '/form/item',
+    {
+      id,
+    },
+    {
+      headers: {
+        Cookie: cookie,
+      },
+    },
+  );
 };

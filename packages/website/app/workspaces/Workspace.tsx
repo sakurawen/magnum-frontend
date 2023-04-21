@@ -1,14 +1,15 @@
 'use client';
-import { Button, Input, Textarea, Dialog } from '@magnum/ui';
 import { formService } from '@/services';
+import { useTrackedAppStore } from '@/store';
+import { request } from '@/utils';
 import { Icon } from '@iconify/react';
+import { Button, Dialog, Input, Textarea } from '@magnum/ui';
+import cx from 'clsx';
+import { useRouter } from 'next/navigation';
 import { startTransition, useEffect, useRef, useState } from 'react';
 import { toast } from 'sonner';
 import useSWR from 'swr';
-import { request } from '@/utils';
-import cx from 'clsx';
-import { useRouter } from 'next/navigation';
-import { useTrackedAppStore } from '@/store';
+import copy from 'copy-to-clipboard';
 
 const Workspace = () => {
   const {
@@ -91,7 +92,8 @@ const Workspace = () => {
   const handleCopyFormURL = (formID: string) => {
     const origin = location.origin;
     const formURL = origin + `/form/${formID}`;
-    console.log(formURL);
+    copy(formURL);
+    toast.success('表单链接已经复制到粘贴板');
   };
   return (
     <div
@@ -162,7 +164,7 @@ const Workspace = () => {
                     </div>
                   </div>
                   <div
-                    onClick={handleCopyFormURL(form.id)}
+                    onClick={() => handleCopyFormURL(form.id)}
                     className="rounded-md p-2 opacity-0 transition-opacity hover:bg-gray-100 group-hover:opacity-100"
                   >
                     <Icon className="h-5 w-5" icon="solar:link-bold" />

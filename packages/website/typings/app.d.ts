@@ -62,6 +62,8 @@ declare namespace App {
     submission_id: string;
     field_id: string;
     field_value: string;
+    field_type: string;
+    field_label: string;
     create_at: string;
     is_deleted: 0 | 1;
   };

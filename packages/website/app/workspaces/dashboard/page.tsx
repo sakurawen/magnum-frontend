@@ -1,8 +1,12 @@
-import Table  from './Table';
+import Table from './Table';
+
+export const metadata = {
+  title: 'Magnum Form Dashboard - 仪表盘',
+};
 
 const Dashboard = () => {
   return (
-    <div className='overflow-y-auto h-full'>
+    <div className="h-full overflow-y-auto">
       <Table />
     </div>
   );

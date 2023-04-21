@@ -62,7 +62,7 @@ const Navbar = () => {
                 className="block h-full cursor-default p-2"
                 href="/workspaces/dashboard"
               >
-                表单记录
+                表单数据
               </Link>
             </Menu.Item>
           </Menu.Items>
