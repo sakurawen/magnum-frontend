@@ -3,6 +3,7 @@ import cx from 'clsx';
 import * as React from 'react';
 
 export type CheckboxProps = {
+  disabled?: boolean;
   value: boolean;
   className?: string;
   id?: string;
@@ -14,7 +15,7 @@ export type CheckboxProps = {
  */
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
   (props, ref) => {
-    const { value, id, className, onChange } = props;
+    const { value, id, className, onChange, disabled } = props;
     return (
       <label
         className={cx(
@@ -39,6 +40,7 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
           <input
             id={id}
             ref={ref}
+            disabled={disabled}
             className="hidden"
             checked={value}
             onChange={(e) => onChange?.(e.target.checked)}

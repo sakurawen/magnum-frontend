@@ -1,22 +1,26 @@
 import { Icon } from '@iconify/react';
 import cx from 'clsx';
 import * as React from 'react';
-import { useEvent } from '../../hooks/use-event';
 import { CONTENT_SIZE_CLASSNAMES, ROUNDED_SIZE_CLASSNAMES } from '../consts';
-import {
-  ACTIONS,
-  SelectContext,
-  SelectContextAction,
-  SelectContextValue,
-  SelectOpenCloseContext,
-} from './context';
+import { createContext } from '../../utils/context';
 
 export type SelectProps<T = any> = React.PropsWithChildren<{
   size?: ComponentSize;
+  disabled?: boolean;
   value: T;
   onChange(val: T): void;
   className?: string;
 }>;
+const [SelectOpenCloseProvider, useSelectOpenCloseContext] = createContext<{
+  open: boolean;
+  onOpenChange: (val: boolean | ((val: boolean) => boolean)) => void;
+}>('SelectOpenCloseContext');
+const [SelectValueProvider, useSelectContext] = createContext<{
+  size: ComponentSize;
+  value: any;
+  disabled?: boolean;
+  onChange: (val: any) => void;
+}>('SelectValueContext');
 
 /**
  * Select Root
@@ -24,50 +28,23 @@ export type SelectProps<T = any> = React.PropsWithChildren<{
  * @returns
  */
 export const Select = (props: SelectProps) => {
-  const { children, size = 'middle', className, onChange } = props;
+  const {
+    children,
+    size = 'middle',
+    disabled,
+    value,
+    className,
+    onChange,
+  } = props;
 
-  const openClose = React.useState(false);
-
-  const optionChange = useEvent((val) => onChange(val));
-
-  const reducer = React.useReducer<
-    React.Reducer<SelectContextValue, SelectContextAction>
-  >(
-    (state, action) => {
-      switch (action.type) {
-        case ACTIONS.UPDATE_SIZE:
-          return {
-            ...state,
-            size: action.data,
-          };
-        case ACTIONS.OPTION_SELECT:
-          return {
-            ...state,
-            value: action.data,
-          };
-        default:
-          return { ...state };
-      }
-    },
-    {
-      size,
-      onChange: optionChange,
-    },
-  );
-
-  React.useEffect(() => {
-    reducer[1]({
-      type: ACTIONS.UPDATE_SIZE,
-      data: size,
-    });
-  }, [size]);
+  const [open, setOpen] = React.useState(false);
 
   const selectContainerRef = React.useRef<HTMLDivElement>(null);
 
   React.useEffect(() => {
     const handleCloseSelectOption = (e: MouseEvent) => {
       if (selectContainerRef.current!.contains(e.target as HTMLElement)) return;
-      openClose[1](false);
+      setOpen(false);
     };
     document.addEventListener('click', handleCloseSelectOption);
     return () => {
@@ -76,8 +53,13 @@ export const Select = (props: SelectProps) => {
   }, []);
 
   return (
-    <SelectOpenCloseContext.Provider value={openClose}>
-      <SelectContext.Provider value={reducer}>
+    <SelectOpenCloseProvider open={open} onOpenChange={setOpen}>
+      <SelectValueProvider
+        size={size}
+        disabled={disabled}
+        onChange={onChange}
+        value={value}
+      >
         <div
           ref={selectContainerRef}
           role="listbox"
@@ -85,8 +67,8 @@ export const Select = (props: SelectProps) => {
         >
           {children}
         </div>
-      </SelectContext.Provider>
-    </SelectOpenCloseContext.Provider>
+      </SelectValueProvider>
+    </SelectOpenCloseProvider>
   );
 };
 
@@ -100,19 +82,22 @@ export type SelectButtonProps = React.PropsWithChildren<{
  * @returns
  */
 export const SelectButton = (props: SelectButtonProps) => {
-  const [value] = React.useContext(SelectContext)!;
-  const { size = 'middle' } = value;
-  const [, setOpen] = React.useContext(SelectOpenCloseContext)!;
+  const { onOpenChange, open } = useSelectOpenCloseContext();
+  const { size = 'middle', disabled } = useSelectContext();
   const { children, className } = props;
+  const handleToggleListOpen = () => {
+    if (!open && disabled) return;
+    onOpenChange((open) => !open);
+  };
   return (
     <button
       className={cx(
-        'bg-gray-blue-50 w-full shadow-sm ring-gray-blue-100 flex items-center justify-between ring-1',
+        'bg-gray-blue-50 ring-gray-blue-100 flex w-full items-center justify-between shadow-sm ring-1',
         CONTENT_SIZE_CLASSNAMES[size],
         ROUNDED_SIZE_CLASSNAMES[size],
         className,
       )}
-      onClick={() => setOpen((open) => !open)}
+      onClick={handleToggleListOpen}
     >
       <span>{children}</span>
       <Icon className="h-5 w-5" icon="radix-icons:caret-sort" />
@@ -137,17 +122,13 @@ const OPTION_SIZE = {
  */
 export const SelectOption = (props: SelectOptionProps) => {
   const { children, value } = props;
-  const [, setOpen] = React.useContext(SelectOpenCloseContext)!;
-  const [{ size = 'middle', value: current, onChange }, dispatch] =
-    React.useContext(SelectContext)!;
+  const { onOpenChange } = useSelectOpenCloseContext();
+
+  const { size = 'middle', value: current, onChange } = useSelectContext();
 
   const handleSelect = () => {
     onChange(value);
-    dispatch({
-      type: ACTIONS.OPTION_SELECT,
-      data: value,
-    });
-    setOpen(false);
+    onOpenChange(false);
   };
 
   const isActive = value === current;
@@ -176,7 +157,7 @@ export type SelectOptionsProps = React.PropsWithChildren<{}>;
  */
 export const SelectOptions = (props: SelectOptionsProps) => {
   const { children } = props;
-  const [open] = React.useContext(SelectOpenCloseContext)!;
+  const { open } = useSelectOpenCloseContext();
   return (
     <div
       className={cx(

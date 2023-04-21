@@ -5,7 +5,7 @@ import { Menu } from '@magnum/ui';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { startTransition } from 'react';
-import  EditorBar from './EditorBar';
+import EditorBar from './EditorBar';
 
 const Navbar = () => {
   const {
@@ -23,7 +23,7 @@ const Navbar = () => {
   const inEditorPage = pathname.startsWith('/workspaces/editor');
 
   return (
-    <nav className="navbar relative z-50 flex h-12 items-center justify-between border-b text-xs  ">
+    <nav className="navbar flex-shrink-0 relative z-50 flex !h-[48px] items-center justify-between border-b text-xs  ">
       <div className="flex h-full items-center  space-x-4">
         <Menu className="h-full">
           <Menu.Trigger className="h-full">
@@ -55,6 +55,14 @@ const Navbar = () => {
                 href="/workspaces"
               >
                 工作空间
+              </Link>
+            </Menu.Item>
+            <Menu.Item>
+              <Link
+                className="block h-full cursor-default p-2"
+                href="/workspaces/dashboard"
+              >
+                表单记录
               </Link>
             </Menu.Item>
           </Menu.Items>

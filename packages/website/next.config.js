@@ -3,6 +3,10 @@ const nextConfig = {
   experimental: {
     appDir: true,
     typedRoutes: true,
+    serverComponentsExternalPackages: ['@tremor/react'],
+  },
+  httpAgentOptions: {
+    keepAlive: true,
   },
   rewrites: async () => {
     return {

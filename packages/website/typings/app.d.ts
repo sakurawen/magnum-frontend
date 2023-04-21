@@ -52,6 +52,8 @@ declare namespace App {
     id: string;
     form_id: string;
     user_id: string;
+    submit_user_id?: string;
+    submit_user_name: string;
     create_at: string;
     is_deleted: 0 | 1;
   };
@@ -62,6 +64,16 @@ declare namespace App {
     field_value: string;
     create_at: string;
     is_deleted: 0 | 1;
+  };
+
+  type FormSnapshot = {
+    id: string;
+    user_id: string;
+    form_id: string;
+    title: string;
+    description: string;
+    create_at: string;
+    json: string;
   };
   type AISchemaMap = {
     Input: {
@@ -98,6 +110,15 @@ declare namespace App {
       type: 'Paragraph';
       text: string;
     };
+  };
+  type Submission = {
+    field_id: string;
+    field_value: string;
+    field_label: string;
+    field_type: string;
+  };
+  type WidgetControl = {
+    onControl?: (...args: any) => void;
   };
   type AISchema = AISchemaMap[keyof AISchemaMap];
 }

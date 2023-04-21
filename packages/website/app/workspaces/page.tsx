@@ -1,9 +1,9 @@
-import WorkspaceDashboard from './Dashboard';
+import Workspace from './Workspace';
 
 const Workspaces = () => {
   return (
-    <div className="workspaces h-full">
-      <WorkspaceDashboard />
+    <div className="workspaces h-full overflow-hidden">
+      <Workspace />
     </div>
   );
 };

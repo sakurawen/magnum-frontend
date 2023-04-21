@@ -10,7 +10,7 @@ import cx from 'clsx';
 import { useRouter } from 'next/navigation';
 import { useTrackedAppStore } from '@/store';
 
-const WorkspaceDashboard = () => {
+const Workspace = () => {
   const {
     app: { resetEditor },
   } = useTrackedAppStore();
@@ -87,10 +87,16 @@ const WorkspaceDashboard = () => {
       router.push(`/workspaces/editor/${id}`);
     });
   };
+
+  const handleCopyFormURL = (formID: string) => {
+    const origin = location.origin;
+    const formURL = origin + `/form/${formID}`;
+    console.log(formURL);
+  };
   return (
     <div
       ref={dashboardContainerRef}
-      className="workspace-dashboard h-full px-4 pt-6"
+      className="workspace-dashboard relative h-full overflow-y-auto px-4 pt-6"
     >
       <div className="action-bar mx-2">
         <Button
@@ -115,14 +121,14 @@ const WorkspaceDashboard = () => {
           </div>
         </Button>
       </div>
-      <div className="form-list mt-6  grid grid-cols-2 gap-4 px-2 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
+      <div className="form-list mt-6 grid grid-cols-2 gap-4 px-2 pb-12 md:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-5">
         {list?.data.map((form) => {
           return (
             <a
               key={form.id}
               onDoubleClick={() => handleEditForm(form.id)}
               onClick={() => setCurrentSelectId(form.id)}
-              className="relative h-[60px]  select-none pt-[70%]"
+              className="group relative h-[60px]  select-none pt-[70%]"
             >
               <div
                 className={cx(
@@ -134,19 +140,32 @@ const WorkspaceDashboard = () => {
                   ],
                 )}
               >
-                <div className="relative h-full flex-grow bg-gray-100"></div>
-                <div className="form-info flex w-full items-start px-2 py-2">
-                  <div className="mt-1 px-2">
-                    <Icon
-                      className="text-theme-400 h-8 w-8"
-                      icon="solar:file-text-bold-duotone"
-                    />
+                <div className="relative flex h-full flex-grow items-center justify-center bg-gray-100">
+                  <Icon
+                    className="h-12 w-12 text-gray-400"
+                    icon="fluent:form-28-regular"
+                  />
+                </div>
+                <div className="form-info flex w-full items-center justify-between px-2 py-2">
+                  <div className="flex items-center">
+                    <div className="mt-1 px-2">
+                      <Icon
+                        className="text-theme-400 h-8 w-8"
+                        icon="solar:file-text-bold-duotone"
+                      />
+                    </div>
+                    <div className="form-desc ">
+                      <h2 className="">{form.title}</h2>
+                      <p className="line-clamp-1 text-xs text-gray-500">
+                        {form.description}
+                      </p>
+                    </div>
                   </div>
-                  <div className="form-desc ">
-                    <h2 className="">{form.title}</h2>
-                    <p className="line-clamp-1 text-xs text-gray-500">
-                      {form.description}
-                    </p>
+                  <div
+                    onClick={handleCopyFormURL(form.id)}
+                    className="rounded-md p-2 opacity-0 transition-opacity hover:bg-gray-100 group-hover:opacity-100"
+                  >
+                    <Icon className="h-5 w-5" icon="solar:link-bold" />
                   </div>
                 </div>
               </div>
@@ -217,4 +236,4 @@ const WorkspaceDashboard = () => {
   );
 };
 
-export default WorkspaceDashboard;
+export default Workspace;

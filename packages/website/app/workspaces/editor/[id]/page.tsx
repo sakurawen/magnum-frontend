@@ -4,7 +4,7 @@ import MaterialList from '@/app/workspaces/editor/[id]/Materials/MaterialList';
 import { redirect } from 'next/navigation';
 import { Suspense } from 'react';
 import ClientDndContext from './ClientDndContext';
-import { getFormDate } from '@/utils/server-only';
+import { getFormTemplate } from '@/utils/server-only';
 
 const Editor = async (props: {
   params: {
@@ -12,7 +12,7 @@ const Editor = async (props: {
   };
 }) => {
   const id = props.params.id;
-  const editForm = await getFormDate(id);
+  const editForm = await getFormTemplate(id);
   if (!editForm?.data) {
     return redirect('/workspaces');
   }

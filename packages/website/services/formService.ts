@@ -34,3 +34,48 @@ export const releaseForm = (form: ReleaseFormData) => {
     form,
   );
 };
+
+type SnapshotForm = {
+  title: string;
+  description: string;
+  form_id: string;
+  json: string;
+};
+
+export const snapshot = (data: SnapshotForm) => {
+  return request.post<any, Service.Response<string>>('/form/snapshot', data);
+};
+
+export const preview = (id: string) => {
+  return request.post<any, Service.Response<App.FormSnapshot>>(
+    '/form/preview',
+    {
+      id,
+    },
+  );
+};
+
+export const submit = (fid: string, data: App.Submission[]) => {
+  return request.post<any, Service.Response<any>>('/form/submit', {
+    form_id: fid,
+    fields: data,
+  });
+};
+
+export const submissions = (formID: string) => {
+  return request.post<any, Service.Response<App.FormSubmissionDataModel>>(
+    '/form/submissions',
+    {
+      form_id: formID,
+    },
+  );
+};
+
+export const submissionRecord = (submissionID: string) => {
+  return request.post<any, Service.Response<App.FormSubmissionDataModel>>(
+    '/form/submission-data',
+    {
+      submission_id: submissionID,
+    },
+  );
+};

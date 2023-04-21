@@ -8,7 +8,7 @@ export type DialogProps = React.PropsWithChildren<{
   onOpenChange: (val: boolean) => void;
 }>;
 
-export const [DialogProvider, useDialogContext] = createContext<{
+const [DialogProvider, useDialogContext] = createContext<{
   open: boolean;
   onOpenChange: (val: boolean) => void;
 }>('Dialog');

@@ -19,7 +19,7 @@ const AIGenerate = ({ open, onOpenChange }: AIGenerateProps) => {
   const handleGenerate = () => {
     setLoading(true);
     openaiService
-      .test(prompt)
+      .completions(prompt)
       .then((res: any) => {
         toast.success('Magnum Form AI 表单生成成功');
         const aiSchema = JSON.parse(res.json) as App.AISchema[];
@@ -27,7 +27,6 @@ const AIGenerate = ({ open, onOpenChange }: AIGenerateProps) => {
         const result = aiSchema.map((schema) => {
           return transformAIDraftWidget(schema);
         });
-        console.log('transfor:', result);
         onOpenChange(false);
         setCurrentDraftWidgetId(null);
         setDraftWidgets(result);
@@ -37,6 +36,7 @@ const AIGenerate = ({ open, onOpenChange }: AIGenerateProps) => {
         toast.error('Magnum Form AI 服务繁忙，请稍后重试');
       })
       .finally(() => {
+        console.timeEnd("aigc")
         setLoading(false);
       });
   };

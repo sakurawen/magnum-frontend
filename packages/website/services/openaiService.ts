@@ -1,9 +1,12 @@
+import { createPrompt } from '@/utils/aigc';
 import axios from 'axios';
-
-export const test = (prompt: string) => {
+const instance = axios.create({
+  timeout: 2 * 60 * 1000,
+});
+export const completions = (prompt: string) => {
   return new Promise((resolve, reject) => {
-    axios
-      .post('/openai/completions', {
+    instance
+      .post('http://localhost:3670/chat/completions', {
         prompt: prompt,
       })
       .then((res: any) => {
